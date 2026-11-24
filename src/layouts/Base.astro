@@ -8,7 +8,11 @@ const { title, description, region = 'in', jsonld = [], regionPath = '' } = Astr
 const r = regions[region];
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const org = { '@context': 'https://schema.org', '@type': 'Organization', name: site.name, url: new URL(url('/'), Astro.site).href, description: site.tagline };
-const alternates = regionPath ? regionList.map((x) => ({ hreflang: ({ in: 'en-IN', me: 'en-AE', africa: 'en-NG', intl: 'en' } as any)[x.id], href: new URL(url(`/${x.id}${regionPath}`), Astro.site).href })) : [];
+// Each regional copy of a page names every country it serves; the international copy is the fallback (x-default).
+const alternates = regionPath ? [
+  ...regionList.flatMap((x) => x.hreflang.map((h) => ({ hreflang: h, href: new URL(url(`/${x.id}${regionPath}`), Astro.site).href }))),
+  { hreflang: 'x-default', href: new URL(url(`/intl${regionPath}`), Astro.site).href },
+] : [];
 ---
 <!doctype html>
 <html lang="en">
@@ -23,6 +27,12 @@ const alternates = regionPath ? regionList.map((x) => ({ hreflang: ({ in: 'en-IN
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={canonical} />
+  <meta property="og:site_name" content={site.name} />
+  <meta property="og:locale" content={r.hreflang[0].replace('-', '_')} />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large" />
   <link rel="sitemap" href={url('/sitemap-index.xml')} />
   <link rel="alternate" type="text/plain" title="LLM summary" href={url('/llms.txt')} />
   <script type="application/ld+json" set:html={JSON.stringify([org, ...jsonld])} />

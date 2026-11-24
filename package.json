@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "indexnow": "node scripts/indexnow.mjs",
+    "deploy": "node scripts/indexnow.mjs diff && npx wrangler deploy && node scripts/indexnow.mjs submit"
   },
   "dependencies": {
     "astro": "7.4.13",

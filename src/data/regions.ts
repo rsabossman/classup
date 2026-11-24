@@ -4,6 +4,9 @@ export interface Region {
   id: RegionId;
   name: string;
   label: string;
+  tag: string; // short region word for page titles
+  hreflang: string[]; // language-country codes this region's pages serve
+  audience: string; // phrase for descriptions, e.g. 'students in India'
   hero: string;
   sub: string;
   currency: string;
@@ -24,7 +27,7 @@ const commonFaqs = [
 
 export const regions: Record<RegionId, Region> = {
   in: {
-    id: 'in', name: 'India', label: 'India',
+    id: 'in', name: 'India', label: 'India', tag: 'India', hreflang: ['en-IN'], audience: 'students in India',
     hero: 'Online degrees from established Indian universities, from wherever you are',
     sub: 'Compare UGC-entitled online BBA, BCA, BCom, MBA, MCA and MCom programs on fees, eligibility and approvals. Free counselling on chat, WhatsApp or a call.',
     currency: 'INR', showInrFees: true,
@@ -40,7 +43,7 @@ export const regions: Record<RegionId, Region> = {
     ],
   },
   me: {
-    id: 'me', name: 'Middle East', label: 'Gulf & Middle East',
+    id: 'me', name: 'Middle East', label: 'Gulf & Middle East', tag: 'Gulf', hreflang: ['en-AE', 'en-SA', 'en-QA', 'en-KW', 'en-OM', 'en-BH'], audience: 'working professionals in the Gulf',
     hero: 'Earn an Indian university degree online while you work in the Gulf',
     sub: 'Online MBA, MCA, BBA and BCA programs from established Indian universities, with exams you take from home and counselling in your time zone.',
     currency: 'USD', showInrFees: false,
@@ -57,7 +60,7 @@ export const regions: Record<RegionId, Region> = {
     ],
   },
   africa: {
-    id: 'africa', name: 'Africa', label: 'Africa',
+    id: 'africa', name: 'Africa', label: 'Africa', tag: 'Africa', hreflang: ['en-NG', 'en-KE', 'en-GH', 'en-ZA', 'en-TZ', 'en-UG', 'en-ET', 'en-ZM'], audience: 'students in Africa',
     hero: 'Affordable, internationally-minded online degrees from India',
     sub: 'Study a UGC-entitled online MBA, MCA, BBA or BCA from home. These universities already have learners across Africa.',
     currency: 'USD', showInrFees: false,
@@ -73,7 +76,7 @@ export const regions: Record<RegionId, Region> = {
     ],
   },
   intl: {
-    id: 'intl', name: 'International', label: 'Rest of the world',
+    id: 'intl', name: 'International', label: 'Rest of the world', tag: 'International', hreflang: ['en'], audience: 'international students',
     hero: 'Indian university degrees, fully online, wherever you live',
     sub: 'Compare online MBA, MCA, BBA, BCA and more from UGC-entitled Indian universities. Free counselling on chat, WhatsApp or a call.',
     currency: 'USD', showInrFees: false,
