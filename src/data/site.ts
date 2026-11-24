@@ -13,6 +13,9 @@ export const site = {
   // Paid-ad conversion tags. They load only on the /go/ landing pages, after the page has finished loading,
   // and fire on every lead from the page form or the advisor widget. Empty = that tag is not loaded.
   ads: {
+    // Google Tag Manager container (site-wide, loaded after the page). When set, Google Ads conversions are configured
+    // inside GTM (Custom Event trigger "lead"), and the direct Google Ads tag below is skipped to avoid double counting.
+    gtmId: import.meta.env.PUBLIC_GTM_ID ?? 'GTM-TWZWWGCC',
     googleAdsId: import.meta.env.PUBLIC_GADS_ID || '', // e.g. AW-123456789
     googleAdsLeadLabel: import.meta.env.PUBLIC_GADS_LEAD_LABEL || '', // conversion label of the "Lead" action, e.g. AbCdEfGhIj
     metaPixelId: import.meta.env.PUBLIC_META_PIXEL_ID || '', // e.g. 1234567890123456

@@ -18,7 +18,9 @@ document.querySelectorAll<HTMLFormElement>('form[data-lead]').forEach((f) =>
       }
       status.textContent = f.dataset.intent === 'callback' ? 'Thanks! An advisor will call you shortly.' : 'Thanks! An advisor will reach out on WhatsApp or by phone shortly.';
       f.reset();
-      (window as any).dataLayer?.push({ event: 'lead', intent: f.dataset.intent, region: f.dataset.region, program: data.program || '', lead_id });
+      const ev = { event: 'lead', intent: f.dataset.intent, region: f.dataset.region, program: data.program || '', lead_id };
+      ((window as any).dataLayer ||= []).push(ev);
+      dispatchEvent(new CustomEvent('cu:lead', { detail: ev }));
     } catch {
       status.textContent = 'Something went wrong. Please try WhatsApp instead.';
     } finally { status.hidden = false; btn.disabled = false; }
