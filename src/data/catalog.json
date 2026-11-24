@@ -15,8 +15,7 @@
    ],
    "exams": "Remotely proctored online exams; assignments mandatory",
    "source": "https://www.uni-mysore.in",
-   "fee_note": "Fees under revision at source; confirm before quoting",
-   "other_fees": "Plus application ₹300, registration ₹450, exam fees each term, transcript ₹375 and convocation ₹1,500 (USD equivalents for international students)"
+   "fee_note": "Fees under revision at source; confirm before quoting"
   },
   "vtu": {
    "name": "Visvesvaraya Technological University",
@@ -89,17 +88,9 @@
    "source_url": "https://www.uni-mysore.in/online-bca-degree-program",
    "category": "Computer Applications",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 7500,
-    "nri_usd": 300,
-    "saarc_inr": 11250,
-    "me_usd": 750,
-    "sea_usd": 300,
-    "africa_usd": 300,
-    "intl_usd": 750
-   },
-   "terms": 6
+   "fee_source": "University of Mysore website, Nov 2026 (fee revision in progress)",
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-bcom",
@@ -120,17 +111,9 @@
    "source_url": "https://www.uni-mysore.in/online-bcom-degree-program",
    "category": "Commerce",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 4500,
-    "nri_usd": 300,
-    "saarc_inr": 11250,
-    "me_usd": 750,
-    "sea_usd": 300,
-    "africa_usd": 300,
-    "intl_usd": 750
-   },
-   "terms": 6
+   "fee_source": "University of Mysore website, Nov 2026 (fee revision in progress)",
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-bba",
@@ -147,17 +130,9 @@
    "source_url": "https://www.uni-mysore.in/online-bba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 7500,
-    "nri_usd": 300,
-    "saarc_inr": 15000,
-    "me_usd": 750,
-    "sea_usd": 300,
-    "africa_usd": 300,
-    "intl_usd": 750
-   },
-   "terms": 6
+   "fee_source": "University of Mysore website, Nov 2026 (fee revision in progress)",
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mca",
@@ -174,17 +149,9 @@
    "source_url": "https://www.uni-mysore.in/online-mca-degree-program",
    "category": "Computer Applications",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 16000,
-    "nri_usd": 1066.67,
-    "saarc_inr": 24000,
-    "me_usd": 1600,
-    "sea_usd": 1000,
-    "africa_usd": 1000,
-    "intl_usd": 1600
-   },
-   "terms": 4
+   "fee_source": "University of Mysore website, Nov 2026 (fee revision in progress)",
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mcom",
@@ -204,17 +171,9 @@
    "source_url": "https://www.uni-mysore.in/online-mcom-degree-program",
    "category": "Commerce",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 7500,
-    "nri_usd": 450,
-    "saarc_inr": 15000,
-    "me_usd": 600,
-    "sea_usd": 450,
-    "africa_usd": 450,
-    "intl_usd": 600
-   },
-   "terms": 4
+   "fee_source": "University of Mysore website, Nov 2026 (fee revision in progress)",
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mba-dual-specialisation",
@@ -238,17 +197,9 @@
    "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 15000,
-    "nri_usd": 600,
-    "saarc_inr": 22500,
-    "me_usd": 900,
-    "sea_usd": 600,
-    "africa_usd": 600,
-    "intl_usd": 900
-   },
-   "terms": 4
+   "fee_source": "University of Mysore website, Nov 2026 (fee revision in progress)",
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mba-in-general-management",
@@ -268,16 +219,8 @@
    "category": "Management",
    "fee_per_year_inr": null,
    "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 22500,
-    "nri_usd": 750,
-    "saarc_inr": 33750,
-    "me_usd": 1125,
-    "sea_usd": 750,
-    "africa_usd": 750,
-    "intl_usd": 1125
-   },
-   "terms": 4
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mba-in-human-resource-management",
@@ -297,16 +240,8 @@
    "category": "Management",
    "fee_per_year_inr": null,
    "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 22500,
-    "nri_usd": 750,
-    "saarc_inr": 33750,
-    "me_usd": 1125,
-    "sea_usd": 750,
-    "africa_usd": 750,
-    "intl_usd": 1125
-   },
-   "terms": 4
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mba-in-marketing-management",
@@ -326,16 +261,8 @@
    "category": "Management",
    "fee_per_year_inr": null,
    "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 22500,
-    "nri_usd": 750,
-    "saarc_inr": 33750,
-    "me_usd": 1125,
-    "sea_usd": 750,
-    "africa_usd": 750,
-    "intl_usd": 1125
-   },
-   "terms": 4
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mba-in-finance-management",
@@ -355,16 +282,8 @@
    "category": "Management",
    "fee_per_year_inr": null,
    "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 22500,
-    "nri_usd": 750,
-    "saarc_inr": 33750,
-    "me_usd": 1125,
-    "sea_usd": 750,
-    "africa_usd": 750,
-    "intl_usd": 1125
-   },
-   "terms": 4
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mba-in-supply-chain-management",
@@ -384,16 +303,8 @@
    "category": "Management",
    "fee_per_year_inr": null,
    "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 22500,
-    "nri_usd": 750,
-    "saarc_inr": 33750,
-    "me_usd": 1125,
-    "sea_usd": 750,
-    "africa_usd": 750,
-    "intl_usd": 1125
-   },
-   "terms": 4
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mba-in-operations-management",
@@ -413,16 +324,8 @@
    "category": "Management",
    "fee_per_year_inr": null,
    "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 22500,
-    "nri_usd": 750,
-    "saarc_inr": 33750,
-    "me_usd": 1125,
-    "sea_usd": 750,
-    "africa_usd": 750,
-    "intl_usd": 1125
-   },
-   "terms": 4
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mba-in-data-science-business-analytics",
@@ -442,16 +345,8 @@
    "category": "Management",
    "fee_per_year_inr": null,
    "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 22500,
-    "nri_usd": 750,
-    "saarc_inr": 33750,
-    "me_usd": 1125,
-    "sea_usd": 750,
-    "africa_usd": 750,
-    "intl_usd": 1125
-   },
-   "terms": 4
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mba-in-it-business-management",
@@ -471,16 +366,8 @@
    "category": "Management",
    "fee_per_year_inr": null,
    "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 22500,
-    "nri_usd": 750,
-    "saarc_inr": 33750,
-    "me_usd": 1125,
-    "sea_usd": 750,
-    "africa_usd": 750,
-    "intl_usd": 1125
-   },
-   "terms": 4
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mba-in-entrepreneurship",
@@ -500,16 +387,8 @@
    "category": "Management",
    "fee_per_year_inr": null,
    "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 22500,
-    "nri_usd": 750,
-    "saarc_inr": 33750,
-    "me_usd": 1125,
-    "sea_usd": 750,
-    "africa_usd": 750,
-    "intl_usd": 1125
-   },
-   "terms": 4
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mba-in-executive-leadership",
@@ -529,16 +408,8 @@
    "category": "Management",
    "fee_per_year_inr": null,
    "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 22500,
-    "nri_usd": 750,
-    "saarc_inr": 33750,
-    "me_usd": 1125,
-    "sea_usd": 750,
-    "africa_usd": 750,
-    "intl_usd": 1125
-   },
-   "terms": 4
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mba-in-digital-marketing",
@@ -558,16 +429,8 @@
    "category": "Management",
    "fee_per_year_inr": null,
    "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 22500,
-    "nri_usd": 750,
-    "saarc_inr": 33750,
-    "me_usd": 1125,
-    "sea_usd": 750,
-    "africa_usd": 750,
-    "intl_usd": 1125
-   },
-   "terms": 4
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mba-in-small-medium-business-management",
@@ -587,16 +450,8 @@
    "category": "Management",
    "fee_per_year_inr": null,
    "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 22500,
-    "nri_usd": 750,
-    "saarc_inr": 33750,
-    "me_usd": 1125,
-    "sea_usd": 750,
-    "africa_usd": 750,
-    "intl_usd": 1125
-   },
-   "terms": 4
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mba-in-hospital-administration",
@@ -616,16 +471,8 @@
    "category": "Management",
    "fee_per_year_inr": null,
    "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 22500,
-    "nri_usd": 750,
-    "saarc_inr": 33750,
-    "me_usd": 1125,
-    "sea_usd": 750,
-    "africa_usd": 750,
-    "intl_usd": 1125
-   },
-   "terms": 4
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "uom-online-mba-in-strategy-leadership",
@@ -645,16 +492,8 @@
    "category": "Management",
    "fee_per_year_inr": null,
    "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": {
-    "in_inr": 22500,
-    "nri_usd": 750,
-    "saarc_inr": 33750,
-    "me_usd": 1125,
-    "sea_usd": 750,
-    "africa_usd": 750,
-    "intl_usd": 1125
-   },
-   "terms": 4
+   "tuition_per_term": null,
+   "terms": null
   },
   {
    "id": "vtu-online-bba-in-digital-marketing",
