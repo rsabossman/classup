@@ -1,4 +1,5 @@
 ---
+import { fitTitle, clipDesc } from '../../lib';
 import Base from '../../layouts/Base.astro';
 import ProgramCard from '../../components/ProgramCard.astro';
 import LeadForm from '../../components/LeadForm.astro';
@@ -12,7 +13,7 @@ const list = byDegree(d);
 const info = degreeInfo[d];
 const fees = list.filter((p) => p.fee_inr).map((p) => p.fee_inr!);
 ---
-<Base title={`Online ${d} (${info.full}) – Compare ${list.length} programs | ${site.name}`} description={`${info.blurb} Compare ${list.length} online ${d} programs on duration, eligibility, approvals and fees.`} region={r.id} regionPath={`/online-${d.toLowerCase()}/`}>
+<Base title={fitTitle(`Online ${d} for ${r.audience}: ${list.length} Programs Compared | ${site.name}`, `Online ${d} (${r.tag}): ${list.length} Programs, Fees & Eligibility`, `Online ${d} (${r.tag}): ${list.length} Programs Compared`)} description={clipDesc(`${info.blurb} Compare ${list.length} UGC-entitled online ${d} programs for ${r.audience} on fees, eligibility, approvals and exams.`)} region={r.id} regionPath={`/online-${d.toLowerCase()}/`}>
   <section><div class="wrap layout-2">
     <div>
       <h1 style="margin-top:0">Online {d}: {info.full}</h1>

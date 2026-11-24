@@ -1,4 +1,5 @@
 ---
+import { fitTitle, clipDesc } from '../../../lib';
 import Base from '../../../layouts/Base.astro';
 import ProgramCard from '../../../components/ProgramCard.astro';
 import { regionList, regions, type RegionId } from '../../../data/regions';
@@ -11,7 +12,7 @@ const list = {
   itemListElement: programs.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: new URL(`programs/${p.id}/`, Astro.url).href, name: p.name })),
 };
 ---
-<Base title={`All online degree programs (${programs.length}) | ${site.name}`} description={`Compare ${programs.length} online UG, PG and diploma programs from UGC-entitled Indian universities on duration, fees, eligibility and approvals.`} region={r.id} regionPath="/programs/" jsonld={[list]}>
+<Base title={fitTitle(`All ${programs.length} Online Degree Programs (${r.tag}) | ${site.name}`)} description={clipDesc(`Compare ${programs.length} online UG, PG and diploma programs from UGC-entitled Indian universities for ${r.audience}: duration, fees, eligibility and approvals.`)} region={r.id} regionPath="/programs/" jsonld={[list]}>
   <section><div class="wrap">
     <h1>Online degree programs</h1>
     <p class="muted">{programs.length} programs from established Indian universities.{r.id !== 'in' && ' Fees shown are tuition per semester for students in your region. Where none is shown, an advisor will confirm it.'}</p>

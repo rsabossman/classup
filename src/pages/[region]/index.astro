@@ -6,12 +6,12 @@ import Faq from '../../components/Faq.astro';
 import { regionList, regions, type RegionId } from '../../data/regions';
 import { programs, degrees, degreeInfo, byDegree, universities } from '../../data/catalog';
 import { url, site } from '../../data/site';
-import { faqLd } from '../../lib';
+import { faqLd, fitTitle, clipDesc } from '../../lib';
 export const getStaticPaths = () => regionList.map((r) => ({ params: { region: r.id } }));
 const r = regions[Astro.params.region as RegionId];
 const featured = ['MBA', 'MCA', 'BBA', 'BCA'].flatMap((d) => byDegree(d).filter((p, i, a) => a.findIndex((x) => x.university === p.university) === i).slice(0, 2));
 ---
-<Base title={`Online Degrees for ${r.label} – Compare UGC-entitled MBA, MCA, BBA, BCA | ${site.name}`} description={r.sub} region={r.id} regionPath="/" jsonld={[faqLd(r.faqs)]}>
+<Base title={fitTitle(`Online Degrees for ${r.label}: MBA, MCA, BBA, BCA | ${site.name}`, `Online Degrees for ${r.label}: MBA, MCA, BBA, BCA`)} description={clipDesc(r.sub)} region={r.id} regionPath="/" jsonld={[faqLd(r.faqs)]}>
   <div class="hero"><div class="wrap">
     <h1>{r.hero}</h1>
     <p>{r.sub}</p>

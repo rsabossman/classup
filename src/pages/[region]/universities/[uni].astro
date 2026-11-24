@@ -1,4 +1,5 @@
 ---
+import { fitTitle, clipDesc } from '../../../lib';
 import Base from '../../../layouts/Base.astro';
 import ProgramCard from '../../../components/ProgramCard.astro';
 import LeadForm from '../../../components/LeadForm.astro';
@@ -11,7 +12,7 @@ const r = regions[Astro.params.region as RegionId];
 const list = programs.filter((p) => p.university === u.id);
 const ld = { '@context': 'https://schema.org', '@type': 'CollegeOrUniversity', name: u.name, foundingDate: String(u.est), address: u.city };
 ---
-<Base title={`${u.name} Online: ${list.length} programs, approvals, exams | ${site.name}`} description={`${u.name} (${u.city}, est. ${u.est}) online programs: ${[...new Set(list.map((p) => p.degree))].join(', ')}. Approvals: ${u.approvals.join(', ')}.`} region={r.id} regionPath={`/universities/${u.id}/`} jsonld={[ld]}>
+<Base title={fitTitle(`${u.name} Online Programs (${r.tag}) | ${site.name}`, `${u.name} Online: ${list.length} Programs (${r.tag})`, `${u.short} Online: ${list.length} Programs, Fees (${r.tag})`)} description={clipDesc(`${u.name} (${u.city}, est. ${u.est}) online programs for ${r.audience}: ${[...new Set(list.map((p) => p.degree))].join(', ')}. Approvals: ${u.approvals.join(', ')}.`)} region={r.id} regionPath={`/universities/${u.id}/`} jsonld={[ld]}>
   <section><div class="wrap layout-2">
     <div>
       <h1 style="margin-top:0">{u.name} online programs</h1>
