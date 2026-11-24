@@ -6,6 +6,8 @@ import LeadForm from '../../components/LeadForm.astro';
 import { regionList, regions, type RegionId } from '../../data/regions';
 import { degrees, degreeInfo, byDegree, uni, inr } from '../../data/catalog';
 import { site, url } from '../../data/site';
+import Pic from '../../components/Pic.astro';
+import { imgForDegree } from '../../data/images';
 export const getStaticPaths = () => regionList.flatMap((r) => degrees.map((d) => ({ params: { region: r.id, degree: d.toLowerCase() }, props: { d } })));
 const { d } = Astro.props as { d: string };
 const r = regions[Astro.params.region as RegionId];
@@ -13,10 +15,11 @@ const list = byDegree(d);
 const info = degreeInfo[d];
 const fees = list.filter((p) => p.fee_inr).map((p) => p.fee_inr!);
 ---
-<Base title={fitTitle(`Online ${d} for ${r.audience}: ${list.length} Programs Compared | ${site.name}`, `Online ${d} (${r.tag}): ${list.length} Programs, Fees & Eligibility`, `Online ${d} (${r.tag}): ${list.length} Programs Compared`)} description={clipDesc(`${info.blurb} Compare ${list.length} UGC-entitled online ${d} programs for ${r.audience} on fees, eligibility, approvals and exams.`)} region={r.id} regionPath={`/online-${d.toLowerCase()}/`}>
+<Base title={fitTitle(`Online ${d} for ${r.audience}: ${list.length} Programs Compared | ${site.name}`, `Online ${d} (${r.tag}): ${list.length} Programs, Fees & Eligibility`, `Online ${d} (${r.tag}): ${list.length} Programs Compared`)} description={clipDesc(`${info.blurb} Compare ${list.length} UGC-entitled online ${d} programs for ${r.audience} on fees, eligibility, approvals and exams.`)} region={r.id} regionPath={`/online-${d.toLowerCase()}/`} image={imgForDegree(d)}>
   <section><div class="wrap layout-2">
     <div>
       <h1 style="margin-top:0">Online {d}: {info.full}</h1>
+      <Pic img={imgForDegree(d)} class="art-img wide" sizes="(min-width: 900px) 700px, 100vw" priority />
       <p>{info.blurb}</p>
       <table class="facts">
         <tr><th>Programs listed</th><td>{list.length} from {new Set(list.map((p) => p.university)).size} universities</td></tr>

@@ -1,0 +1,20 @@
+---
+// Responsive 16:9 WebP illustration. The first image on a page passes priority; everything else lazy-loads.
+import { url } from '../data/site';
+import { IMG_WIDTHS, type Img } from '../data/images';
+interface Props { img: Img; sizes: string; priority?: boolean; class?: string; alt?: string; widths?: readonly number[]; ratio?: number }
+const { img, sizes, priority = false, class: cls, alt, widths = IMG_WIDTHS, ratio = 16 / 9 } = Astro.props;
+const maxW = widths[widths.length - 1];
+const src = (w: number) => url(`/img/${img.name}-${w}.webp`);
+---
+<img
+  class={cls}
+  src={src(widths[1] ?? widths[0])}
+  srcset={widths.map((w) => `${src(w)} ${w}w`).join(', ')}
+  sizes={sizes}
+  width={maxW} height={Math.round(maxW / ratio)}
+  alt={alt ?? img.alt}
+  loading={priority ? 'eager' : 'lazy'}
+  fetchpriority={priority ? 'high' : 'auto'}
+  decoding={priority ? 'sync' : 'async'}
+/>

@@ -8,3 +8,8 @@
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Cross-Origin-Opener-Policy: same-origin
+
+# Images change rarely: cache them for 30 days (the ! line drops the no-cache header from the /* rule).
+/img/*
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000

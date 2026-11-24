@@ -7,6 +7,7 @@ import { regionList, regions, type RegionId } from '../../../data/regions';
 import { programs, uni, feeFor, degreeInfo, type Program } from '../../../data/catalog';
 import { url, site } from '../../../data/site';
 import { faqLd, crumbLd, fitTitle, clipDesc } from '../../../lib';
+import { imgForDegree } from '../../../data/images';
 export const getStaticPaths = () => regionList.flatMap((r) => programs.map((p) => ({ params: { region: r.id, id: p.id }, props: { p } })));
 const { p } = Astro.props as { p: Program };
 const r = regions[Astro.params.region as RegionId];
@@ -34,7 +35,7 @@ const course = {
 };
 const related = programs.filter((x) => x.degree === p.degree && x.id !== p.id).slice(0, 6);
 ---
-<Base title={fitTitle(`${p.name}, ${u.short}: Fees & Eligibility (${r.tag}) | ${site.name}`, `${p.name}, ${u.short}: Fees & Eligibility (${r.tag})`, `${p.name}, ${u.short} (${r.tag})`)} description={clipDesc(`${p.name} from ${u.name} for ${r.audience}: ${dur}${f ? `, ${f.short}` : ''}. Eligibility, exams, approvals (${u.approvals.slice(0, 2).join(', ')}) and free counselling.`)} region={r.id} regionPath={`/programs/${p.id}/`} jsonld={[course, faqLd(faqs), crumbLd([['Programs', new URL(url(`/${r.id}/programs/`), Astro.site).href], [p.name, self]])]}>
+<Base title={fitTitle(`${p.name}, ${u.short}: Fees & Eligibility (${r.tag}) | ${site.name}`, `${p.name}, ${u.short}: Fees & Eligibility (${r.tag})`, `${p.name}, ${u.short} (${r.tag})`)} description={clipDesc(`${p.name} from ${u.name} for ${r.audience}: ${dur}${f ? `, ${f.short}` : ''}. Eligibility, exams, approvals (${u.approvals.slice(0, 2).join(', ')}) and free counselling.`)} region={r.id} regionPath={`/programs/${p.id}/`} image={imgForDegree(p.degree)} jsonld={[course, faqLd(faqs), crumbLd([['Programs', new URL(url(`/${r.id}/programs/`), Astro.site).href], [p.name, self]])]}>
   <div class="wrap crumbs"><a href={url(`/${r.id}/programs/`)}>Programs</a> › <a href={url(`/${r.id}/online-${p.degree.toLowerCase()}/`)}>Online {p.degree}</a> › {p.name}</div>
   <section><div class="wrap layout-2">
     <div>
