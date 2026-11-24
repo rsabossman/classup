@@ -8,6 +8,8 @@ export const site = {
   // AI chat widget script (ElevenLabs / other) added in step 3.
   // Cloudflare Web Analytics site token for classuponline.com (visitor counts; manual install, not auto-injected). Loaded after page load, see Base.astro.
   cfAnalyticsToken: 'eda6841b4eb347039f99a98fc0bdeece',
+  // Ria, the AI advisor behind the widget's chat (n8n webhook; history is stored server side by lead_id). Empty = guided chat only.
+  chatEndpoint: import.meta.env.PUBLIC_CHAT_ENDPOINT ?? 'https://university18.app.n8n.cloud/webhook/ria',
   // Paid-ad conversion tags. They load only on the /go/ landing pages, after the page has finished loading,
   // and fire on every lead from the page form or the advisor widget. Empty = that tag is not loaded.
   ads: {

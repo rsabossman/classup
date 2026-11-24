@@ -2,7 +2,7 @@
 // It is loaded after the page has finished loading (see client.ts), renders in a shadow root,
 // and carries its own styles inline, so it never slows down or restyles the page.
 
-type Cfg = { region: string; whatsapp: string; phone: string; hours: string; endpoint: string };
+type Cfg = { region: string; whatsapp: string; phone: string; hours: string; endpoint: string; chat?: string };
 const cfg: Cfg = JSON.parse(document.getElementById('cu-widget-cfg')?.textContent || '{}');
 
 const css = `
@@ -10,6 +10,7 @@ const css = `
 *{box-sizing:border-box}
 .fab{position:fixed;right:16px;bottom:16px;z-index:2147483000;height:56px;padding:0 20px 0 16px;border:0;border-radius:28px;background:#0f5c4d;color:#fff;display:flex;align-items:center;gap:8px;font:600 15px system-ui,sans-serif;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.22)}
 .fab svg{width:24px;height:24px;fill:currentColor}
+@media(max-width:600px){.fab{width:56px;padding:0;justify-content:center}.fab span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
 .panel{position:fixed;right:16px;bottom:84px;z-index:2147483001;width:min(370px,calc(100vw - 32px));max-height:min(600px,calc(100vh - 110px));background:#fff;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.25);display:flex;flex-direction:column;overflow:hidden}
 .panel[hidden]{display:none}
 .hd{background:#0f5c4d;color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px}
@@ -33,6 +34,7 @@ label.c input{width:auto;margin-top:2px}
 .m{max-width:85%;padding:9px 12px;border-radius:14px;white-space:pre-wrap}
 .m.bot{background:#f1efe9;align-self:flex-start;border-bottom-left-radius:4px}
 .m.me{background:#0f5c4d;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.m.typing{color:#5b6275;font-style:italic}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{border:1px solid #0f5c4d;color:#0f5c4d;background:#fff;border-radius:99px;padding:5px 11px;cursor:pointer;font:inherit;font-size:14px}
 .ft{border-top:1px solid #eee;padding:8px;display:flex;gap:6px}
@@ -50,7 +52,7 @@ const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&
 const source = () => { try { return JSON.parse(sessionStorage.getItem('cu_src') || '{}'); } catch { return {}; } };
 const pageProgram = () => (document.querySelector('form[data-lead] select[name=program]') as HTMLSelectElement | null)?.value || '';
 
-export async function sendLead(data: Record<string, unknown>) {
+export async function sendLead(data: Record<string, unknown>): Promise<string> {
   // Every lead needs an id: the lead store keys on it, and the ad conversions reuse it for de-duplication.
   const lead_id = crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
   const payload = { ...data, lead_id, program: data.program || pageProgram(), region: cfg.region, page: location.pathname, ...source(), ts: new Date().toISOString(), via: 'widget' };
@@ -59,6 +61,7 @@ export async function sendLead(data: Record<string, unknown>) {
     if (!r.ok) throw new Error(String(r.status));
   }
   (window as any).dataLayer?.push({ event: 'lead', intent: data.intent, region: cfg.region, lead_id });
+  return lead_id;
 }
 const track = (action: string) => (window as any).dataLayer?.push({ event: 'contact_click', action, region: cfg.region });
 
@@ -138,45 +141,87 @@ function show(v: string) {
       `<input name="email" type="email" placeholder="Email (optional)" autocomplete="email"><input name="interest" placeholder="What would you like to study? (e.g. MBA in HR)">`);
     wire('enquiry', 'Thanks! An advisor will reach out on WhatsApp or by phone shortly.');
   } else if (v === 'chat') {
-    title.textContent = 'Chat with us';
+    title.textContent = cfg.chat ? 'Chat with Ria, our advisor' : 'Chat with us';
     const ai = (window as any).cuChat; // The AI agent (step 3) can take over here.
     if (ai?.mount) return ai.mount(bd, { region: cfg.region, sendLead });
     chat();
   }
 }
 
-// Guided chat used until the AI agent is connected. Everything the visitor types travels with the lead.
+// Chat: a few guided questions, then name and WhatsApp number (the lead is saved first, so Ria knows the
+// visitor's country and degree), then a free conversation with Ria. Without a chat endpoint, it stays a guided form.
 function chat() {
   const log: string[] = [];
-  let interest = '';
+  const pending: string[] = []; // questions typed before the visitor shared their contact details
+  // On a degree landing page, the degree is already known.
+  const pageDegree = (document.querySelector('form[data-lead] input[name=degree]') as HTMLInputElement | null)?.value || '';
+  let interest = pageDegree, work = '', leadId = '', name = '', busy = false;
   bd.innerHTML = '<div class="msgs"></div>';
   const msgs = bd.querySelector('.msgs')!;
-  const say = (who: 'bot' | 'me', text: string) => { const d = document.createElement('div'); d.className = `m ${who}`; d.textContent = text; msgs.appendChild(d); log.push(`${who}: ${text}`); bd.scrollTop = bd.scrollHeight; };
+  const say = (who: 'bot' | 'me', text: string, cls = '') => { const d = document.createElement('div'); d.className = `m ${who} ${cls}`; d.textContent = text; msgs.appendChild(d); if (!cls) log.push(`${who}: ${text}`); bd.scrollTop = bd.scrollHeight; return d; };
   const chips = (list: string[], cb: (s: string) => void) => {
     const c = document.createElement('div'); c.className = 'chips';
     list.forEach((s) => { const b = document.createElement('button'); b.className = 'chip'; b.textContent = s; b.onclick = () => { c.remove(); say('me', s); cb(s); }; c.appendChild(b); });
     msgs.appendChild(c); bd.scrollTop = bd.scrollHeight;
   };
+  const ria = async (message: string) => {
+    if (!cfg.chat || !leadId) return;
+    busy = true;
+    const typing = say('bot', 'Ria is typing…', 'typing');
+    try {
+      const { askRia } = await import('./ria');
+      const r = await askRia(cfg.chat, leadId, message, name);
+      typing.remove();
+      if (r.paused) say('bot', 'An advisor will reply here shortly.');
+      else if (r.reply) say('bot', r.reply);
+    } catch {
+      typing.remove();
+      say('bot', 'Sorry, I couldn’t reply just now. An advisor will message you on WhatsApp shortly.');
+    } finally { busy = false; }
+  };
   const askContact = () => {
-    say('bot', 'Share your name and WhatsApp number, and an advisor will send you fees, eligibility and the next intake date.');
+    say('bot', 'Share your name and WhatsApp number, and I’ll answer your questions here. An advisor can also send you fees and the next intake date on WhatsApp.');
     const f = document.createElement('form');
     f.innerHTML = `<input name="name" placeholder="Your name" required autocomplete="name"><input name="phone" placeholder="Mobile / WhatsApp with country code" required inputmode="tel" autocomplete="tel"><label class="c"><input type="checkbox" name="consent" required checked> I agree to be contacted about programs.</label><button class="btn">Send</button>`;
     msgs.appendChild(f); bd.scrollTop = bd.scrollHeight;
     f.addEventListener('submit', async (e) => {
       e.preventDefault(); const b = f.querySelector('button')!; b.disabled = true;
-      try { await sendLead({ ...Object.fromEntries(new FormData(f).entries()), intent: 'chat', interest, transcript: log.join('\n') }); f.remove(); say('bot', 'Thank you! An advisor will message you on WhatsApp shortly.'); }
-      catch { b.disabled = false; b.textContent = 'Try again'; }
+      const data = Object.fromEntries(new FormData(f).entries()) as Record<string, string>;
+      try {
+        leadId = await sendLead({ ...data, intent: 'chat', interest, degree: /^(MBA|MCA|BBA|BCA)$/.test(interest) ? interest : pageDegree, transcript: log.join('\n') });
+        name = data.name || '';
+        f.remove();
+        if (!cfg.chat) return void say('bot', 'Thank you! An advisor will message you on WhatsApp shortly.');
+        const intro = [interest && interest !== 'Not sure yet' ? `I’m interested in an online ${interest}.` : 'I’m not sure which degree to choose yet.', work && `Work status: ${work}.`, ...pending].filter(Boolean).join(' ');
+        pending.length = 0;
+        ria(intro);
+      } catch { b.disabled = false; b.textContent = 'Try again'; }
     });
   };
-  say('bot', 'Hi! I can help you find the right online degree. What would you like to study?');
-  chips(['MBA', 'MCA', 'BBA', 'BCA', 'BCom / MCom', 'Not sure yet'], (s) => {
-    interest = s;
-    say('bot', s === 'Not sure yet' ? 'No problem. Are you currently working?' : `Good choice. Are you currently working?`);
-    chips(['Yes, working', 'Studying', 'Neither right now'], () => askContact());
-  });
+  const askWork = () => chips(['Yes, working', 'Studying', 'Neither right now'], (w) => { work = w; askContact(); });
+  const hi = `Hi${cfg.chat ? ', I’m Ria' : ''}!`;
+  if (pageDegree) {
+    say('bot', `${hi} I can answer your questions about the online ${pageDegree}. Are you currently working?`);
+    askWork();
+  } else {
+    say('bot', `${hi} I can help you find the right online degree. What would you like to study?`);
+    chips(['MBA', 'MCA', 'BBA', 'BCA', 'BCom / MCom', 'Not sure yet'], (s) => {
+      interest = s;
+      say('bot', s === 'Not sure yet' ? 'No problem. Are you currently working?' : `Good choice. Are you currently working?`);
+      askWork();
+    });
+  }
   ft.hidden = false;
   ft.innerHTML = '<input placeholder="Type a question…" aria-label="Message"><button class="btn" aria-label="Send">➤</button>';
-  const inp = ft.querySelector('input')!, send = () => { const t = inp.value.trim(); if (!t) return; inp.value = ''; say('me', t); if (!interest) interest = t; if (!msgs.querySelector('form')) askContact(); else say('bot', 'Thanks, I’ve noted that for your advisor.'); };
+  const inp = ft.querySelector('input')!;
+  const send = () => {
+    const t = inp.value.trim(); if (!t || busy) return; inp.value = ''; say('me', t);
+    if (leadId && cfg.chat) return void ria(t);
+    pending.push(t);
+    if (!msgs.querySelector('form')) { msgs.querySelector('.chips')?.remove(); askContact(); }
+    else if (!leadId) say('bot', 'Thanks, I’ll answer that as soon as you share your details above.');
+    else say('bot', 'Thanks, I’ve noted that for your advisor.');
+  };
   ft.querySelector('button')!.addEventListener('click', send);
   inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') send(); });
 }
