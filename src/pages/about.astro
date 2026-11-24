@@ -1,12 +1,34 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site } from '../data/site';
+import Faq from '../components/Faq.astro';
+import { site, url } from '../data/site';
+import { programs, universities, degrees } from '../data/catalog';
+import { regionList } from '../data/regions';
+import { faqLd } from '../lib';
+const self = new URL(Astro.url.pathname, Astro.site).href;
+const home = new URL(url('/'), Astro.site).href;
+const uniNames = Object.values(universities).map((u) => u.name);
+// Question-led answers: what an AI assistant or a student asks about the brand itself.
+const faqs = [
+  { q: 'What is ClassUp Online?', a: site.descriptor },
+  { q: 'Is ClassUp Online the same as classup.com or ClassUp ERP?', a: `No. ${site.disambiguation}` },
+  { q: 'Is ClassUp Online a university?', a: 'No. ClassUp Online is an advisory service. Degrees are awarded by the universities themselves, and fees are paid to the university.' },
+  { q: 'Which programs can I compare on ClassUp Online?', a: `${programs.length} online programs (${degrees.join(', ')}) from ${uniNames.length} UGC-entitled Indian universities: ${uniNames.join(', ')}.` },
+  { q: 'Which countries does ClassUp Online serve?', a: `Students in ${regionList.map((r) => r.label).join(', ')}. Program and fee pages are tailored to each region.` },
+  { q: 'Does ClassUp Online charge students?', a: 'No. Counselling is free for students. You can chat with Ria, the AI advisor, or call or message an advisor.' },
+  { q: 'Where does the program information come from?', a: 'From university publications and fee notifications. Fees, intakes and approvals can change, so confirm them with the university before paying.' },
+];
+const aboutLd = { '@context': 'https://schema.org', '@type': 'AboutPage', url: self, name: `About ${site.name}`, about: { '@id': home + '#org' }, mainEntity: { '@id': home + '#org' } };
 ---
-<Base title={`About ${site.name}`} description={`${site.name} is an independent counselling service that helps students compare and apply to online degree programs.`}>
+<Base title="About ClassUp Online: independent online degree advisor" description={`ClassUp Online is an independent advisory service in India that helps students compare UGC-entitled online degrees. Not a university, and not classup.com or ClassUp ERP.`} jsonld={[aboutLd, faqLd(faqs)]}>
   <section><div class="wrap prose">
-    <h1>About {site.name}</h1>
-    <p>{site.name} helps working professionals and students in India, the Middle East, Africa and around the world find a suitable online degree from an established Indian university.</p>
+    <h1>About ClassUp Online</h1>
+    <p class="answer"><strong>In short:</strong> {site.descriptor}</p>
     <p>We collect program information from university publications and present it in one place so you can compare programs. Our advisors help you check your eligibility, understand fees and recognition, and complete your application. Counselling is free for students.</p>
     <p>We are not a university. Degrees are awarded by the universities themselves. Fees, intakes and approvals can change, so always confirm them with the university before paying.</p>
+    <p class="muted small">{site.disambiguation}</p>
+    <h2>Questions about ClassUp Online</h2>
+    <Faq faqs={faqs} />
+    <p>Follow us: {site.social.map((s, i) => <>{i ? ' · ' : ''}<a href={s.href} rel="me noopener" target="_blank">{s.name}</a></>)}</p>
   </div></section>
 </Base>

@@ -13,8 +13,11 @@ const r = regions[region];
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const home = new URL(url('/'), Astro.site).href;
 const org = [
-  { '@context': 'https://schema.org', '@type': 'Organization', '@id': home + '#org', name: site.name, url: home, description: site.tagline,
-    areaServed: ['IN', 'AE', 'SA', 'QA', 'KW', 'OM', 'BH', 'NG', 'KE', 'GH', 'ZA', 'TZ', 'UG', 'ET', 'ZM'],
+  { '@context': 'https://schema.org', '@type': ['Organization', 'EducationalOrganization'], '@id': home + '#org', name: site.name, alternateName: site.alternateNames, url: home,
+    description: site.descriptor, disambiguatingDescription: site.disambiguation, slogan: site.tagline,
+    address: { '@type': 'PostalAddress', addressCountry: 'IN' },
+    contactPoint: { '@type': 'ContactPoint', contactType: 'admissions counselling', telephone: '+91-80-6426-4489', availableLanguage: ['English'], areaServed: 'Worldwide' },
+    areaServed: regionList.flatMap((x) => x.hreflang).filter((h) => h.includes('-')).map((h) => h.split('-')[1]),
     sameAs: site.social.map((x) => x.href),
     knowsAbout: ['Online degrees in India', 'UGC-entitled online programs', 'Online MBA', 'Online MCA', 'Online BBA', 'Online BCA', 'Online BCom', 'Online MCom', 'Online MA'] },
   { '@context': 'https://schema.org', '@type': 'WebSite', '@id': home + '#site', name: site.name, url: home, publisher: { '@id': home + '#org' }, inLanguage: 'en',
