@@ -1,0 +1,18 @@
+---
+import Base from './Base.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { site, url } from '../data/site';
+const { frontmatter } = Astro.props;
+const ld = { '@context': 'https://schema.org', '@type': 'Article', headline: frontmatter.title, description: frontmatter.description, datePublished: frontmatter.date, dateModified: frontmatter.updated || frontmatter.date, author: { '@type': 'Organization', name: `${site.name} Advisors` }, publisher: { '@type': 'Organization', name: site.name } };
+---
+<Base title={`${frontmatter.title} | ${site.name}`} description={frontmatter.description} jsonld={[ld]}>
+  <div class="wrap crumbs"><a href={url('/articles/')}>Guides</a> › {frontmatter.title}</div>
+  <section><div class="wrap layout-2">
+    <article class="prose">
+      <h1 style="margin-top:0">{frontmatter.title}</h1>
+      <p class="small muted">Updated {frontmatter.updated || frontmatter.date} · {site.name} Advisors</p>
+      <slot />
+    </article>
+    <aside><div class="card sticky"><h3>Have a question?</h3><p class="small muted">Ask an advisor. It’s free.</p><LeadForm region="in" /></div></aside>
+  </div></section>
+</Base>

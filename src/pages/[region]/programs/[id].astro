@@ -1,0 +1,73 @@
+---
+import Base from '../../../layouts/Base.astro';
+import LeadForm from '../../../components/LeadForm.astro';
+import ProgramCard from '../../../components/ProgramCard.astro';
+import Faq from '../../../components/Faq.astro';
+import { regionList, regions, type RegionId } from '../../../data/regions';
+import { programs, uni, inr, degreeInfo, type Program } from '../../../data/catalog';
+import { url, site } from '../../../data/site';
+import { faqLd, crumbLd } from '../../../lib';
+export const getStaticPaths = () => regionList.flatMap((r) => programs.map((p) => ({ params: { region: r.id, id: p.id }, props: { p } })));
+const { p } = Astro.props as { p: Program };
+const r = regions[Astro.params.region as RegionId];
+const u = uni(p);
+const dur = p.duration_years ? `${p.duration_years} year${p.duration_years > 1 ? 's' : ''}` : 'Ask an advisor';
+const fee = r.showInrFees && p.fee_inr ? `${inr(p.fee_inr)}${u.fee_note ? ' (as published; fees are being revised)' : ''}` : r.showInrFees ? 'Ask an advisor for the current fee' : 'Ask an advisor for the international fee in your currency';
+const info = degreeInfo[p.degree];
+const faqs = [
+  { q: `Is the ${p.name} from ${u.name} valid?`, a: `${u.name} states that it holds these approvals: ${u.approvals.join(', ')}. Degrees from UGC-entitled universities earned online are treated as equivalent to on-campus degrees. Check the university’s current entitlement on the UGC-DEB website before enrolling.` },
+  { q: `Who can apply for the ${p.name}?`, a: `Applicants in India: ${p.eligibility_india}. International applicants: ${p.eligibility_foreign}.` },
+  { q: 'How are exams held?', a: u.exams + '.' },
+  { q: 'How long does it take?', a: `The program normally takes ${dur}.${p.credits ? ` It carries ${p.credits} credits.` : ''}` },
+];
+const self = new URL(Astro.url.pathname, Astro.site).href;
+const course = {
+  '@context': 'https://schema.org', '@type': 'EducationalOccupationalProgram',
+  name: `${p.name} – ${u.name}`, url: self, educationalProgramMode: 'online',
+  provider: { '@type': 'CollegeOrUniversity', name: u.name, address: u.city },
+  timeToComplete: p.duration_years ? `P${p.duration_years}Y` : undefined,
+  numberOfCredits: p.credits ?? undefined,
+  educationalCredentialAwarded: info?.full || p.degree,
+  programPrerequisites: p.eligibility_india,
+  ...(p.fee_inr && r.showInrFees ? { offers: { '@type': 'Offer', price: p.fee_inr, priceCurrency: 'INR', category: 'Tuition' } } : {}),
+};
+const related = programs.filter((x) => x.degree === p.degree && x.id !== p.id).slice(0, 6);
+---
+<Base title={`${p.name} from ${u.name}: Fees, Eligibility, Approvals | ${site.name}`} description={`${p.name} by ${u.name}: ${dur}, ${p.level}. Eligibility, exams, approvals (${u.approvals.slice(0, 3).join(', ')}) and free admission counselling.`} region={r.id} regionPath={`/programs/${p.id}/`} jsonld={[course, faqLd(faqs), crumbLd([['Programs', new URL(url(`/${r.id}/programs/`), Astro.site).href], [p.name, self]])]}>
+  <div class="wrap crumbs"><a href={url(`/${r.id}/programs/`)}>Programs</a> › <a href={url(`/${r.id}/online-${p.degree.toLowerCase()}/`)}>Online {p.degree}</a> › {p.name}</div>
+  <section><div class="wrap layout-2">
+    <div>
+      <h1 style="margin-top:0">{p.name}</h1>
+      <p class="muted">Offered by <a href={url(`/${r.id}/universities/${u.id}/`)}>{u.name}</a>, {u.city}. {info?.blurb}</p>
+      <table class="facts">
+        <tr><th>Level</th><td>{p.level}</td></tr>
+        <tr><th>Duration</th><td>{dur}</td></tr>
+        {p.credits && <tr><th>Credits</th><td>{p.credits}</td></tr>}
+        <tr><th>Fee</th><td>{fee}</td></tr>
+        {p.specializations.length > 0 && <tr><th>Specialisations / electives</th><td>{p.specializations.join(', ')}</td></tr>}
+        <tr><th>Eligibility (India)</th><td>{p.eligibility_india}</td></tr>
+        <tr><th>Eligibility (international)</th><td>{p.eligibility_foreign}</td></tr>
+        <tr><th>Mode</th><td>100% online</td></tr>
+        <tr><th>Exams</th><td>{u.exams}</td></tr>
+        <tr><th>Approvals (as stated by the university)</th><td>{u.approvals.join(', ')}</td></tr>
+        {u.scholarships && <tr><th>Scholarships</th><td>{Object.entries(u.scholarships).map(([k, v]) => `${k}: ${v}%`).join(' · ')} (confirm eligibility with an advisor)</td></tr>}
+      </table>
+      <h2 style="margin-top:28px">How admission works</h2>
+      <ol>
+        <li>Talk to an advisor (free) to confirm the program fits your goals and eligibility.</li>
+        <li>Apply online and upload your mark sheets, ID and photo.</li>
+        <li>Pay the fee to the university in full, per semester or by EMI where offered.</li>
+        <li>The university verifies your documents and confirms enrolment.</li>
+        <li>You get access to the learning platform and start classes.</li>
+      </ol>
+      <h2>FAQs</h2>
+      <Faq faqs={faqs} />
+    </div>
+    <aside><div class="card sticky">
+      <h3>Interested in this program?</h3>
+      <p class="small muted">Get the current fee, intake dates and a free eligibility check.</p>
+      <LeadForm region={r.id} program={p.id} />
+    </div></aside>
+  </div></section>
+  {related.length > 0 && <section><div class="wrap"><h2>Compare other {p.degree} programs</h2><div class="grid">{related.map((x) => <ProgramCard p={x} region={r} />)}</div></div></section>}
+</Base>
