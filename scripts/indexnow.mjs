@@ -47,10 +47,13 @@ async function submit() {
   if (!urlList.length) return console.log('indexnow: no changed pages');
   const host = new URL(SITE).host;
   for (let i = 0; i < urlList.length; i += 10000) {
-    const r = await fetch('https://api.indexnow.org/indexnow', {
+    const send = () => fetch('https://api.indexnow.org/indexnow', {
       method: 'POST', headers: { 'content-type': 'application/json; charset=utf-8' },
       body: JSON.stringify({ host, key: KEY, keyLocation: `${SITE}/${KEY}.txt`, urlList: urlList.slice(i, i + 10000) }),
     });
+    let r = await send();
+    // 403 means IndexNow could not verify the key yet, usually because the key file was only just deployed. Retry once.
+    if (r.status === 403) { await new Promise((ok) => setTimeout(ok, 30000)); r = await send(); }
     console.log(`indexnow: submitted ${Math.min(10000, urlList.length - i)} URLs, HTTP ${r.status}`);
   }
 }
