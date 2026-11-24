@@ -1,15 +1,15 @@
 # Cloudflare static assets headers.
-# Astro's build files have content hashes in their names, so they can be cached for a year.
-/_astro# Illustrations change rarely; cache for 30 days.
-/img/*
-  Cache-Control: public, max-age=2592000
-
 /*
-  Cache-Control: public, max-age=31536000, immutable
-
-/*
+  # no-transform stops Cloudflare auto-injecting its analytics beacon into the page's critical path;
+  # Base.astro loads the same beacon after the page has finished loading instead.
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Cross-Origin-Opener-Policy: same-origin
+
+# Images change rarely: cache them for 30 days (the ! line drops the no-cache header from the /* rule).
+/img/*
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
