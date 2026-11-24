@@ -20,7 +20,7 @@ const fees = list.filter((p) => p.fee_inr).map((p) => p.fee_inr!);
       <table class="facts">
         <tr><th>Programs listed</th><td>{list.length} from {new Set(list.map((p) => p.university)).size} universities</td></tr>
         <tr><th>Duration</th><td>{[...new Set(list.map((p) => p.duration_years).filter(Boolean))].join(' or ') || '—'} years</td></tr>
-        {r.showInrFees && fees.length > 0 && <tr><th>Published fees</th><td>From {inr(Math.min(...fees))}. Ask an advisor for fees not yet listed.</td></tr>}
+        {r.id === 'in' && fees.length > 0 && <tr><th>Published fees</th><td>From {inr(Math.min(...fees))}. Ask an advisor for fees not yet listed.</td></tr>}
       </table>
       <h2 style="margin-top:28px">Programs</h2>
       <div class="grid">{list.map((p) => <ProgramCard p={p} region={r} />)}</div>

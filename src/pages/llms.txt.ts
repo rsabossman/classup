@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { programs, universities, uni, inr, degrees, degreeInfo } from '../data/catalog';
+import { programs, universities, uni, feeFor, degrees, degreeInfo } from '../data/catalog';
 import { regionList } from '../data/regions';
 import { site } from '../data/site';
 
@@ -10,7 +10,7 @@ export const GET: APIRoute = ({ site: s }) => {
     '',
     `> ${site.tagline}. ${site.name} is an independent counselling service, not a university. It lists ${programs.length} online programs from ${Object.keys(universities).length} UGC-entitled Indian universities and offers free counselling by chat, WhatsApp and phone for students in India, the Middle East, Africa and elsewhere.`,
     '',
-    'Facts here come from university publications. Fees are in INR, apply to Indian students and may change. International fees are given on request.',
+    'Facts here come from university publications. Fees come from university fee notifications. INR amounts apply to students in India; USD amounts are tuition per semester for international students. Fees may change.',
     '',
     `Machine-readable catalog: ${abs('/programs.json')}`,
     '',
@@ -22,7 +22,7 @@ export const GET: APIRoute = ({ site: s }) => {
     '',
     ...degrees.flatMap((d) => [
       `## Online ${d} (${degreeInfo[d].full})`,
-      ...programs.filter((p) => p.degree === d).map((p) => `- [${p.name}, ${uni(p).name}](${abs(`/in/programs/${p.id}/`)}): ${p.duration_years ? p.duration_years + ' yr' : ''}${p.credits ? ', ' + p.credits + ' credits' : ''}${p.fee_inr ? ', fee ' + inr(p.fee_inr) : ''}. Eligibility: ${p.eligibility_india}.${p.specializations.length ? ' Specialisations: ' + p.specializations.join(', ') + '.' : ''}`),
+      ...programs.filter((p) => p.degree === d).map((p) => `- [${p.name}, ${uni(p).name}](${abs(`/in/programs/${p.id}/`)}): ${p.duration_years ? p.duration_years + ' yr' : ''}${p.credits ? ', ' + p.credits + ' credits' : ''}${feeFor(p, 'in') ? ', India fee ' + feeFor(p, 'in')!.short : ''}${feeFor(p, 'intl') ? ', international tuition ' + feeFor(p, 'intl')!.short : ''}. Eligibility: ${p.eligibility_india}.${p.specializations.length ? ' Specialisations: ' + p.specializations.join(', ') + '.' : ''}`),
       '',
     ]),
     '## Guides',

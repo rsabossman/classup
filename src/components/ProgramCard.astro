@@ -1,5 +1,5 @@
 ---
-import { uni, inr, type Program } from '../data/catalog';
+import { uni, feeFor, type Program } from '../data/catalog';
 import type { Region } from '../data/regions';
 import { url } from '../data/site';
 interface Props { p: Program; region: Region }
@@ -14,7 +14,7 @@ const u = uni(p);
   <p class="small" style="margin:8px 0">
     {p.duration_years ? `${p.duration_years} year${p.duration_years > 1 ? 's' : ''}` : 'Duration on request'}
     {p.credits ? ` · ${p.credits} credits` : ''}
-    {' · '}{region.showInrFees && p.fee_inr ? inr(p.fee_inr) : 'Fee on request'}
+    {' · '}{feeFor(p, region.id)?.short ?? 'Fee on request'}
   </p>
   <div>{u.approvals.slice(0, 2).map((a) => <span class="tag">{a}</span>)}</div>
 </article>

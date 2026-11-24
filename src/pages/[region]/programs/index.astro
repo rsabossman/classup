@@ -14,7 +14,7 @@ const list = {
 <Base title={`All online degree programs (${programs.length}) | ${site.name}`} description={`Compare ${programs.length} online UG, PG and diploma programs from UGC-entitled Indian universities on duration, fees, eligibility and approvals.`} region={r.id} regionPath="/programs/" jsonld={[list]}>
   <section><div class="wrap">
     <h1>Online degree programs</h1>
-    <p class="muted">{programs.length} programs from established Indian universities.{!r.showInrFees && ' International fees are confirmed by our advisors for your country.'}</p>
+    <p class="muted">{programs.length} programs from established Indian universities.{r.id !== 'in' && ' Fees shown are tuition per semester for students in your region. Where none is shown, an advisor will confirm it.'}</p>
     <div class="filters" role="group" aria-label="Filter by degree">
       <button type="button" aria-pressed="true" data-f="">All</button>
       {degrees.map((d) => <button type="button" aria-pressed="false" data-f={d}>{d}</button>)}

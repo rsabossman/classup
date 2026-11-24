@@ -4,7 +4,7 @@ import LeadForm from '../../../components/LeadForm.astro';
 import ProgramCard from '../../../components/ProgramCard.astro';
 import Faq from '../../../components/Faq.astro';
 import { regionList, regions, type RegionId } from '../../../data/regions';
-import { programs, uni, inr, degreeInfo, type Program } from '../../../data/catalog';
+import { programs, uni, feeFor, degreeInfo, type Program } from '../../../data/catalog';
 import { url, site } from '../../../data/site';
 import { faqLd, crumbLd } from '../../../lib';
 export const getStaticPaths = () => regionList.flatMap((r) => programs.map((p) => ({ params: { region: r.id, id: p.id }, props: { p } })));
@@ -12,7 +12,8 @@ const { p } = Astro.props as { p: Program };
 const r = regions[Astro.params.region as RegionId];
 const u = uni(p);
 const dur = p.duration_years ? `${p.duration_years} year${p.duration_years > 1 ? 's' : ''}` : 'Ask an advisor';
-const fee = r.showInrFees && p.fee_inr ? `${inr(p.fee_inr)}${u.fee_note ? ' (as published; fees are being revised)' : ''}` : r.showInrFees ? 'Ask an advisor for the current fee' : 'Ask an advisor for the international fee in your currency';
+const f = feeFor(p, r.id);
+const fee = f ? f.long : r.id === 'in' ? 'Ask an advisor for the current fee' : 'Ask an advisor for the international fee in your currency';
 const info = degreeInfo[p.degree];
 const faqs = [
   { q: `Is the ${p.name} from ${u.name} valid?`, a: `${u.name} states that it holds these approvals: ${u.approvals.join(', ')}. Degrees from UGC-entitled universities earned online are treated as equivalent to on-campus degrees. Check the university’s current entitlement on the UGC-DEB website before enrolling.` },
@@ -29,7 +30,7 @@ const course = {
   numberOfCredits: p.credits ?? undefined,
   educationalCredentialAwarded: info?.full || p.degree,
   programPrerequisites: p.eligibility_india,
-  ...(p.fee_inr && r.showInrFees ? { offers: { '@type': 'Offer', price: p.fee_inr, priceCurrency: 'INR', category: 'Tuition' } } : {}),
+  ...(r.id === 'in' && p.fee_inr ? { offers: { '@type': 'Offer', price: p.fee_inr, priceCurrency: 'INR', category: 'Tuition' } } : p.tuition_per_term && r.id !== 'in' ? { offers: { '@type': 'Offer', price: (p.tuition_per_term as any)[{ me: 'me_usd', africa: 'africa_usd', intl: 'intl_usd' }[r.id as 'me']], priceCurrency: 'USD', category: 'Tuition per semester' } } : {}),
 };
 const related = programs.filter((x) => x.degree === p.degree && x.id !== p.id).slice(0, 6);
 ---
@@ -43,7 +44,7 @@ const related = programs.filter((x) => x.degree === p.degree && x.id !== p.id).s
         <tr><th>Level</th><td>{p.level}</td></tr>
         <tr><th>Duration</th><td>{dur}</td></tr>
         {p.credits && <tr><th>Credits</th><td>{p.credits}</td></tr>}
-        <tr><th>Fee</th><td>{fee}</td></tr>
+        <tr><th>Fee</th><td>{fee}{u.other_fees && <><br /><span class="small muted">{u.other_fees}.</span></>}{p.fee_source && <><br /><span class="small muted">Source: {p.fee_source}. Confirm with an advisor before paying.</span></>}</td></tr>
         {p.specializations.length > 0 && <tr><th>Specialisations / electives</th><td>{p.specializations.join(', ')}</td></tr>}
         <tr><th>Eligibility (India)</th><td>{p.eligibility_india}</td></tr>
         <tr><th>Eligibility (international)</th><td>{p.eligibility_foreign}</td></tr>
