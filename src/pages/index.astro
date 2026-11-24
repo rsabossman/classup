@@ -19,16 +19,16 @@ import { regionImg, heroImg, HERO_WIDTHS } from '../data/images';
   </div>
   <section id="regions"><div class="wrap">
     <h2>Where are you studying from?</h2>
-    <div class="grid">{regionList.map((r) => <a class="card media" style="text-decoration:none;color:inherit" href={url(`/${r.id}/`)}><Pic img={regionImg[r.id]} sizes="(min-width: 900px) 360px, 100vw" /><div class="body"><h3>{r.label}</h3><p class="small muted" style="margin:0">{r.hero}</p></div></a>)}</div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">{regionList.map((r) => <a class="card media" style="text-decoration:none;color:inherit" href={url(`/${r.id}/`)}><Pic img={regionImg[r.id]} sizes="(min-width: 900px) 360px, 100vw" /><div class="body"><h3>{r.label}</h3><p class="small muted" style="margin:0">{r.hero}</p></div></a>)}</div>
   </div></section>
   <script>
     // Fallback when the Worker didn't set the region (local runs): guess from the browser time zone. No redirect, so crawlers see the same page.
-    import { regionLabels, regionNames } from '../data/geo';
+    import { regionLabels, regionNames, regionForTz } from '../data/geo';
     const box = document.querySelector<HTMLElement>('[data-search]');
     const label = document.querySelector<HTMLElement>('[data-geo-label]');
     if (box && label && box.dataset.region === 'auto') {
       const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-      const id = tz === 'Asia/Calcutta' || tz === 'Asia/Kolkata' ? 'in' : /^Asia\/(Dubai|Riyadh|Qatar|Kuwait|Bahrain|Muscat|Baghdad|Amman|Beirut|Tehran)/.test(tz) ? 'me' : tz.startsWith('Africa/') ? 'africa' : 'intl';
+      const id = regionForTz(tz);
       label.textContent = regionLabels[id];
       const n = document.querySelector('[data-geo-name]'); if (n) n.textContent = regionNames[id];
       document.querySelectorAll('.region-switch a').forEach((a) => a.getAttribute('href')?.endsWith(`/${id}/`) ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current'));

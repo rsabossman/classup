@@ -34,8 +34,9 @@ export function feeFor(p: Program, region: string): { short: string; long: strin
     if (t) return { short: `${inr(t.in_inr)} / semester`, long: `${inr(t.in_inr)} tuition per semester (${inr(t.in_inr * (p.terms || 1))} over ${p.terms} semesters), plus exam and admin fees.` };
     return null;
   }
+  if (t && region === 'saarc') return { short: `${inr(t.saarc_inr)} / semester`, long: `${inr(t.saarc_inr)} tuition per semester for students from SAARC countries (${inr(t.saarc_inr * (p.terms || 1))} over ${p.terms} semesters), plus exam and admin fees.` };
   if (t) {
-    const v = (t as any)[{ me: 'me_usd', africa: 'africa_usd', intl: 'intl_usd' }[region] || 'intl_usd'] as number;
+    const v = (t as any)[{ me: 'me_usd', sea: 'sea_usd', africa: 'africa_usd', intl: 'intl_usd' }[region] || 'intl_usd'] as number;
     return { short: `${usd(v)} / semester`, long: `${usd(v)} tuition per semester (${usd(v * (p.terms || 1))} over ${p.terms} semesters), plus exam and admin fees. Indian nationals living abroad pay ${usd(t.nri_usd)} per semester.` };
   }
   return null;
