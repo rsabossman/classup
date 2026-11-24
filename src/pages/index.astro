@@ -4,18 +4,18 @@ import { regionList } from '../data/regions';
 import { programs, universities } from '../data/catalog';
 import { site, url } from '../data/site';
 import Pic from '../components/Pic.astro';
-import { homeImg, regionImg } from '../data/images';
+import { regionImg, heroImg, HERO_WIDTHS } from '../data/images';
 ---
 <Base title={`${site.name}: Compare UGC-entitled online degrees from Indian universities`} description={`${site.tagline}. ${programs.length} online programs from ${Object.keys(universities).length} universities, with free counselling.`} region="in">
-  <div class="hero"><div class="wrap hero-split">
-    <div>
+  <div class="hero hero-bg">
+    <Pic img={heroImg.home} widths={HERO_WIDTHS} sizes="100vw" priority />
+    <div class="wrap"><div class="copy">
     <h1>{site.tagline}</h1>
     <p>Choose where you live so we can show the right fees, counselling hours and recognition guidance.</p>
     <div class="row">{regionList.map((r) => <a class="btn alt" href={url(`/${r.id}/`)} data-region={r.id}>{r.label}</a>)}</div>
     <p class="small muted" id="suggest" hidden></p>
-    </div>
-    <Pic img={homeImg} class="hero-img" sizes="(min-width: 900px) 540px, 100vw" priority />
-  </div></div>
+    </div></div>
+  </div>
   <section><div class="wrap">
     <h2>Where are you studying from?</h2>
     <div class="grid">{regionList.map((r) => <a class="card media" style="text-decoration:none;color:inherit" href={url(`/${r.id}/`)}><Pic img={regionImg[r.id]} sizes="(min-width: 900px) 360px, 100vw" /><div class="body"><h3>{r.label}</h3><p class="small muted" style="margin:0">{r.hero}</p></div></a>)}</div>

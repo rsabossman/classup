@@ -59,3 +59,9 @@ a.card:hover,.card:has(a.stretch:hover){box-shadow:0 8px 22px rgba(29,34,48,.1);
 .art-img{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:14px;margin:4px 0 20px;background:var(--brand-2)}
 .card.media.prog img{aspect-ratio:2.2/1}
 .art-img.wide{aspect-ratio:2.6/1;object-fit:cover}
+.hero-bg{position:relative;overflow:hidden;padding:84px 0 76px;background:var(--brand-2)}
+.hero-bg>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% center}
+.hero-bg:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(251,250,247,.96) 0%,rgba(251,250,247,.88) 38%,rgba(251,250,247,.35) 65%,rgba(251,250,247,0) 85%)}
+.hero-bg .wrap{position:relative;z-index:2}
+.hero-bg .copy{max-width:600px}
+@media(max-width:760px){.hero-bg{padding:56px 0 48px}.hero-bg:before{background:rgba(251,250,247,.86)}}

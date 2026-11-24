@@ -36,3 +36,13 @@ export const articleImg: Record<string, Img> = {
 };
 
 export const IMG_WIDTHS = [480, 800, 1280] as const;
+
+// Full-width hero background photos (licensed stock supplied by the site owner), in public/img as hero-<id>-640/1024/1600.webp.
+export const HERO_WIDTHS = [640, 1024, 1600] as const;
+export const heroImg: Record<string, Img> = {
+  home: img('hero-home', ''),
+  in: img('hero-in', ''),
+  me: img('hero-me', ''),
+  africa: img('hero-africa', ''),
+  intl: img('hero-intl', ''),
+};
