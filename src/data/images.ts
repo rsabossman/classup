@@ -1,6 +1,6 @@
 // AI-generated illustrations (ElevenLabs, 2026-11). Each lives in public/img as <name>-480/800/1280.webp, 16:9.
 // They show generic learners and settings only: no university logos, buildings or photos.
-export interface Img { name: string; alt: string }
+export interface Img { name: string; alt: string; ogWidth?: number }
 
 const img = (name: string, alt: string): Img => ({ name, alt });
 
@@ -40,9 +40,9 @@ export const IMG_WIDTHS = [480, 800, 1280] as const;
 // Full-width hero background photos (licensed stock supplied by the site owner), in public/img as hero-<id>-640/1024/1600.webp.
 export const HERO_WIDTHS = [640, 1024, 1600] as const;
 export const heroImg: Record<string, Img> = {
-  home: img('hero-home', ''),
-  in: img('hero-in', ''),
-  me: img('hero-me', ''),
-  africa: img('hero-africa', ''),
-  intl: img('hero-intl', ''),
+  home: { name: 'hero-home', alt: 'Student taking notes while studying in a library', ogWidth: 1600 },
+  in: { name: 'hero-in', alt: 'Student with headphones taking notes during an online class on her laptop', ogWidth: 1600 },
+  me: { name: 'hero-me', alt: 'Working professional in an office thinking about his next career step', ogWidth: 1600 },
+  africa: { name: 'hero-africa', alt: 'Professional with a headset joining an online class on his laptop', ogWidth: 1600 },
+  intl: { name: 'hero-intl', alt: 'Professional studying on her laptop in a modern workspace', ogWidth: 1600 },
 };
