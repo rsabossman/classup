@@ -17,7 +17,7 @@ export const site = {
     // When set, landing-page conversions are sent through it, and no second Google Ads tag is loaded.
     gtmId: import.meta.env.PUBLIC_GTM_ID ?? 'GTM-TWZWWGCC',
     googleAdsId: import.meta.env.PUBLIC_GADS_ID || 'AW-18593585584', // ClassUp Google Ads account (standalone)
-    googleAdsLeadLabel: import.meta.env.PUBLIC_GADS_LEAD_LABEL || '', // conversion label of the "Lead" action, e.g. AbCdEfGhIj
+    googleAdsLeadLabel: import.meta.env.PUBLIC_GADS_LEAD_LABEL || 'Wg2fCImqz74dELCzjqJF', // conversion label of the "Lead" action, e.g. AbCdEfGhIj
     metaPixelId: import.meta.env.PUBLIC_META_PIXEL_ID || '', // e.g. 1234567890123456
   },
   chatAgentId: import.meta.env.PUBLIC_CHAT_AGENT_ID || '',

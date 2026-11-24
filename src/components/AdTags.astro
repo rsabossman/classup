@@ -30,7 +30,7 @@ const viaGtm = !!gtmId;
   // Leads are announced as a cu:lead DOM event (as well as on dataLayer, which GTM takes over).
   addEventListener('cu:lead',function(ev){
     var e=ev.detail||{},id=e.lead_id||String(Date.now());
-    if(g&&gl)gtag('event','conversion',{send_to:g+'/'+gl,transaction_id:id});
+    if(g&&gl)gtag('event','conversion',{send_to:g+'/'+gl,value:1,currency:'INR',transaction_id:id});
     if(g)gtag('event','generate_lead',{lp:lp,degree:degree,country:country,intent:e.intent});
     if(m)fbq('track','Lead',{content_name:degree,content_category:lp},{eventID:id});
   });
