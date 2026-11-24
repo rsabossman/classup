@@ -77,7 +77,7 @@ const wa = `https://wa.me/${r.whatsapp}?text=${encodeURIComponent(`Hi, I would l
       <p><a href={url('/privacy/')} target="_blank" rel="noopener">Privacy</a></p>
     </div>
   </footer>
-  <script type="application/json" id="cu-widget-cfg" set:html={JSON.stringify({ region: r.id, whatsapp: r.whatsapp, phone: r.phone, hours: r.hours, endpoint: site.leadEndpoint })} />
+  <script type="application/json" id="cu-widget-cfg" set:html={JSON.stringify({ region: r.id, whatsapp: r.whatsapp, phone: r.phone, hours: r.hours, endpoint: site.leadEndpoint, chat: site.chatEndpoint })} />
   <script>
     import '../scripts/client';
   </script>
