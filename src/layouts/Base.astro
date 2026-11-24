@@ -16,7 +16,9 @@ const org = [
   { '@context': 'https://schema.org', '@type': 'Organization', '@id': home + '#org', name: site.name, url: home, description: site.tagline,
     areaServed: ['IN', 'AE', 'SA', 'QA', 'KW', 'OM', 'BH', 'NG', 'KE', 'GH', 'ZA', 'TZ', 'UG', 'ET', 'ZM'],
     knowsAbout: ['Online degrees in India', 'UGC-entitled online programs', 'Online MBA', 'Online MCA', 'Online BBA', 'Online BCA', 'Online BCom', 'Online MCom', 'Online MA'] },
-  { '@context': 'https://schema.org', '@type': 'WebSite', '@id': home + '#site', name: site.name, url: home, publisher: { '@id': home + '#org' }, inLanguage: 'en' },
+  { '@context': 'https://schema.org', '@type': 'WebSite', '@id': home + '#site', name: site.name, url: home, publisher: { '@id': home + '#org' }, inLanguage: 'en',
+    // The homepage search box reads ?q= on load, so agents can link straight to a search.
+    potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: home + '?q={search_term_string}' }, 'query-input': 'required name=search_term_string' } },
 ];
 // Each regional copy of a page names every country it serves; the international copy is the fallback (x-default).
 const alternates = regionPath ? [

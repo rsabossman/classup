@@ -4,6 +4,7 @@ import { regionList } from '../data/regions';
 import { programs, universities } from '../data/catalog';
 import { site, url } from '../data/site';
 import Pic from '../components/Pic.astro';
+import SearchBar from '../components/SearchBar.astro';
 import { regionImg, heroImg, HERO_WIDTHS } from '../data/images';
 ---
 <Base title={`${site.name}: Compare UGC-entitled online degrees from Indian universities`} description={`${site.tagline}. ${programs.length} online programs from ${Object.keys(universities).length} universities, with free counselling.`} region="in">
@@ -11,7 +12,8 @@ import { regionImg, heroImg, HERO_WIDTHS } from '../data/images';
     <Pic img={heroImg.home} widths={HERO_WIDTHS} ratio={2.2} sizes="(min-width: 900px) 58vw, 100vw" priority />
     <div class="wrap"><div class="copy">
     <h1>{site.tagline}</h1>
-    <p>Choose where you live so we can show the right fees, counselling hours and recognition guidance.</p>
+    <SearchBar />
+    <p class="small" style="margin:18px 0 8px">Or choose where you live to see the right fees, counselling hours and recognition guidance.</p>
     <div class="row">{regionList.map((r) => <a class="btn alt" href={url(`/${r.id}/`)} data-region={r.id}>{r.label}</a>)}</div>
     <p class="small muted" id="suggest" hidden></p>
     </div></div>

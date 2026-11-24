@@ -83,7 +83,9 @@ const fab = $<HTMLButtonElement>('.fab'), panel = $<HTMLDivElement>('.panel'), b
 const back = $<HTMLButtonElement>('.back'), title = $<HTMLElement>('[data-t]');
 const waLink = `https://wa.me/${cfg.whatsapp}?text=${encodeURIComponent('Hi, I would like to know more about online degree programs.')}`;
 
-function open(v = 'home') { panel.hidden = false; fab.setAttribute('aria-expanded', 'true'); show(v); }
+// opts.question: a question typed elsewhere on the page (the homepage search), which opens the chat with it.
+type Opts = { question?: string };
+function open(v = 'home', opts: Opts = {}) { panel.hidden = false; fab.setAttribute('aria-expanded', 'true'); show(v, opts); }
 function close() { panel.hidden = true; fab.setAttribute('aria-expanded', 'false'); }
 fab.addEventListener('click', () => (panel.hidden ? open() : close()));
 $('.x').addEventListener('click', close);
@@ -112,7 +114,7 @@ function wire(intent: string, done: string) {
   });
 }
 
-function show(v: string) {
+function show(v: string, opts: Opts = {}) {
   back.hidden = v === 'home'; ft.hidden = true; ft.innerHTML = '';
   if (v === 'home') {
     title.textContent = 'Hi! How can we help?';
@@ -146,13 +148,13 @@ function show(v: string) {
     title.textContent = cfg.chat ? 'Chat with Ria, our advisor' : 'Chat with us';
     const ai = (window as any).cuChat; // The AI agent (step 3) can take over here.
     if (ai?.mount) return ai.mount(bd, { region: cfg.region, sendLead });
-    chat();
+    chat(opts.question);
   }
 }
 
 // Chat: a few guided questions, then name and WhatsApp number (the lead is saved first, so Ria knows the
 // visitor's country and degree), then a free conversation with Ria. Without a chat endpoint, it stays a guided form.
-function chat() {
+function chat(question = '') {
   const log: string[] = [];
   const pending: string[] = []; // questions typed before the visitor shared their contact details
   // On a degree landing page, the degree is already known.
@@ -195,7 +197,7 @@ function chat() {
         f.remove();
         if (cfg.chat) import('./ria').then(({ listen }) => listen(cfg.chat!, leadId, (t) => say('bot', `Advisor: ${t}`)));
         if (!cfg.chat) return void say('bot', 'Thank you! An advisor will message you on WhatsApp shortly.');
-        const intro = [interest && interest !== 'Not sure yet' ? `I’m interested in an online ${interest}.` : 'I’m not sure which degree to choose yet.', work && `Work status: ${work}.`, ...pending].filter(Boolean).join(' ');
+        const intro = [interest && interest !== 'Not sure yet' ? `I’m interested in an online ${interest}.` : pending.length ? '' : 'I’m not sure which degree to choose yet.', work && `Work status: ${work}.`, ...pending].filter(Boolean).join(' ');
         pending.length = 0;
         ria(intro);
       } catch { b.disabled = false; b.textContent = 'Try again'; }
@@ -203,7 +205,13 @@ function chat() {
   };
   const askWork = () => chips(['Yes, working', 'Studying', 'Neither right now'], (w) => { work = w; askContact(); });
   const hi = `Hi${cfg.chat ? ', I’m Ria' : ''}!`;
-  if (pageDegree) {
+  if (question) {
+    // Arrived from the search box: show the question, then ask for contact details so Ria can answer it.
+    say('me', question);
+    pending.push(question);
+    say('bot', `${hi} Happy to help with that.`);
+    askContact();
+  } else if (pageDegree) {
     say('bot', `${hi} I can answer your questions about the online ${pageDegree}. Are you currently working?`);
     askWork();
   } else {
