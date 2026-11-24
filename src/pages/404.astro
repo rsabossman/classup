@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../data/site';
+---
+<Base title="Page not found" description="This page could not be found.">
+  <section><div class="wrap prose">
+    <h1>Page not found</h1>
+    <p>The page you’re looking for has moved or doesn’t exist. Try <a href={url('/in/programs/')}>browsing all programs</a> or ask an advisor on WhatsApp.</p>
+  </div></section>
+</Base>
