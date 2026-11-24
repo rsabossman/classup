@@ -1,0 +1,20 @@
+---
+import { uni, inr, type Program } from '../data/catalog';
+import type { Region } from '../data/regions';
+import { url } from '../data/site';
+interface Props { p: Program; region: Region }
+const { p, region } = Astro.props;
+const u = uni(p);
+---
+<article class="card" data-degree={p.degree}>
+  <a class="stretch" href={url(`/${region.id}/programs/${p.id}/`)}>
+    <h3>{p.name}</h3>
+    <div class="muted small">{u.name}</div>
+  </a>
+  <p class="small" style="margin:8px 0">
+    {p.duration_years ? `${p.duration_years} year${p.duration_years > 1 ? 's' : ''}` : 'Duration on request'}
+    {p.credits ? ` · ${p.credits} credits` : ''}
+    {' · '}{region.showInrFees && p.fee_inr ? inr(p.fee_inr) : 'Fee on request'}
+  </p>
+  <div>{u.approvals.slice(0, 2).map((a) => <span class="tag">{a}</span>)}</div>
+</article>

@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import { regionList } from '../data/regions';
+import { programs, universities } from '../data/catalog';
+import { site, url } from '../data/site';
+---
+<Base title={`${site.name}: Compare UGC-entitled online degrees from Indian universities`} description={`${site.tagline}. ${programs.length} online programs from ${Object.keys(universities).length} universities, with free counselling.`} region="in">
+  <div class="hero"><div class="wrap">
+    <h1>{site.tagline}</h1>
+    <p>Choose where you live so we can show the right fees, counselling hours and recognition guidance.</p>
+    <div class="row">{regionList.map((r) => <a class="btn alt" href={url(`/${r.id}/`)} data-region={r.id}>{r.label}</a>)}</div>
+    <p class="small muted" id="suggest" hidden></p>
+  </div></div>
+  <script>
+    // Suggest a region from the browser time zone; there's no auto-redirect, so crawlers see the same page.
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    const id = tz === 'Asia/Calcutta' || tz === 'Asia/Kolkata' ? 'in' : /^Asia\/(Dubai|Riyadh|Qatar|Kuwait|Bahrain|Muscat|Baghdad|Amman|Beirut|Tehran)/.test(tz) ? 'me' : tz.startsWith('Africa/') ? 'africa' : 'intl';
+    const a = document.querySelector<HTMLAnchorElement>(`[data-region="${id}"]`);
+    if (a) { a.classList.remove('alt'); const s = document.getElementById('suggest')!; s.hidden = false; s.textContent = 'Suggested for your location: ' + a.textContent; }
+  </script>
+</Base>

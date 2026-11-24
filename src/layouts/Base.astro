@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+import { site, url } from '../data/site';
+import { regions, regionList, type RegionId } from '../data/regions';
+import Dock from '../components/Dock.astro';
+interface Props { title: string; description: string; region?: RegionId; jsonld?: object[]; regionPath?: string }
+const { title, description, region = 'in', jsonld = [], regionPath = '' } = Astro.props;
+const r = regions[region];
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const org = { '@context': 'https://schema.org', '@type': 'Organization', name: site.name, url: new URL(url('/'), Astro.site).href, description: site.tagline };
+const alternates = regionPath ? regionList.map((x) => ({ hreflang: ({ in: 'en-IN', me: 'en-AE', africa: 'en-NG', intl: 'en' } as any)[x.id], href: new URL(url(`/${x.id}${regionPath}`), Astro.site).href })) : [];
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <link rel="sitemap" href={url('/sitemap-index.xml')} />
+  <link rel="alternate" type="text/plain" title="LLM summary" href={url('/llms.txt')} />
+  <script type="application/ld+json" set:html={JSON.stringify([org, ...jsonld])} />
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <a class="logo" href={url(`/${region}/`)}>{site.name}</a>
+      <nav class="main" aria-label="Main">
+        <a href={url(`/${region}/programs/`)}>Programs</a>
+        <a href={url(`/${region}/universities/`)}>Universities</a>
+        <a href={url('/articles/')}>Guides</a>
+        <a href={url(`/${region}/#counselling`)}>Free counselling</a>
+      </nav>
+      <div class="region-switch">Region:
+        {regionList.map((x) => <a href={url(`/${x.id}${regionPath || '/'}`)} aria-current={x.id === region ? 'true' : undefined}>{x.name}</a>)}
+      </div>
+    </div>
+  </header>
+  <main><slot /></main>
+  <footer class="site">
+    <div class="wrap">
+      <p><strong>{site.name}</strong> is an independent education counselling service. We help students compare online degree programs and apply to them. We are not a university and do not award degrees. Each degree is awarded by the university that offers it. Check the program details, fees and approvals with the university before you pay.</p>
+      <p><a href={url('/about/')}>About</a> · <a href={url('/privacy/')}>Privacy</a> · <a href={url('/articles/')}>Guides</a> · <a href={url('/llms.txt')}>llms.txt</a></p>
+    </div>
+  </footer>
+  <Dock region={r} />
+  <script>
+    import '../scripts/client';
+  </script>
+</body>
+</html>

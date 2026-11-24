@@ -1,0 +1,18 @@
+---
+import { programs, uni } from '../data/catalog';
+import { site } from '../data/site';
+interface Props { region: string; program?: string; intent?: 'counselling' | 'callback'; compact?: boolean }
+const { region, program = '', intent = 'counselling', compact = false } = Astro.props;
+---
+<form class="lead" data-lead data-endpoint={site.leadEndpoint} data-region={region} data-intent={intent}>
+  <input name="name" placeholder="Full name" required autocomplete="name" />
+  <input name="phone" placeholder="Mobile / WhatsApp number with country code" required autocomplete="tel" inputmode="tel" />
+  {!compact && <input name="email" type="email" placeholder="Email (optional)" autocomplete="email" />}
+  <select name="program" aria-label="Program of interest">
+    <option value="">Program of interest (optional)</option>
+    {programs.map((p) => <option value={p.id} selected={p.id === program}>{p.name} – {uni(p).short}</option>)}
+  </select>
+  <label class="small muted"><input type="checkbox" name="consent" required checked style="width:auto" /> I agree to be contacted by call, WhatsApp, SMS or email about programs.</label>
+  <button class="btn" type="submit">{intent === 'callback' ? 'Call me back' : 'Get free counselling'}</button>
+  <p class="small muted" data-status hidden></p>
+</form>

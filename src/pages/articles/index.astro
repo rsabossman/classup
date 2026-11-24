@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site, url } from '../../data/site';
+const posts = Object.entries(import.meta.glob('./*.md', { eager: true }) as Record<string, any>)
+  .map(([f, m]) => ({ slug: f.replace('./', '').replace('.md', ''), ...m.frontmatter }))
+  .sort((a, b) => (a.date < b.date ? 1 : -1));
+---
+<Base title={`Guides to online degrees | ${site.name}`} description="Practical guides to choosing, checking and applying for online degrees from Indian universities.">
+  <section><div class="wrap">
+    <h1>Guides</h1>
+    <div class="grid">{posts.map((p) => <a class="card" style="text-decoration:none;color:inherit" href={url(`/articles/${p.slug}/`)}><h3>{p.title}</h3><p class="small muted" style="margin:0">{p.description}</p></a>)}</div>
+  </div></section>
+</Base>

@@ -1,0 +1,30 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ProgramCard from '../../../components/ProgramCard.astro';
+import LeadForm from '../../../components/LeadForm.astro';
+import { regionList, regions, type RegionId } from '../../../data/regions';
+import { universities, programs, type University } from '../../../data/catalog';
+import { site } from '../../../data/site';
+export const getStaticPaths = () => regionList.flatMap((r) => Object.values(universities).map((u) => ({ params: { region: r.id, uni: u.id }, props: { u } })));
+const { u } = Astro.props as { u: University };
+const r = regions[Astro.params.region as RegionId];
+const list = programs.filter((p) => p.university === u.id);
+const ld = { '@context': 'https://schema.org', '@type': 'CollegeOrUniversity', name: u.name, foundingDate: String(u.est), address: u.city };
+---
+<Base title={`${u.name} Online: ${list.length} programs, approvals, exams | ${site.name}`} description={`${u.name} (${u.city}, est. ${u.est}) online programs: ${[...new Set(list.map((p) => p.degree))].join(', ')}. Approvals: ${u.approvals.join(', ')}.`} region={r.id} regionPath={`/universities/${u.id}/`} jsonld={[ld]}>
+  <section><div class="wrap layout-2">
+    <div>
+      <h1 style="margin-top:0">{u.name} online programs</h1>
+      <p class="muted">{u.city} · Established {u.est}</p>
+      <table class="facts">
+        <tr><th>Approvals (as stated by the university)</th><td>{u.approvals.join(', ')}</td></tr>
+        <tr><th>Exams</th><td>{u.exams}</td></tr>
+        <tr><th>Online programs</th><td>{list.length}</td></tr>
+        {u.scholarships && <tr><th>Scholarships</th><td>{Object.entries(u.scholarships).map(([k, v]) => `${k}: ${v}%`).join(' · ')}</td></tr>}
+      </table>
+      <h2 style="margin-top:28px">Programs</h2>
+      <div class="grid">{list.map((p) => <ProgramCard p={p} region={r} />)}</div>
+    </div>
+    <aside><div class="card sticky"><h3>Talk to an advisor</h3><LeadForm region={r.id} /></div></aside>
+  </div></section>
+</Base>

@@ -1,0 +1,31 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ProgramCard from '../../../components/ProgramCard.astro';
+import { regionList, regions, type RegionId } from '../../../data/regions';
+import { programs, degrees } from '../../../data/catalog';
+import { site } from '../../../data/site';
+export const getStaticPaths = () => regionList.map((r) => ({ params: { region: r.id } }));
+const r = regions[Astro.params.region as RegionId];
+const list = {
+  '@context': 'https://schema.org', '@type': 'ItemList', name: 'Online degree programs',
+  itemListElement: programs.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: new URL(`programs/${p.id}/`, Astro.url).href, name: p.name })),
+};
+---
+<Base title={`All online degree programs (${programs.length}) | ${site.name}`} description={`Compare ${programs.length} online UG, PG and diploma programs from UGC-entitled Indian universities on duration, fees, eligibility and approvals.`} region={r.id} regionPath="/programs/" jsonld={[list]}>
+  <section><div class="wrap">
+    <h1>Online degree programs</h1>
+    <p class="muted">{programs.length} programs from established Indian universities.{!r.showInrFees && ' International fees are confirmed by our advisors for your country.'}</p>
+    <div class="filters" role="group" aria-label="Filter by degree">
+      <button type="button" aria-pressed="true" data-f="">All</button>
+      {degrees.map((d) => <button type="button" aria-pressed="false" data-f={d}>{d}</button>)}
+    </div>
+    <div class="grid" id="plist">{programs.map((p) => <ProgramCard p={p} region={r} />)}</div>
+  </div></section>
+  <script>
+    const btns = document.querySelectorAll<HTMLButtonElement>('[data-f]');
+    btns.forEach((b) => b.addEventListener('click', () => {
+      btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      document.querySelectorAll<HTMLElement>('#plist [data-degree]').forEach((c) => { c.hidden = !!b.dataset.f && c.dataset.degree !== b.dataset.f; });
+    }));
+  </script>
+</Base>

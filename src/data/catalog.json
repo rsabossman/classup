@@ -1,0 +1,1105 @@
+{
+ "updated": "2026-11-24",
+ "universities": {
+  "uom": {
+   "name": "University of Mysore",
+   "short": "UoM",
+   "city": "Mysuru, Karnataka",
+   "est": 1916,
+   "approvals": [
+    "UGC-entitled",
+    "AICTE",
+    "AIU member",
+    "NAAC accredited",
+    "NIRF ranked"
+   ],
+   "exams": "Remotely proctored online exams; assignments mandatory",
+   "source": "https://www.uni-mysore.in",
+   "fee_note": "Fees under revision at source; confirm before quoting"
+  },
+  "vtu": {
+   "name": "Visvesvaraya Technological University",
+   "short": "VTU",
+   "city": "Belagavi, Karnataka",
+   "est": 1998,
+   "approvals": [
+    "UGC-DEB",
+    "AICTE (where applicable)",
+    "NAAC B++",
+    "NIRF 2024 #75 (University)",
+    "WES recognised",
+    "AIU member"
+   ],
+   "exams": "30% internal, 70% online proctored end-term",
+   "source": "https://www.vtu-online.net"
+  },
+  "gndu": {
+   "name": "Guru Nanak Dev University",
+   "short": "GNDU",
+   "city": "Amritsar, Punjab",
+   "est": 1969,
+   "approvals": [
+    "UGC-DEB",
+    "NAAC A++ (3.85)",
+    "AICTE",
+    "AIU member"
+   ],
+   "exams": "30% internal, 70% AI-proctored online end-term",
+   "source": "https://www.gndu-online.in"
+  },
+  "adbu": {
+   "name": "Assam Don Bosco University",
+   "short": "ADBU",
+   "city": "Guwahati, Assam",
+   "est": 2008,
+   "approvals": [
+    "UGC-DEB",
+    "NAAC A",
+    "AICTE (MBA, MCA)",
+    "AIU member",
+    "ACU member"
+   ],
+   "exams": "Online proctored (live video + AI)",
+   "source": "https://www.dbuglobal.com",
+   "scholarships": {
+    "North-East residents": 60,
+    "Defence wards": 50,
+    "Persons with disability": 50,
+    "Gig workers": 50,
+    "Merit (85%+)": 25,
+    "Sports": 25,
+    "Alumni": 25
+   }
+  }
+ },
+ "programs": [
+  {
+   "id": "uom-online-bca",
+   "university": "uom",
+   "degree": "BCA",
+   "name": "Online BCA",
+   "level": "UG",
+   "duration_years": 3,
+   "credits": 120,
+   "fee_inr": 52875,
+   "specializations": [],
+   "eligibility_india": "10+2 (any stream) from a recognised board",
+   "eligibility_foreign": "12 years of formal schooling",
+   "source_url": "https://www.uni-mysore.in/online-bca-degree-program",
+   "category": "Computer Applications"
+  },
+  {
+   "id": "uom-online-bcom",
+   "university": "uom",
+   "degree": "BCom",
+   "name": "Online BCom",
+   "level": "UG",
+   "duration_years": 3,
+   "credits": 120,
+   "fee_inr": 34875,
+   "specializations": [
+    "Financial Management",
+    "Advertising & Salesmanship",
+    "Retail Marketing"
+   ],
+   "eligibility_india": "10+2 (any stream) from a recognised board",
+   "eligibility_foreign": "12 years of formal schooling",
+   "source_url": "https://www.uni-mysore.in/online-bcom-degree-program",
+   "category": "Commerce"
+  },
+  {
+   "id": "uom-online-bba",
+   "university": "uom",
+   "degree": "BBA",
+   "name": "Online BBA",
+   "level": "UG",
+   "duration_years": 3,
+   "credits": 120,
+   "fee_inr": 52875,
+   "specializations": [],
+   "eligibility_india": "10+2 (any stream) from a recognised board",
+   "eligibility_foreign": "12 years of formal schooling",
+   "source_url": "https://www.uni-mysore.in/online-bba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "uom-online-mca",
+   "university": "uom",
+   "degree": "MCA",
+   "name": "Online MCA",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": 84,
+   "fee_inr": 66625,
+   "specializations": [],
+   "eligibility_india": "BCA/B.Sc CS/B.E., or any graduate with Maths/Statistics/IT (bridge course may apply)",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mca-degree-program",
+   "category": "Computer Applications"
+  },
+  {
+   "id": "uom-online-mcom",
+   "university": "uom",
+   "degree": "MCom",
+   "name": "Online MCom",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": 84,
+   "fee_inr": 38625,
+   "specializations": [
+    "Retail Banking",
+    "Personal Financial Planning"
+   ],
+   "eligibility_india": "BCom/BBM/BBA",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mcom-degree-program",
+   "category": "Commerce"
+  },
+  {
+   "id": "uom-online-mba-dual-specialisation",
+   "university": "uom",
+   "degree": "MBA",
+   "name": "Online MBA (Dual Specialisation)",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": 85,
+   "fee_inr": 62625,
+   "specializations": [
+    "Supply Chain",
+    "Operations",
+    "Human Resources",
+    "Finance",
+    "Marketing",
+    "Project Management"
+   ],
+   "eligibility_india": "Any graduate",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "uom-online-mba-in-general-management",
+   "university": "uom",
+   "degree": "MBA",
+   "name": "Online MBA in General Management",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "General Management"
+   ],
+   "eligibility_india": "Any graduate",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "uom-online-mba-in-human-resource-management",
+   "university": "uom",
+   "degree": "MBA",
+   "name": "Online MBA in Human Resource Management",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Human Resource Management"
+   ],
+   "eligibility_india": "Any graduate",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "uom-online-mba-in-marketing-management",
+   "university": "uom",
+   "degree": "MBA",
+   "name": "Online MBA in Marketing Management",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Marketing Management"
+   ],
+   "eligibility_india": "Any graduate",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "uom-online-mba-in-finance-management",
+   "university": "uom",
+   "degree": "MBA",
+   "name": "Online MBA in Finance Management",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Finance Management"
+   ],
+   "eligibility_india": "Any graduate",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "uom-online-mba-in-supply-chain-management",
+   "university": "uom",
+   "degree": "MBA",
+   "name": "Online MBA in Supply Chain Management",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Supply Chain Management"
+   ],
+   "eligibility_india": "Any graduate",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "uom-online-mba-in-operations-management",
+   "university": "uom",
+   "degree": "MBA",
+   "name": "Online MBA in Operations Management",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Operations Management"
+   ],
+   "eligibility_india": "Any graduate",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "uom-online-mba-in-data-science-business-analytics",
+   "university": "uom",
+   "degree": "MBA",
+   "name": "Online MBA in Data Science & Business Analytics",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Data Science & Business Analytics"
+   ],
+   "eligibility_india": "Any graduate",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "uom-online-mba-in-it-business-management",
+   "university": "uom",
+   "degree": "MBA",
+   "name": "Online MBA in IT Business Management",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "IT Business Management"
+   ],
+   "eligibility_india": "Any graduate",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "uom-online-mba-in-entrepreneurship",
+   "university": "uom",
+   "degree": "MBA",
+   "name": "Online MBA in Entrepreneurship",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Entrepreneurship"
+   ],
+   "eligibility_india": "Any graduate",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "uom-online-mba-in-executive-leadership",
+   "university": "uom",
+   "degree": "MBA",
+   "name": "Online MBA in Executive Leadership",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Executive Leadership"
+   ],
+   "eligibility_india": "Any graduate",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "uom-online-mba-in-digital-marketing",
+   "university": "uom",
+   "degree": "MBA",
+   "name": "Online MBA in Digital Marketing",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Digital Marketing"
+   ],
+   "eligibility_india": "Any graduate",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "uom-online-mba-in-small-medium-business-management",
+   "university": "uom",
+   "degree": "MBA",
+   "name": "Online MBA in Small & Medium Business Management",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Small & Medium Business Management"
+   ],
+   "eligibility_india": "Any graduate",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "uom-online-mba-in-hospital-administration",
+   "university": "uom",
+   "degree": "MBA",
+   "name": "Online MBA in Hospital Administration",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Hospital Administration"
+   ],
+   "eligibility_india": "Any graduate",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "uom-online-mba-in-strategy-leadership",
+   "university": "uom",
+   "degree": "MBA",
+   "name": "Online MBA in Strategy & Leadership",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Strategy & Leadership"
+   ],
+   "eligibility_india": "Any graduate",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "vtu-online-bba-in-digital-marketing",
+   "university": "vtu",
+   "degree": "BBA",
+   "name": "Online BBA in Digital Marketing",
+   "level": "UG",
+   "duration_years": 3,
+   "credits": 120,
+   "fee_inr": null,
+   "specializations": [
+    "Digital Marketing"
+   ],
+   "eligibility_india": "10+2 (any stream) from a recognised board",
+   "eligibility_foreign": "12 years of formal schooling",
+   "source_url": "https://vtu-online.net/online-bba-in-digital-marketing",
+   "category": "Management"
+  },
+  {
+   "id": "vtu-online-bca-in-data-analytics",
+   "university": "vtu",
+   "degree": "BCA",
+   "name": "Online BCA in Data Analytics",
+   "level": "UG",
+   "duration_years": 3,
+   "credits": 120,
+   "fee_inr": null,
+   "specializations": [
+    "Data Analytics"
+   ],
+   "eligibility_india": "10+2 (any stream) from a recognised board",
+   "eligibility_foreign": "12 years of formal schooling",
+   "source_url": "https://vtu-online.net/online-bca-in-data-analytics",
+   "category": "Computer Applications"
+  },
+  {
+   "id": "vtu-online-bca-in-data-science",
+   "university": "vtu",
+   "degree": "BCA",
+   "name": "Online BCA in Data Science",
+   "level": "UG",
+   "duration_years": 3,
+   "credits": 120,
+   "fee_inr": null,
+   "specializations": [
+    "Data Science"
+   ],
+   "eligibility_india": "10+2 (any stream) from a recognised board",
+   "eligibility_foreign": "12 years of formal schooling",
+   "source_url": "https://vtu-online.net/online-bca-in-data-sciences",
+   "category": "Computer Applications"
+  },
+  {
+   "id": "vtu-online-mca",
+   "university": "vtu",
+   "degree": "MCA",
+   "name": "Online MCA",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": 80,
+   "fee_inr": null,
+   "specializations": [
+    "Data Analytics",
+    "Cloud Computing",
+    "Cyber Security",
+    "AI",
+    "Blockchain",
+    "Machine Learning"
+   ],
+   "eligibility_india": "BCA/B.Sc CS, or B.Sc/B.Com/BA with Maths/Statistics/Computer Applications",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://vtu-online.net/online-mca",
+   "category": "Computer Applications"
+  },
+  {
+   "id": "vtu-online-mca-in-ai-data-science",
+   "university": "vtu",
+   "degree": "MCA",
+   "name": "Online MCA in AI & Data Science",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "AI & Data Science"
+   ],
+   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://vtu-online.net/online-mca-artificial-intelligence-data-science",
+   "category": "Computer Applications"
+  },
+  {
+   "id": "vtu-online-mca-in-cyber-security-cloud-computing",
+   "university": "vtu",
+   "degree": "MCA",
+   "name": "Online MCA in Cyber Security & Cloud Computing",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Cyber Security",
+    "Cloud Computing"
+   ],
+   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://vtu-online.net/online-mca-cyber-security-cloud-computing",
+   "category": "Computer Applications"
+  },
+  {
+   "id": "vtu-online-mba-in-business-analytics",
+   "university": "vtu",
+   "degree": "MBA",
+   "name": "Online MBA in Business Analytics",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": 80,
+   "fee_inr": null,
+   "specializations": [
+    "Business Analytics"
+   ],
+   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://vtu-online.net/online-mba-business-analytics",
+   "category": "Management"
+  },
+  {
+   "id": "vtu-online-mba-in-digital-marketing",
+   "university": "vtu",
+   "degree": "MBA",
+   "name": "Online MBA in Digital Marketing",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": 80,
+   "fee_inr": null,
+   "specializations": [
+    "Digital Marketing"
+   ],
+   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://vtu-online.net/online-mba-in-digital-marketing",
+   "category": "Management"
+  },
+  {
+   "id": "vtu-online-mba-dual-hr-marketing-finance",
+   "university": "vtu",
+   "degree": "MBA",
+   "name": "Online MBA (Dual: HR / Marketing / Finance)",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": 80,
+   "fee_inr": null,
+   "specializations": [
+    "Human Resources",
+    "Marketing",
+    "Finance"
+   ],
+   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://vtu-online.net/online-mba-hr-mm-fm",
+   "category": "Management"
+  },
+  {
+   "id": "vtu-online-pg-diploma-in-big-data-analytics",
+   "university": "vtu",
+   "degree": "PGD",
+   "name": "Online PG Diploma in Big Data Analytics",
+   "level": "PG Diploma",
+   "duration_years": null,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Big Data Analytics"
+   ],
+   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://vtu-online.net/online-pg-diploma-big-data-analytics",
+   "category": "Diploma"
+  },
+  {
+   "id": "vtu-online-pg-diploma-in-software-testing",
+   "university": "vtu",
+   "degree": "PGD",
+   "name": "Online PG Diploma in Software Testing",
+   "level": "PG Diploma",
+   "duration_years": null,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Software Testing"
+   ],
+   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://vtu-online.net/online-pg-diploma-software-testing",
+   "category": "Diploma"
+  },
+  {
+   "id": "vtu-online-pg-diploma-in-financial-marketing-hr-analytics",
+   "university": "vtu",
+   "degree": "PGD",
+   "name": "Online PG Diploma in Financial / Marketing / HR Analytics",
+   "level": "PG Diploma",
+   "duration_years": null,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Financial / Marketing / HR Analytics"
+   ],
+   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://vtu-online.net/online-pg-diploma-fa-ma-hr",
+   "category": "Diploma"
+  },
+  {
+   "id": "vtu-online-pg-diploma-in-investment-risk-financial-retail-management",
+   "university": "vtu",
+   "degree": "PGD",
+   "name": "Online PG Diploma in Investment / Risk / Financial / Retail Management",
+   "level": "PG Diploma",
+   "duration_years": null,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Investment / Risk / Financial / Retail Management"
+   ],
+   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://vtu-online.net/online-pg-diploma-im-rm-fm",
+   "category": "Diploma"
+  },
+  {
+   "id": "gndu-online-bca",
+   "university": "gndu",
+   "degree": "BCA",
+   "name": "Online BCA",
+   "level": "UG",
+   "duration_years": 3,
+   "credits": 132,
+   "fee_inr": null,
+   "specializations": [],
+   "eligibility_india": "10+2 with minimum 40%",
+   "eligibility_foreign": "12 years of formal schooling",
+   "source_url": "https://gndu-online.in/online-bca-degree-program",
+   "category": "Computer Applications"
+  },
+  {
+   "id": "gndu-online-ba",
+   "university": "gndu",
+   "degree": "BA",
+   "name": "Online BA",
+   "level": "UG",
+   "duration_years": 3,
+   "credits": 128,
+   "fee_inr": [
+    "English/Punjabi",
+    "Economics/Sociology",
+    "History",
+    "Political Science",
+    "Public Administration"
+   ],
+   "specializations": [],
+   "eligibility_india": "10+2 (any stream) from a recognised board",
+   "eligibility_foreign": "12 years of formal schooling",
+   "source_url": "https://gndu-online.in/online-ba-degree-program",
+   "category": "Arts"
+  },
+  {
+   "id": "gndu-online-bcom",
+   "university": "gndu",
+   "degree": "BCom",
+   "name": "Online BCom",
+   "level": "UG",
+   "duration_years": 3,
+   "credits": 132,
+   "fee_inr": null,
+   "specializations": [],
+   "eligibility_india": "10+2 with minimum 40%",
+   "eligibility_foreign": "12 years of formal schooling",
+   "source_url": "https://gndu-online.in/online-bcom-degree-program",
+   "category": "Commerce"
+  },
+  {
+   "id": "gndu-online-mba",
+   "university": "gndu",
+   "degree": "MBA",
+   "name": "Online MBA",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": 100,
+   "fee_inr": null,
+   "specializations": [
+    "Finance",
+    "Marketing",
+    "Human Resources"
+   ],
+   "eligibility_india": "Any bachelor's with 50% (45% SC/ST)",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://gndu-online.in/online-mba-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "gndu-online-mba-in-marketing-management",
+   "university": "gndu",
+   "degree": "MBA",
+   "name": "Online MBA in Marketing Management",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": 100,
+   "fee_inr": null,
+   "specializations": [
+    "Marketing Management"
+   ],
+   "eligibility_india": "Any bachelor's with 50% (45% SC/ST)",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://gndu-online.in/online-mba-in-mm-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "gndu-online-mba-in-hr-management",
+   "university": "gndu",
+   "degree": "MBA",
+   "name": "Online MBA in HR Management",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": 100,
+   "fee_inr": null,
+   "specializations": [
+    "HR Management"
+   ],
+   "eligibility_india": "Any bachelor's with 50% (45% SC/ST)",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://gndu-online.in/online-mba-in-hrm-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "gndu-online-mba-in-finance-management",
+   "university": "gndu",
+   "degree": "MBA",
+   "name": "Online MBA in Finance Management",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": 100,
+   "fee_inr": null,
+   "specializations": [
+    "Finance Management"
+   ],
+   "eligibility_india": "Any bachelor's with 50% (45% SC/ST)",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://gndu-online.in/online-mba-in-fm-degree-program",
+   "category": "Management"
+  },
+  {
+   "id": "gndu-online-mca",
+   "university": "gndu",
+   "degree": "MCA",
+   "name": "Online MCA",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": 96,
+   "fee_inr": null,
+   "specializations": [],
+   "eligibility_india": "BCA/B.Sc IT/CS, or bachelor's with Mathematics, 50% (45% SC/ST)",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://gndu-online.in/online-mca-degree-program",
+   "category": "Computer Applications"
+  },
+  {
+   "id": "gndu-online-mcom",
+   "university": "gndu",
+   "degree": "MCom",
+   "name": "Online MCom",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": 96,
+   "fee_inr": null,
+   "specializations": [],
+   "eligibility_india": "BCom/BBA with 50% (45% SC/ST)",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://gndu-online.in/online-mcom-degree-program",
+   "category": "Commerce"
+  },
+  {
+   "id": "gndu-online-ma-in-english",
+   "university": "gndu",
+   "degree": "MA",
+   "name": "Online MA in English",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": 80,
+   "fee_inr": null,
+   "specializations": [],
+   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://gndu-online.in/online-ma-in-english-degree-program",
+   "category": "Arts"
+  },
+  {
+   "id": "gndu-online-ma-in-punjabi",
+   "university": "gndu",
+   "degree": "MA",
+   "name": "Online MA in Punjabi",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": 80,
+   "fee_inr": null,
+   "specializations": [],
+   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://gndu-online.in/online-ma-in-punjabi-degree-program",
+   "category": "Arts"
+  },
+  {
+   "id": "gndu-online-diploma-in-computer-applications",
+   "university": "gndu",
+   "degree": "DCA",
+   "name": "Online Diploma in Computer Applications",
+   "level": "Diploma",
+   "duration_years": 1,
+   "credits": 32,
+   "fee_inr": null,
+   "specializations": [],
+   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://gndu-online.in/online-dca-program",
+   "category": "Diploma"
+  },
+  {
+   "id": "gndu-online-diploma-certificate-in-data-analytics",
+   "university": "gndu",
+   "degree": "Diploma",
+   "name": "Online Diploma / Certificate in Data Analytics",
+   "level": "Diploma",
+   "duration_years": 1,
+   "credits": 32,
+   "fee_inr": null,
+   "specializations": [
+    "Data Analytics"
+   ],
+   "eligibility_india": "See university",
+   "eligibility_foreign": "See university",
+   "source_url": null,
+   "category": "Diploma"
+  },
+  {
+   "id": "gndu-online-diploma-certificate-in-artificial-intelligence-machine-learning",
+   "university": "gndu",
+   "degree": "Diploma",
+   "name": "Online Diploma / Certificate in Artificial Intelligence & Machine Learning",
+   "level": "Diploma",
+   "duration_years": 1,
+   "credits": 32,
+   "fee_inr": null,
+   "specializations": [
+    "Artificial Intelligence & Machine Learning"
+   ],
+   "eligibility_india": "See university",
+   "eligibility_foreign": "See university",
+   "source_url": null,
+   "category": "Diploma"
+  },
+  {
+   "id": "gndu-online-diploma-certificate-in-digital-marketing",
+   "university": "gndu",
+   "degree": "Diploma",
+   "name": "Online Diploma / Certificate in Digital Marketing",
+   "level": "Diploma",
+   "duration_years": 1,
+   "credits": 32,
+   "fee_inr": null,
+   "specializations": [
+    "Digital Marketing"
+   ],
+   "eligibility_india": "See university",
+   "eligibility_foreign": "See university",
+   "source_url": null,
+   "category": "Diploma"
+  },
+  {
+   "id": "gndu-online-diploma-certificate-in-cybersecurity",
+   "university": "gndu",
+   "degree": "Diploma",
+   "name": "Online Diploma / Certificate in Cybersecurity",
+   "level": "Diploma",
+   "duration_years": 1,
+   "credits": 32,
+   "fee_inr": null,
+   "specializations": [
+    "Cybersecurity"
+   ],
+   "eligibility_india": "See university",
+   "eligibility_foreign": "See university",
+   "source_url": null,
+   "category": "Diploma"
+  },
+  {
+   "id": "gndu-online-diploma-certificate-in-fashion-merchandising-retail-marketing",
+   "university": "gndu",
+   "degree": "Diploma",
+   "name": "Online Diploma / Certificate in Fashion Merchandising & Retail Marketing",
+   "level": "Diploma",
+   "duration_years": 1,
+   "credits": 32,
+   "fee_inr": null,
+   "specializations": [
+    "Fashion Merchandising & Retail Marketing"
+   ],
+   "eligibility_india": "See university",
+   "eligibility_foreign": "See university",
+   "source_url": null,
+   "category": "Diploma"
+  },
+  {
+   "id": "gndu-online-diploma-certificate-in-apparel-management",
+   "university": "gndu",
+   "degree": "Diploma",
+   "name": "Online Diploma / Certificate in Apparel Management",
+   "level": "Diploma",
+   "duration_years": 1,
+   "credits": 32,
+   "fee_inr": null,
+   "specializations": [
+    "Apparel Management"
+   ],
+   "eligibility_india": "See university",
+   "eligibility_foreign": "See university",
+   "source_url": null,
+   "category": "Diploma"
+  },
+  {
+   "id": "gndu-online-diploma-certificate-in-radio-jockeying",
+   "university": "gndu",
+   "degree": "Diploma",
+   "name": "Online Diploma / Certificate in Radio Jockeying",
+   "level": "Diploma",
+   "duration_years": 1,
+   "credits": 32,
+   "fee_inr": null,
+   "specializations": [
+    "Radio Jockeying"
+   ],
+   "eligibility_india": "See university",
+   "eligibility_foreign": "See university",
+   "source_url": null,
+   "category": "Diploma"
+  },
+  {
+   "id": "gndu-online-diploma-certificate-in-personal-finance-investment-management",
+   "university": "gndu",
+   "degree": "Diploma",
+   "name": "Online Diploma / Certificate in Personal Finance & Investment Management",
+   "level": "Diploma",
+   "duration_years": 1,
+   "credits": 32,
+   "fee_inr": null,
+   "specializations": [
+    "Personal Finance & Investment Management"
+   ],
+   "eligibility_india": "See university",
+   "eligibility_foreign": "See university",
+   "source_url": null,
+   "category": "Diploma"
+  },
+  {
+   "id": "gndu-online-diploma-certificate-in-internet-of-things",
+   "university": "gndu",
+   "degree": "Diploma",
+   "name": "Online Diploma / Certificate in Internet of Things",
+   "level": "Diploma",
+   "duration_years": 1,
+   "credits": 32,
+   "fee_inr": null,
+   "specializations": [
+    "Internet of Things"
+   ],
+   "eligibility_india": "See university",
+   "eligibility_foreign": "See university",
+   "source_url": null,
+   "category": "Diploma"
+  },
+  {
+   "id": "gndu-online-diploma-certificate-in-start-up-family-enterprise-management",
+   "university": "gndu",
+   "degree": "Diploma",
+   "name": "Online Diploma / Certificate in Start-up & Family Enterprise Management",
+   "level": "Diploma",
+   "duration_years": 1,
+   "credits": 32,
+   "fee_inr": null,
+   "specializations": [
+    "Start-up & Family Enterprise Management"
+   ],
+   "eligibility_india": "See university",
+   "eligibility_foreign": "See university",
+   "source_url": null,
+   "category": "Diploma"
+  },
+  {
+   "id": "adbu-online-mba",
+   "university": "adbu",
+   "degree": "MBA",
+   "name": "Online MBA",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Marketing",
+    "Finance",
+    "Human Resources",
+    "Project Management",
+    "Supply Chain",
+    "Operations"
+   ],
+   "eligibility_india": "Any graduate",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://dbuniversity.ac.in/dbucdoe/online-mba",
+   "category": "Management"
+  },
+  {
+   "id": "adbu-online-mca",
+   "university": "adbu",
+   "degree": "MCA",
+   "name": "Online MCA",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "AI & Machine Learning",
+    "Data Science"
+   ],
+   "eligibility_india": "CS/IT graduate, or any graduate with CS/IT subject, IT experience or bridge course",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://dbuniversity.ac.in/dbucdoe/online-mca",
+   "category": "Computer Applications"
+  },
+  {
+   "id": "adbu-online-bba",
+   "university": "adbu",
+   "degree": "BBA",
+   "name": "Online BBA",
+   "level": "UG",
+   "duration_years": 3,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [
+    "Marketing",
+    "Finance",
+    "Human Resources",
+    "Entrepreneurship",
+    "Artificial Intelligence"
+   ],
+   "eligibility_india": "10+2 (any stream) from a recognised board",
+   "eligibility_foreign": "12 years of formal schooling",
+   "source_url": "https://dbuniversity.ac.in/dbucdoe/online-bba",
+   "category": "Management"
+  },
+  {
+   "id": "adbu-online-bca",
+   "university": "adbu",
+   "degree": "BCA",
+   "name": "Online BCA",
+   "level": "UG",
+   "duration_years": 3,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [],
+   "eligibility_india": "10+2 (any stream) from a recognised board",
+   "eligibility_foreign": "12 years of formal schooling",
+   "source_url": "https://dbuniversity.ac.in/dbucdoe/online-bca",
+   "category": "Computer Applications"
+  },
+  {
+   "id": "adbu-online-ma-in-public-administration",
+   "university": "adbu",
+   "degree": "MA",
+   "name": "Online MA in Public Administration",
+   "level": "PG",
+   "duration_years": 2,
+   "credits": null,
+   "fee_inr": null,
+   "specializations": [],
+   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_foreign": "15 years of formal education",
+   "source_url": "https://dbuniversity.ac.in/dbucdoe/online-ma-in-pa",
+   "category": "Arts"
+  }
+ ]
+}

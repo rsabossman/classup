@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base title={`About ${site.name}`} description={`${site.name} is an independent counselling service that helps students compare and apply to online degree programs.`}>
+  <section><div class="wrap prose">
+    <h1>About {site.name}</h1>
+    <p>{site.name} helps working professionals and students in India, the Middle East, Africa and around the world find a suitable online degree from an established Indian university.</p>
+    <p>We collect program information from university publications and present it in one place so you can compare programs. Our advisors help you check your eligibility, understand fees and recognition, and complete your application. Counselling is free for students.</p>
+    <p>We are not a university. Degrees are awarded by the universities themselves. Fees, intakes and approvals can change, so always confirm them with the university before paying.</p>
+  </div></section>
+</Base>

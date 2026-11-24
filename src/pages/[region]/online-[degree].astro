@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProgramCard from '../../components/ProgramCard.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import { regionList, regions, type RegionId } from '../../data/regions';
+import { degrees, degreeInfo, byDegree, uni, inr } from '../../data/catalog';
+import { site, url } from '../../data/site';
+export const getStaticPaths = () => regionList.flatMap((r) => degrees.map((d) => ({ params: { region: r.id, degree: d.toLowerCase() }, props: { d } })));
+const { d } = Astro.props as { d: string };
+const r = regions[Astro.params.region as RegionId];
+const list = byDegree(d);
+const info = degreeInfo[d];
+const fees = list.filter((p) => p.fee_inr).map((p) => p.fee_inr!);
+---
+<Base title={`Online ${d} (${info.full}) – Compare ${list.length} programs | ${site.name}`} description={`${info.blurb} Compare ${list.length} online ${d} programs on duration, eligibility, approvals and fees.`} region={r.id} regionPath={`/online-${d.toLowerCase()}/`}>
+  <section><div class="wrap layout-2">
+    <div>
+      <h1 style="margin-top:0">Online {d}: {info.full}</h1>
+      <p>{info.blurb}</p>
+      <table class="facts">
+        <tr><th>Programs listed</th><td>{list.length} from {new Set(list.map((p) => p.university)).size} universities</td></tr>
+        <tr><th>Duration</th><td>{[...new Set(list.map((p) => p.duration_years).filter(Boolean))].join(' or ') || '—'} years</td></tr>
+        {r.showInrFees && fees.length > 0 && <tr><th>Published fees</th><td>From {inr(Math.min(...fees))}. Ask an advisor for fees not yet listed.</td></tr>}
+      </table>
+      <h2 style="margin-top:28px">Programs</h2>
+      <div class="grid">{list.map((p) => <ProgramCard p={p} region={r} />)}</div>
+    </div>
+    <aside><div class="card sticky"><h3>Not sure which {d} to pick?</h3><p class="small muted">An advisor will compare them for your budget, background and goals.</p><LeadForm region={r.id} /></div></aside>
+  </div></section>
+</Base>
