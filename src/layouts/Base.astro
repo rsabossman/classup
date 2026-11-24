@@ -14,6 +14,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const home = new URL(url('/'), Astro.site).href;
 const org = [
   { '@context': 'https://schema.org', '@type': ['Organization', 'EducationalOrganization'], '@id': home + '#org', name: site.name, alternateName: site.alternateNames, url: home,
+    logo: { '@type': 'ImageObject', url: new URL(url('/logo-512.png'), Astro.site).href, width: 512, height: 512 },
+    image: new URL(url('/logo-512.png'), Astro.site).href,
     description: site.descriptor, disambiguatingDescription: site.disambiguation, slogan: site.tagline,
     address: { '@type': 'PostalAddress', addressCountry: 'IN' },
     contactPoint: { '@type': 'ContactPoint', contactType: 'admissions counselling', telephone: '+91-80-6426-4489', availableLanguage: ['English'], areaServed: 'Worldwide' },
