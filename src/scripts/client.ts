@@ -13,17 +13,6 @@ function src() {
 }
 const source = src();
 
-document.querySelectorAll<HTMLButtonElement>('[data-open]').forEach((b) =>
-  b.addEventListener('click', () => (document.getElementById(b.dataset.open!) as HTMLDialogElement)?.showModal())
-);
-document.querySelectorAll<HTMLButtonElement>('[data-open-chat]').forEach((b) =>
-  b.addEventListener('click', () => {
-    // Step 3 replaces this with the AI chat widget; until then, fall back to the call-back form.
-    const w = (window as any).cuChat;
-    if (w?.open) w.open(); else (document.getElementById('callme') as HTMLDialogElement)?.showModal();
-  })
-);
-
 document.querySelectorAll<HTMLFormElement>('form[data-lead]').forEach((f) =>
   f.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -45,3 +34,10 @@ document.querySelectorAll<HTMLFormElement>('form[data-lead]').forEach((f) =>
     } finally { status.hidden = false; btn.disabled = false; }
   })
 );
+
+// The contact widget is fetched only after the page has fully loaded and the browser is idle,
+// so it never competes with the page itself for bandwidth or main-thread time.
+const loadWidget = () => import('./widget');
+const idle = (cb: () => void) => ('requestIdleCallback' in window ? (window as any).requestIdleCallback(cb, { timeout: 2000 }) : setTimeout(cb, 200));
+if (document.readyState === 'complete') idle(loadWidget);
+else addEventListener('load', () => idle(loadWidget), { once: true });

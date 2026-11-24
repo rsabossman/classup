@@ -36,12 +36,6 @@ form.lead input,form.lead select{width:100%;padding:10px;border:1px solid var(--
 .layout-2{display:grid;gap:24px;grid-template-columns:1fr}
 @media(min-width:900px){.layout-2{grid-template-columns:1fr 340px}.sticky{position:sticky;top:76px}}
 footer.site{border-top:1px solid var(--line);padding:28px 0 90px;margin-top:32px;font-size:.9rem;color:var(--muted)}
-.dock{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:10px;z-index:30}
-.dock a,.dock button{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;border:0;box-shadow:0 4px 14px rgba(0,0,0,.18);cursor:pointer;text-decoration:none}
-.dock svg{width:26px;height:26px;fill:currentColor}
-.dock .d-wa{background:var(--wa)}.dock .d-call{background:var(--accent)}.dock .d-chat{background:var(--brand)}
-dialog{border:0;border-radius:var(--radius);padding:22px;max-width:420px;width:calc(100% - 32px)}
-dialog::backdrop{background:rgba(0,0,0,.4)}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .filters button{padding:6px 12px;border-radius:99px;border:1px solid var(--line);background:#fff;cursor:pointer;font:inherit;font-size:.9rem}
 .filters button[aria-pressed=true]{background:var(--brand);color:#fff;border-color:var(--brand)}
