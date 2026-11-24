@@ -4,12 +4,14 @@ import Base from '../../../layouts/Base.astro';
 import { regionList, regions, type RegionId } from '../../../data/regions';
 import { universities, programs } from '../../../data/catalog';
 import { site, url } from '../../../data/site';
+import Pic from '../../../components/Pic.astro';
+import { uniImg } from '../../../data/images';
 export const getStaticPaths = () => regionList.map((r) => ({ params: { region: r.id } }));
 const r = regions[Astro.params.region as RegionId];
 ---
 <Base title={fitTitle(`Universities Offering Online Degrees (${r.tag}) | ${site.name}`)} description={`Established Indian universities that offer UGC-entitled online degree programs to ${r.audience}: approvals, programs and exam formats.`} region={r.id} regionPath="/universities/">
   <section><div class="wrap">
     <h1>Universities</h1>
-    <div class="grid">{Object.values(universities).map((u) => <a class="card" style="text-decoration:none;color:inherit" href={url(`/${r.id}/universities/${u.id}/`)}><h3>{u.name}</h3><p class="small muted" style="margin:0 0 6px">{u.city} · Est. {u.est} · {programs.filter((p) => p.university === u.id).length} online programs</p>{u.approvals.map((a) => <span class="tag">{a}</span>)}</a>)}</div>
+    <div class="grid">{Object.values(universities).map((u) => <a class={uniImg[u.id] ? 'card media' : 'card'} style="text-decoration:none;color:inherit" href={url(`/${r.id}/universities/${u.id}/`)}>{uniImg[u.id] && <Pic img={uniImg[u.id].img} widths={uniImg[u.id].widths} sizes="(min-width: 900px) 360px, 100vw" />}<div class={uniImg[u.id] ? 'body' : ''}><h3>{u.name}</h3><p class="small muted" style="margin:0 0 6px">{u.city} · Est. {u.est} · {programs.filter((p) => p.university === u.id).length} online programs</p>{u.approvals.map((a) => <span class="tag">{a}</span>)}</div></a>)}</div>
   </div></section>
 </Base>
