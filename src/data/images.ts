@@ -47,9 +47,10 @@ export const heroImg: Record<string, Img> = {
   intl: { name: 'hero-intl', alt: 'Professional studying on her laptop in a modern workspace', ogWidth: 1600 },
 };
 
-// Campus photos from each university's own website (added at the site owner's request), in public/img as uni-<id>-<w>.webp.
-export const uniImg: Record<string, { img: Img; widths: readonly number[]; credit: string }> = {
-  vtu: { img: img('uni-vtu', 'Visvesvaraya Technological University campus at Jnana Sangama, Belagavi'), widths: [480, 800], credit: 'vtu.ac.in' },
+// Campus photos (from the universities' own websites, or supplied by the site owner), in public/img as uni-<id>-<w>.webp.
+export const uniImg: Record<string, { img: Img; widths: readonly number[]; credit?: string }> = {
+  uom: { img: img('uni-uom', 'Crawford Hall, the University of Mysore main building, Mysuru'), widths: [480, 800] },
+  vtu: { img: img('uni-vtu', 'Aerial view of the Visvesvaraya Technological University main building, Belagavi'), widths: [480, 800] },
   gndu: { img: img('uni-gndu', 'Tree-lined main avenue of the Guru Nanak Dev University campus, Amritsar'), widths: [480, 800], credit: 'gndu.ac.in' },
-  adbu: { img: img('uni-adbu', 'Assam Don Bosco University buildings beside the Brahmaputra, Guwahati'), widths: [400], credit: 'dbuniversity.ac.in' },
+  adbu: { img: img('uni-adbu', 'Academic Block 1 at Assam Don Bosco University, Guwahati'), widths: [480, 680] },
 };
