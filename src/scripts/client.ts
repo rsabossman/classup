@@ -16,13 +16,13 @@ document.querySelectorAll<HTMLFormElement>('form[data-lead]').forEach((f) =>
         const r = await fetch(f.dataset.endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
         if (!r.ok) throw new Error(String(r.status));
       }
-      status.textContent = f.dataset.intent === 'callback' ? 'Thanks! An advisor will call you shortly.' : 'Thanks! An advisor will reach out on WhatsApp or by phone shortly.';
+      status.textContent = f.dataset.intent === 'callback' ? 'Thanks! An advisor will call you shortly.' : 'Thanks! An advisor will call you shortly.';
       f.reset();
       const ev = { event: 'lead', intent: f.dataset.intent, region: f.dataset.region, program: data.program || '', lead_id };
       ((window as any).dataLayer ||= []).push(ev);
       dispatchEvent(new CustomEvent('cu:lead', { detail: ev }));
     } catch {
-      status.textContent = 'Something went wrong. Please try WhatsApp instead.';
+      status.textContent = 'Something went wrong. Please try again, or use the chat button.';
     } finally { status.hidden = false; btn.disabled = false; }
   })
 );

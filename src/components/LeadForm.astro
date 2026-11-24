@@ -6,7 +6,7 @@ const { region, program = '', intent = 'counselling', compact = false } = Astro.
 ---
 <form class="lead" data-lead data-endpoint={site.leadEndpoint} data-region={region} data-intent={intent}>
   <input name="name" placeholder="Full name" required autocomplete="name" />
-  <input name="phone" placeholder="Mobile / WhatsApp number with country code" required autocomplete="tel" inputmode="tel" />
+  <input name="phone" placeholder="Mobile number with country code" required autocomplete="tel" inputmode="tel" />
   {!compact && <input name="email" type="email" placeholder="Email (optional)" autocomplete="email" />}
   <select name="program" aria-label="Program of interest">
     <option value="">Program of interest (optional)</option>

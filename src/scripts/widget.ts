@@ -83,7 +83,9 @@ const fab = $<HTMLButtonElement>('.fab'), panel = $<HTMLDivElement>('.panel'), b
 const back = $<HTMLButtonElement>('.back'), title = $<HTMLElement>('[data-t]');
 const waLink = `https://wa.me/${cfg.whatsapp}?text=${encodeURIComponent('Hi, I would like to know more about online degree programs.')}`;
 
-function open(v = 'home') { panel.hidden = false; fab.setAttribute('aria-expanded', 'true'); show(v); }
+// opts.question: a question typed elsewhere on the page (the homepage search), which opens the chat with it.
+type Opts = { question?: string };
+function open(v = 'home', opts: Opts = {}) { panel.hidden = false; fab.setAttribute('aria-expanded', 'true'); show(v, opts); }
 function close() { panel.hidden = true; fab.setAttribute('aria-expanded', 'false'); }
 fab.addEventListener('click', () => (panel.hidden ? open() : close()));
 $('.x').addEventListener('click', close);
@@ -96,7 +98,7 @@ const opt = (view: string, color: string, ic: string, t: string, s: string, href
 function leadForm(intent: string, note: string, extra = '') {
   return `<p class="note">${note}</p><form>
     <input name="name" placeholder="Your name" required autocomplete="name">
-    <input name="phone" placeholder="Mobile / WhatsApp with country code" required autocomplete="tel" inputmode="tel">
+    <input name="phone" placeholder="Mobile number with country code" required autocomplete="tel" inputmode="tel">
     ${extra}
     <label class="c"><input type="checkbox" name="consent" required checked> I agree to be contacted by call, WhatsApp, SMS or email about programs.</label>
     <button class="btn" type="submit">Send</button></form>`;
@@ -112,7 +114,7 @@ function wire(intent: string, done: string) {
   });
 }
 
-function show(v: string) {
+function show(v: string, opts: Opts = {}) {
   back.hidden = v === 'home'; ft.hidden = true; ft.innerHTML = '';
   if (v === 'home') {
     title.textContent = 'Hi! How can we help?';
@@ -141,18 +143,18 @@ function show(v: string) {
     title.textContent = 'Leave your details';
     bd.innerHTML = leadForm('enquiry', 'Tell us a little about you and we’ll send a shortlist of programs that fit.',
       `<input name="email" type="email" placeholder="Email (optional)" autocomplete="email"><input name="interest" placeholder="What would you like to study? (e.g. MBA in HR)">`);
-    wire('enquiry', 'Thanks! An advisor will reach out on WhatsApp or by phone shortly.');
+    wire('enquiry', 'Thanks! An advisor will call you shortly.');
   } else if (v === 'chat') {
     title.textContent = cfg.chat ? 'Chat with Ria, our advisor' : 'Chat with us';
     const ai = (window as any).cuChat; // The AI agent (step 3) can take over here.
     if (ai?.mount) return ai.mount(bd, { region: cfg.region, sendLead });
-    chat();
+    chat(opts.question);
   }
 }
 
-// Chat: a few guided questions, then name and WhatsApp number (the lead is saved first, so Ria knows the
+// Chat: a few guided questions, then name and mobile number (the lead is saved first, so Ria knows the
 // visitor's country and degree), then a free conversation with Ria. Without a chat endpoint, it stays a guided form.
-function chat() {
+function chat(question = '') {
   const log: string[] = [];
   const pending: string[] = []; // questions typed before the visitor shared their contact details
   // On a degree landing page, the degree is already known.
@@ -178,13 +180,13 @@ function chat() {
       else if (r.reply) say('bot', r.reply);
     } catch {
       typing.remove();
-      say('bot', 'Sorry, I couldn’t reply just now. An advisor will message you on WhatsApp shortly.');
+      say('bot', 'Sorry, I couldn’t reply just now. An advisor will call you shortly.');
     } finally { busy = false; }
   };
   const askContact = () => {
-    say('bot', 'Share your name and WhatsApp number, and I’ll answer your questions here. An advisor can also send you fees and the next intake date on WhatsApp.');
+    say('bot', 'Share your name and mobile number, and I’ll answer your questions here. An advisor can also call you with fees and the next intake date.');
     const f = document.createElement('form');
-    f.innerHTML = `<input name="name" placeholder="Your name" required autocomplete="name"><input name="phone" placeholder="Mobile / WhatsApp with country code" required inputmode="tel" autocomplete="tel"><label class="c"><input type="checkbox" name="consent" required checked> I agree to be contacted about programs.</label><button class="btn">Send</button>`;
+    f.innerHTML = `<input name="name" placeholder="Your name" required autocomplete="name"><input name="phone" placeholder="Mobile number with country code" required inputmode="tel" autocomplete="tel"><label class="c"><input type="checkbox" name="consent" required checked> I agree to be contacted about programs.</label><button class="btn">Send</button>`;
     msgs.appendChild(f); bd.scrollTop = bd.scrollHeight;
     f.addEventListener('submit', async (e) => {
       e.preventDefault(); const b = f.querySelector('button')!; b.disabled = true;
@@ -194,8 +196,8 @@ function chat() {
         name = data.name || '';
         f.remove();
         if (cfg.chat) import('./ria').then(({ listen }) => listen(cfg.chat!, leadId, (t) => say('bot', `Advisor: ${t}`)));
-        if (!cfg.chat) return void say('bot', 'Thank you! An advisor will message you on WhatsApp shortly.');
-        const intro = [interest && interest !== 'Not sure yet' ? `I’m interested in an online ${interest}.` : 'I’m not sure which degree to choose yet.', work && `Work status: ${work}.`, ...pending].filter(Boolean).join(' ');
+        if (!cfg.chat) return void say('bot', 'Thank you! An advisor will call you shortly.');
+        const intro = [interest && interest !== 'Not sure yet' ? `I’m interested in an online ${interest}.` : pending.length ? '' : 'I’m not sure which degree to choose yet.', work && `Work status: ${work}.`, ...pending].filter(Boolean).join(' ');
         pending.length = 0;
         ria(intro);
       } catch { b.disabled = false; b.textContent = 'Try again'; }
@@ -203,7 +205,13 @@ function chat() {
   };
   const askWork = () => chips(['Yes, working', 'Studying', 'Neither right now'], (w) => { work = w; askContact(); });
   const hi = `Hi${cfg.chat ? ', I’m Ria' : ''}!`;
-  if (pageDegree) {
+  if (question) {
+    // Arrived from the search box: show the question, then ask for contact details so Ria can answer it.
+    say('me', question);
+    pending.push(question);
+    say('bot', `${hi} Happy to help with that.`);
+    askContact();
+  } else if (pageDegree) {
     say('bot', `${hi} I can answer your questions about the online ${pageDegree}. Are you currently working?`);
     askWork();
   } else {
