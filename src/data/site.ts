@@ -18,7 +18,7 @@ export const site = {
     gtmId: import.meta.env.PUBLIC_GTM_ID ?? 'GTM-TWZWWGCC',
     googleAdsId: import.meta.env.PUBLIC_GADS_ID || 'AW-18593585584', // ClassUp Google Ads account (standalone)
     googleAdsLeadLabel: import.meta.env.PUBLIC_GADS_LEAD_LABEL || 'Wg2fCImqz74dELCzjqJF', // conversion label of the "Lead" action, e.g. AbCdEfGhIj
-    metaPixelId: import.meta.env.PUBLIC_META_PIXEL_ID || '', // e.g. 1234567890123456
+    metaPixelId: import.meta.env.PUBLIC_META_PIXEL_ID || '1662160548619676', // ClassUp pixel (portfolio 1708552709254667, ad account 2647103285716847)
   },
   chatAgentId: import.meta.env.PUBLIC_CHAT_AGENT_ID || '',
 };
