@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/Article.astro
 title: How to check whether an online degree is UGC-valid (in 5 minutes)
+seoTitle: "How to check if an online degree is UGC-valid"
 description: A step-by-step check you can do yourself before paying any university, using the UGC-DEB website and the university’s own disclosures.
 date: 2026-11-24
 ---

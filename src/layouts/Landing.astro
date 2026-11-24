@@ -1,4 +1,5 @@
 ---
+import { fitTitle } from '../lib';
 // Distraction-free layout for paid-ad landing pages (/go/...): no site navigation, no outbound links
 // except Privacy, noindex, and the same advisor widget and lead handling as the rest of the site.
 import '../styles/global.css';
@@ -8,7 +9,8 @@ import Attribution from '../components/Attribution.astro';
 import Gtm from '../components/Gtm.astro';
 import AdTags from '../components/AdTags.astro';
 interface Props { title: string; description: string; region: RegionId; lp: string; degree: string; country: string }
-const { title, description, region, lp, degree, country } = Astro.props;
+const { title: rawTitle, description, region, lp, degree, country } = Astro.props;
+const title = fitTitle(rawTitle, rawTitle.replace(/ \| ClassUp$/, ''));
 const r = regions[region];
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const wa = `https://wa.me/${r.whatsapp}?text=${encodeURIComponent(`Hi, I would like to know more about the online ${degree}.`)}`;
