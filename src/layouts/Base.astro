@@ -35,6 +35,8 @@ const alternates = regionPath ? [
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large" />
   <link rel="sitemap" href={url('/sitemap-index.xml')} />
   <link rel="alternate" type="text/plain" title="LLM summary" href={url('/llms.txt')} />
+  <!-- Instant page changes: the browser fetches a page when the visitor hovers or starts tapping its link. -->
+  <script type="speculationrules" set:html={JSON.stringify({ prefetch: [{ where: { href_matches: '/*' }, eagerness: 'moderate' }] })} />
   <script type="application/ld+json" set:html={JSON.stringify([org, ...jsonld])} />
 </head>
 <body>
