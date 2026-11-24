@@ -16,7 +16,7 @@ export const site = {
     // Google Tag Manager container (site-wide, loaded after the page). When set, Google Ads conversions are configured
     // inside GTM (Custom Event trigger "lead"), and the direct Google Ads tag below is skipped to avoid double counting.
     gtmId: import.meta.env.PUBLIC_GTM_ID ?? 'GTM-TWZWWGCC',
-    googleAdsId: import.meta.env.PUBLIC_GADS_ID || '', // e.g. AW-123456789
+    googleAdsId: import.meta.env.PUBLIC_GADS_ID || 'AW-18593585584', // ClassUp Google Ads account (standalone)
     googleAdsLeadLabel: import.meta.env.PUBLIC_GADS_LEAD_LABEL || '', // conversion label of the "Lead" action, e.g. AbCdEfGhIj
     metaPixelId: import.meta.env.PUBLIC_META_PIXEL_ID || '', // e.g. 1234567890123456
   },
