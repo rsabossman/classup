@@ -12,7 +12,7 @@ export const GET: APIRoute = () => {
   const p = programs.map((x) => {
     const u = uni(x);
     const fees: Record<string, string> = {};
-    for (const r of ['in', 'me', 'africa', 'intl']) { const f = feeFor(x, r); if (f) fees[r] = f.short; }
+    for (const r of ['in', 'saarc', 'me', 'sea', 'africa', 'intl']) { const f = feeFor(x, r); if (f) fees[r] = f.short; }
     const t = x.tuition_per_term;
     return {
       id: x.id,

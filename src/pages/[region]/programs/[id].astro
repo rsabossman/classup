@@ -33,7 +33,7 @@ const course = {
   numberOfCredits: p.credits ?? undefined,
   educationalCredentialAwarded: info?.full || p.degree,
   programPrerequisites: p.eligibility_india,
-  ...(r.id === 'in' && p.fee_inr ? { offers: { '@type': 'Offer', price: p.fee_inr, priceCurrency: 'INR', category: 'Tuition' } } : p.tuition_per_term && r.id !== 'in' ? { offers: { '@type': 'Offer', price: (p.tuition_per_term as any)[{ me: 'me_usd', africa: 'africa_usd', intl: 'intl_usd' }[r.id as 'me']], priceCurrency: 'USD', category: 'Tuition per semester' } } : {}),
+  ...(r.id === 'in' && p.fee_inr ? { offers: { '@type': 'Offer', price: p.fee_inr, priceCurrency: 'INR', category: 'Tuition' } } : p.tuition_per_term && r.id !== 'in' ? { offers: { '@type': 'Offer', price: (p.tuition_per_term as any)[{ saarc: 'saarc_inr', me: 'me_usd', sea: 'sea_usd', africa: 'africa_usd', intl: 'intl_usd' }[r.id as 'me']], priceCurrency: r.id === 'saarc' ? 'INR' : 'USD', category: 'Tuition per semester' } } : {}),
 };
 // A plain Course object alongside the program, so search and AI engines that only read Course still pick it up.
 const courseLd = {

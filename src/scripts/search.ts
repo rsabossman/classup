@@ -3,6 +3,8 @@
 // Results and the short answer come from the catalog in the browser, so they appear as you type.
 // "Ask Ria" hands the question to Ria, the AI advisor, in the chat widget.
 
+import { regionForTz } from '../data/geo';
+
 type Engine = typeof import('./search-engine');
 type Ix = import('./search-engine').Index;
 
@@ -15,8 +17,7 @@ if (box) {
   const base = box.dataset.base || '';
   // The homepage serves every region, so guess it from the time zone (as the hero does) to pick fees and links.
   const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-  const region = box.dataset.region !== 'auto' ? box.dataset.region || 'in'
-    : tz === 'Asia/Calcutta' || tz === 'Asia/Kolkata' ? 'in' : /^Asia\/(Dubai|Riyadh|Qatar|Kuwait|Bahrain|Muscat|Baghdad|Amman|Beirut|Tehran)/.test(tz) ? 'me' : tz.startsWith('Africa/') ? 'africa' : tz ? 'intl' : 'in';
+  const region = box.dataset.region !== 'auto' ? box.dataset.region || 'in' : tz ? regionForTz(tz) : 'in';
   const dl = () => ((window as any).dataLayer ||= []);
   const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
 

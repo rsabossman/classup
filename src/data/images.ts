@@ -10,6 +10,8 @@ export const regionImg: Record<string, Img> = {
   in: img('region-in', 'Illustration of a working professional in India studying an online degree on her laptop at dusk'),
   me: img('region-me', 'Illustration of an expat professional in a Gulf city studying an online degree on his laptop at night'),
   africa: img('region-africa', 'Illustration of a professional in an African city studying an online degree on her laptop at sunset'),
+  saarc: img('region-saarc', 'Illustration of a young professional in a South Asian hill city studying an online degree on her laptop at dusk'),
+  sea: img('region-sea', 'Illustration of a young professional on a balcony in a South East Asian city studying an online degree on her laptop in the evening'),
   intl: img('region-intl', 'Illustration of two learners in different time zones studying online degrees, with a globe between them'),
 };
 
@@ -44,6 +46,9 @@ export const heroImg: Record<string, Img> = {
   in: { name: 'hero-in', alt: 'Student with headphones taking notes during an online class on her laptop', ogWidth: 1600 },
   me: { name: 'hero-me', alt: 'Working professional in an office thinking about his next career step', ogWidth: 1600 },
   africa: { name: 'hero-africa', alt: 'Professional with a headset joining an online class on his laptop', ogWidth: 1600 },
+  // SAARC and South East Asia reuse licensed photos until dedicated ones are chosen.
+  saarc: { name: 'hero-in', alt: 'Student with headphones taking notes during an online class on her laptop', ogWidth: 1600 },
+  sea: { name: 'hero-intl', alt: 'Professional studying on her laptop in a modern workspace', ogWidth: 1600 },
   intl: { name: 'hero-intl', alt: 'Professional studying on her laptop in a modern workspace', ogWidth: 1600 },
 };
 
