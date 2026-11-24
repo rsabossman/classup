@@ -2,8 +2,12 @@
   // Static site served from Cloudflare Workers static assets. Built by `npm run build` (Astro) into ./dist.
   "name": "classup",
   "compatibility_date": "2026-11-01",
+  // A small Worker runs for the homepage only, to pick the visitor's region from their country.
+  "main": "worker/index.ts",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/"],
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash"
   },

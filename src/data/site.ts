@@ -21,6 +21,11 @@ export const site = {
     googleAdsLeadLabel: import.meta.env.PUBLIC_GADS_LEAD_LABEL || 'Wg2fCImqz74dELCzjqJF', // conversion label of the "Lead" action, e.g. AbCdEfGhIj
     metaPixelId: import.meta.env.PUBLIC_META_PIXEL_ID || '1662160548619676', // ClassUp pixel (portfolio 1708552709254667, ad account 2647103285716847)
   },
+  // Social profiles: footer and mobile-menu icons, plus sameAs in the Organization schema. Not shown on the /go/ ad pages.
+  social: [
+    { name: 'Facebook', href: 'https://www.facebook.com/1474588932400560' },
+    { name: 'Instagram', href: 'https://www.instagram.com/classup_india/' },
+  ],
   chatAgentId: import.meta.env.PUBLIC_CHAT_AGENT_ID || '',
 };
 
