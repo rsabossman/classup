@@ -65,3 +65,5 @@ a.card:hover,.card:has(a.stretch:hover){box-shadow:0 8px 22px rgba(29,34,48,.1);
 .hero-bg .wrap{position:relative;z-index:2}
 .hero-bg .copy{max-width:600px}
 @media(max-width:760px){.hero-bg{padding:56px 0 48px}.hero-bg:before{background:rgba(251,250,247,.86)}}
+.hero-bg>img{object-position:center 30%}
+@media(min-width:900px){.hero-bg{background:var(--bg)}.hero-bg .copy{max-width:520px}.hero-bg>img{left:auto;width:58%}.hero-bg:before{background:linear-gradient(90deg,var(--bg) 0%,var(--bg) 48%,rgba(251,250,247,.5) 54%,rgba(251,250,247,0) 64%)}}

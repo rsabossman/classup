@@ -15,7 +15,7 @@ const featured = ['MBA', 'MCA', 'BBA', 'BCA'].flatMap((d) => byDegree(d).filter(
 ---
 <Base title={fitTitle(`Online Degrees for ${r.label}: MBA, MCA, BBA, BCA | ${site.name}`, `Online Degrees for ${r.label}: MBA, MCA, BBA, BCA`)} description={clipDesc(r.sub)} region={r.id} regionPath="/" image={heroImg[r.id]} jsonld={[faqLd(r.faqs)]}>
   <div class="hero hero-bg">
-    <Pic img={heroImg[r.id]} widths={HERO_WIDTHS} ratio={2.2} sizes="100vw" priority />
+    <Pic img={heroImg[r.id]} widths={HERO_WIDTHS} ratio={2.2} sizes="(min-width: 900px) 58vw, 100vw" priority />
     <div class="wrap"><div class="copy">
       <h1>{r.hero}</h1>
       <p>{r.sub}</p>
