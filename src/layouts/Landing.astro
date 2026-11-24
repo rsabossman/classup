@@ -1,0 +1,95 @@
+---
+// Distraction-free layout for paid-ad landing pages (/go/...): no site navigation, no outbound links
+// except Privacy, noindex, and the same advisor widget and lead handling as the rest of the site.
+import '../styles/global.css';
+import { site, url } from '../data/site';
+import { regions, type RegionId } from '../data/regions';
+import Attribution from '../components/Attribution.astro';
+import AdTags from '../components/AdTags.astro';
+interface Props { title: string; description: string; region: RegionId; lp: string; degree: string; country: string }
+const { title, description, region, lp, degree, country } = Astro.props;
+const r = regions[region];
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const wa = `https://wa.me/${r.whatsapp}?text=${encodeURIComponent(`Hi, I would like to know more about the online ${degree}.`)}`;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <Attribution />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <!-- Ad landing page: kept out of search results so it never competes with the SEO pages. -->
+  <meta name="robots" content="noindex,follow" />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:site_name" content={site.name} />
+  <AdTags lp={lp} degree={degree} country={country} />
+  <style is:global>
+    .lp-top{background:#fff;border-bottom:1px solid var(--line)}
+    .lp-top .wrap{display:flex;align-items:center;gap:12px;min-height:56px}
+    .lp-top .logo{cursor:default}
+    .lp-top .tag-line{color:var(--muted);font-size:.85rem}
+    .lp-top .btn{margin-left:auto;padding:8px 14px;font-size:.9rem}
+    @media(max-width:560px){.lp-top .tag-line{display:none}}
+    .lp-hero{display:grid;gap:24px;align-items:start}
+    @media(min-width:900px){.lp-hero{grid-template-columns:1fr 380px;gap:40px}.hero-bg .lp-hero .copy{max-width:none}}
+    .eyebrow{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--brand);margin-bottom:8px}
+    .ticks{list-style:none;padding:0;margin:14px 0 16px}
+    .ticks li{padding-left:28px;position:relative;margin:6px 0;font-weight:500}
+    .ticks li:before{content:"✓";position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:var(--brand);color:#fff;font-size:.75rem;display:grid;place-items:center;margin-top:3px}
+    .form-card{box-shadow:0 14px 36px rgba(29,34,48,.16);scroll-margin-top:16px}
+    .form-card h2{font-size:1.25rem;margin:0 0 4px}
+    form.lead label.c{display:flex;gap:8px;align-items:flex-start}
+    form.lead label.c input{width:auto;margin-top:4px}
+    form.lead .btn{width:100%;padding:13px;font-size:1.05rem;background:var(--accent)}
+    .unis{display:grid;gap:14px}
+    @media(min-width:760px){.unis{grid-template-columns:1fr 1fr}}
+    .uni h3{font-size:1.1rem}
+    .uni dl{display:grid;grid-template-columns:110px 1fr;gap:4px 10px;margin:10px 0 0;font-size:.92rem}
+    .uni dt{color:var(--muted)}.uni dd{margin:0}
+    .steps{display:grid;gap:14px;counter-reset:s;padding:0;list-style:none}
+    @media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
+    .steps li{counter-increment:s;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px 16px 16px 58px;position:relative}
+    .steps li:before{content:counter(s);position:absolute;left:16px;top:16px;width:30px;height:30px;border-radius:50%;background:var(--brand-2);color:var(--brand);font-weight:800;display:grid;place-items:center}
+    .cta-band{background:var(--brand);color:#fff;border-radius:var(--radius);padding:24px;text-align:center}
+    .cta-band h2{color:#fff}.cta-band p{opacity:.9;margin:0 0 16px}
+    .cta-band .btn{background:var(--accent)}.cta-band .btn.alt{background:#fff;color:var(--brand)}.cta-band .row{justify-content:center}
+    .m-cta{display:none}
+    @media(max-width:760px){.hero-bg.lp{padding:24px 0 28px}.lp-hero .copy>p,.lp-hero .copy>.trust{display:none}.lp-hero h1{font-size:1.6rem}.ticks{margin:10px 0 4px}.ticks li{margin:3px 0;font-size:.95rem}}
+    footer.lp{border-top:1px solid var(--line);padding:24px 0 96px;margin-top:24px;font-size:.85rem;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header class="lp-top">
+    <div class="wrap">
+      <span class="logo">{site.name}</span>
+      <span class="tag-line">Free online degree counselling</span>
+      <a class="btn wa" href={wa} target="_blank" rel="noopener" data-track="whatsapp">WhatsApp us</a>
+    </div>
+  </header>
+  <main><slot /></main>
+  <footer class="lp">
+    <div class="wrap">
+      <p><strong>{site.name}</strong> is an independent education counselling service. We help students compare online degree programs and apply to them. We are not a university and do not award degrees. Each degree is awarded by the university that offers it. Check the program details, fees and approvals with the university before you pay.</p>
+      <p><a href={url('/privacy/')} target="_blank" rel="noopener">Privacy</a></p>
+    </div>
+  </footer>
+  <script type="application/json" id="cu-widget-cfg" set:html={JSON.stringify({ region: r.id, whatsapp: r.whatsapp, phone: r.phone, hours: r.hours, endpoint: site.leadEndpoint })} />
+  <script>
+    import '../scripts/client';
+  </script>
+  {site.cfAnalyticsToken && <script is:inline define:vars={{ token: site.cfAnalyticsToken }}>
+    // Visitor analytics, loaded once the page has finished loading so it never delays what the visitor sees.
+    addEventListener('load', () => (window.requestIdleCallback || setTimeout)(() => {
+      const s = document.createElement('script');
+      s.defer = true;
+      s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+      s.dataset.cfBeacon = JSON.stringify({ token, spa: true });
+      document.body.appendChild(s);
+    }, { timeout: 3000 }));
+  </script>}
+</body>
+</html>

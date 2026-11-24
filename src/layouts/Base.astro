@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { site, url } from '../data/site';
 import { regions, regionList, type RegionId } from '../data/regions';
 import { heroImg, type Img } from '../data/images';
+import Attribution from '../components/Attribution.astro';
 interface Props { title: string; description: string; region?: RegionId; jsonld?: object[]; regionPath?: string; image?: Img }
 const { title, description, region = 'in', jsonld = [], regionPath = '', image = heroImg.home } = Astro.props;
 const ogW = image.ogWidth ?? 1280;
@@ -21,6 +22,7 @@ const alternates = regionPath ? [
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <Attribution />
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical} />

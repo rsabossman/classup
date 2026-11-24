@@ -13,3 +13,7 @@
 /img/*
   ! Cache-Control
   Cache-Control: public, max-age=2592000
+
+# Paid-ad landing pages: never indexed, so they don't compete with the SEO pages.
+/go/*
+  X-Robots-Tag: noindex
