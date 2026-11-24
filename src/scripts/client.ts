@@ -33,3 +33,10 @@ const loadWidget = () => import('./widget');
 const idle = (cb: () => void) => ('requestIdleCallback' in window ? (window as any).requestIdleCallback(cb, { timeout: 2000 }) : setTimeout(cb, 200));
 if (document.readyState === 'complete') idle(loadWidget);
 else addEventListener('load', () => idle(loadWidget), { once: true });
+
+// Header pickers (menu, region) are <details>: close them on an outside click, on Escape, or after a choice.
+document.addEventListener('click', (e) => document.querySelectorAll<HTMLDetailsElement>('details.pick[open]').forEach((d) => {
+  const t = e.target as Element;
+  if (!d.contains(t) || t.closest('.pop a')) d.open = false;
+}));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll<HTMLDetailsElement>('details.pick[open]').forEach((d) => (d.open = false)); });
