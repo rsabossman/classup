@@ -98,7 +98,7 @@ const opt = (view: string, color: string, ic: string, t: string, s: string, href
 function leadForm(intent: string, note: string, extra = '') {
   return `<p class="note">${note}</p><form>
     <input name="name" placeholder="Your name" required autocomplete="name">
-    <input name="phone" placeholder="Mobile / WhatsApp with country code" required autocomplete="tel" inputmode="tel">
+    <input name="phone" placeholder="Mobile number with country code" required autocomplete="tel" inputmode="tel">
     ${extra}
     <label class="c"><input type="checkbox" name="consent" required checked> I agree to be contacted by call, WhatsApp, SMS or email about programs.</label>
     <button class="btn" type="submit">Send</button></form>`;
@@ -143,7 +143,7 @@ function show(v: string, opts: Opts = {}) {
     title.textContent = 'Leave your details';
     bd.innerHTML = leadForm('enquiry', 'Tell us a little about you and we’ll send a shortlist of programs that fit.',
       `<input name="email" type="email" placeholder="Email (optional)" autocomplete="email"><input name="interest" placeholder="What would you like to study? (e.g. MBA in HR)">`);
-    wire('enquiry', 'Thanks! An advisor will reach out on WhatsApp or by phone shortly.');
+    wire('enquiry', 'Thanks! An advisor will call you shortly.');
   } else if (v === 'chat') {
     title.textContent = cfg.chat ? 'Chat with Ria, our advisor' : 'Chat with us';
     const ai = (window as any).cuChat; // The AI agent (step 3) can take over here.
@@ -152,7 +152,7 @@ function show(v: string, opts: Opts = {}) {
   }
 }
 
-// Chat: a few guided questions, then name and WhatsApp number (the lead is saved first, so Ria knows the
+// Chat: a few guided questions, then name and mobile number (the lead is saved first, so Ria knows the
 // visitor's country and degree), then a free conversation with Ria. Without a chat endpoint, it stays a guided form.
 function chat(question = '') {
   const log: string[] = [];
@@ -180,13 +180,13 @@ function chat(question = '') {
       else if (r.reply) say('bot', r.reply);
     } catch {
       typing.remove();
-      say('bot', 'Sorry, I couldn’t reply just now. An advisor will message you on WhatsApp shortly.');
+      say('bot', 'Sorry, I couldn’t reply just now. An advisor will call you shortly.');
     } finally { busy = false; }
   };
   const askContact = () => {
-    say('bot', 'Share your name and WhatsApp number, and I’ll answer your questions here. An advisor can also send you fees and the next intake date on WhatsApp.');
+    say('bot', 'Share your name and mobile number, and I’ll answer your questions here. An advisor can also call you with fees and the next intake date.');
     const f = document.createElement('form');
-    f.innerHTML = `<input name="name" placeholder="Your name" required autocomplete="name"><input name="phone" placeholder="Mobile / WhatsApp with country code" required inputmode="tel" autocomplete="tel"><label class="c"><input type="checkbox" name="consent" required checked> I agree to be contacted about programs.</label><button class="btn">Send</button>`;
+    f.innerHTML = `<input name="name" placeholder="Your name" required autocomplete="name"><input name="phone" placeholder="Mobile number with country code" required inputmode="tel" autocomplete="tel"><label class="c"><input type="checkbox" name="consent" required checked> I agree to be contacted about programs.</label><button class="btn">Send</button>`;
     msgs.appendChild(f); bd.scrollTop = bd.scrollHeight;
     f.addEventListener('submit', async (e) => {
       e.preventDefault(); const b = f.querySelector('button')!; b.disabled = true;
@@ -196,7 +196,7 @@ function chat(question = '') {
         name = data.name || '';
         f.remove();
         if (cfg.chat) import('./ria').then(({ listen }) => listen(cfg.chat!, leadId, (t) => say('bot', `Advisor: ${t}`)));
-        if (!cfg.chat) return void say('bot', 'Thank you! An advisor will message you on WhatsApp shortly.');
+        if (!cfg.chat) return void say('bot', 'Thank you! An advisor will call you shortly.');
         const intro = [interest && interest !== 'Not sure yet' ? `I’m interested in an online ${interest}.` : pending.length ? '' : 'I’m not sure which degree to choose yet.', work && `Work status: ${work}.`, ...pending].filter(Boolean).join(' ');
         pending.length = 0;
         ria(intro);
