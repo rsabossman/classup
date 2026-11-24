@@ -2,6 +2,10 @@
 export const site = {
   name: 'ClassUp',
   tagline: 'Compare UGC-entitled online degrees from established Indian universities',
+  // Entity facts for search and AI engines, so "ClassUp" isn't confused with other brands of the same name.
+  alternateNames: ['ClassUp Online', 'classuponline.com'],
+  descriptor: 'ClassUp Online (classuponline.com) is an independent online-degree advisory service based in India. It helps students in India, South Asia, the Gulf, South East Asia, Africa and elsewhere compare and apply to UGC-entitled online degrees (MBA, MCA, BBA, BCA, BCom, MCom, BA, MA and diplomas) from established Indian universities, with free counselling.',
+  disambiguation: 'ClassUp Online is not a university and is not related to the K-12 tutoring app formerly called ClassUp (classup.com, now Cosmo) or to the ClassUp school ERP software (classuperp.in).',
   // Leads go to SalesKarma (the lead desk), keyed by lead_id. k is this site's public key; only this site's origins are allowed.
   // Nothing goes to HubSpot until a lead is marked ready to enroll.
   leadEndpoint: import.meta.env.PUBLIC_LEAD_ENDPOINT || 'https://api.saleskarma.app/v1/lead?k=sk_a5ced9aff85a95d1a2915456',

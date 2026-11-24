@@ -6,9 +6,11 @@ import { site } from '../data/site';
 export const GET: APIRoute = ({ site: s }) => {
   const abs = (p: string) => new URL(`${import.meta.env.BASE_URL.replace(/\/$/, '')}${p}`, s).href;
   const lines = [
-    `# ${site.name}`,
+    `# ${site.alternateNames[0]} (${site.alternateNames[1]})`,
     '',
     `> ${site.tagline}. ${site.name} is an independent counselling service, not a university. It lists ${programs.length} online programs from ${Object.keys(universities).length} UGC-entitled Indian universities and offers free counselling by chat, WhatsApp and phone for students in India, the Middle East, Africa and elsewhere.`,
+    '',
+    site.disambiguation,
     '',
     'Facts here come from university publications. Fees come from university fee notifications. INR amounts apply to students in India; USD amounts are tuition per semester for international students. Fees may change.',
     '',
