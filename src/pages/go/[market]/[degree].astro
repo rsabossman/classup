@@ -4,7 +4,7 @@ import Landing from '../../../layouts/Landing.astro';
 import Faq from '../../../components/Faq.astro';
 import Pic from '../../../components/Pic.astro';
 import { regions } from '../../../data/regions';
-import { byDegree, universities, degreeInfo, inr, type Program } from '../../../data/catalog';
+import { byDegree, degreeInfo } from '../../../data/catalog';
 import { site } from '../../../data/site';
 import { heroImg, HERO_WIDTHS } from '../../../data/images';
 import { markets, lpDegrees, degreeCopy, type Market, type LpDegree } from '../../../data/landing';
@@ -19,37 +19,31 @@ const list = byDegree(d);
 const lp = `${m.id}-${d.toLowerCase()}`;
 const isPG = d === 'MBA' || d === 'MCA';
 
-// One card per university that offers this degree.
-const unis = Object.values(universities)
-  .map((u) => ({ u, ps: list.filter((p) => p.university === u.id) }))
-  .filter((x) => x.ps.length);
-// Specialisations, merged so "Marketing" and "Marketing Management" (or "HR" and "Human Resources") show once.
-const specs = (ps: Program[]) => {
+// No university is named on these pages: the advisor matches each student to a university.
+const unis = new Set(list.map((p) => p.university)).size;
+// Specialisations across all programs, merged so "Marketing" and "Marketing Management" (or "HR" and "Human Resources") show once.
+const specList = (() => {
   const seen = new Map<string, string>();
-  for (const x of ps.flatMap((p) => p.specializations)) {
+  for (const x of list.flatMap((p) => p.specializations)) {
     const label = x.replace(/^HR\b/, 'Human Resources').replace(/^Human Resource\b(?!s)/, 'Human Resources');
     const key = label.replace(/ Management$/, '').toLowerCase();
     if (!seen.has(key)) seen.set(key, label);
   }
-  const s = [...seen.values()];
-  if (!s.length) return 'General';
-  return s.length > 8 ? `${s.slice(0, 8).join(', ')} and ${s.length - 8} more` : s.join(', ');
-};
-// Fees: only VTU's India fees are approved for publishing.
-const feeText = (ps: Program[]) => {
-  if (m.region !== 'in') return 'Ask an advisor for the fee in your currency';
-  const vtu = ps.filter((p) => p.university === 'vtu' && p.fee_inr);
-  if (!vtu.length) return 'Ask an advisor';
-  const p = vtu.reduce((a, b) => (b.fee_inr! < a.fee_inr! ? b : a));
-  return `${inr(p.fee_inr!)} total${p.fee_per_year_inr ? ` (${inr(p.fee_per_year_inr)} per year)` : ''}`;
-};
-
+  return [...seen.values()];
+})();
+const overview = [
+  { title: 'Specialisations', body: specList.length ? specList.join(' · ') : `A general ${d} curriculum, with electives in the final year.` },
+  { title: 'Duration and format', body: `${c.duration}. Recorded lectures, live online sessions (usually at weekends) and assignments you submit online.` },
+  { title: 'Exams', body: 'Online proctored exams you take from home with a webcam. A typical split is 30% internal assessment and 70% end-term exam.' },
+  { title: 'Eligibility', body: c.eligibility + (m.region !== 'in' ? ' If you studied outside India, we check your qualification’s equivalence for you.' : '') },
+  { title: 'Fees', body: m.region === 'in' ? 'Fees differ by university and specialisation. Pay per semester or per year, and ask about EMI. Your advisor shares the exact fee for every option.' : 'Fees differ by university and are quoted in US dollars for international students. Your advisor shares the exact fee and payment options for your country.' },
+];
 const h1 =
   m.region === 'in' ? (isPG ? `Earn a UGC-entitled online ${d} without leaving your job` : `Earn a UGC-entitled online ${d} from home, right after 12th`)
   : m.region === 'me' ? `Earn an Indian university ${d} online while you work ${m.where}`
   : m.region === 'africa' ? `Study an online ${d} from an established Indian university, from home ${m.where}`
   : `An online ${d} from an established Indian university, ${m.where}`;
-const sub = `Compare ${list.length} online ${d} programs from ${unis.length} NAAC-accredited universities entitled by the UGC to teach online. ${c.duration}, no entrance exam for most programs, and exams you take from home. Free counselling to help you ${c.goal}.`;
+const sub = `Choose from ${list.length} online ${d} programs at ${unis} NAAC-accredited universities entitled by the UGC to teach online. ${c.duration}, no entrance exam for most programs, and exams you take from home. Free counselling to help you ${c.goal}.`;
 const ticks = [
   `${info.full}: ${c.duration}, fully online`,
   'Proctored exams you take online from home',
@@ -67,7 +61,7 @@ const qual = isPG
   : ['I have passed 12th', 'I’m in 12th now', 'I have a diploma / other'];
 const where = m.region === 'in' ? 'in India' : m.where;
 const title = `Online ${d} ${m.region === 'in' ? 'in India' : m.region === 'intl' ? 'from an Indian University' : `for ${m.name.replace(/^the /, '')}`}: Fees & Eligibility | ${site.name}`;
-const description = `${info.full} online from UGC-entitled, NAAC-accredited Indian universities for students ${where}. Compare programs, fees and eligibility. Free counselling.`;
+const description = `${info.full} online from UGC-entitled, NAAC-accredited Indian universities for students ${where}. Specialisations, fees and eligibility. Free counselling.`;
 ---
 <Landing title={title} description={description} region={r.id} lp={lp} degree={d} country={m.country}>
   <div class="hero hero-bg lp">
@@ -90,9 +84,9 @@ const description = `${info.full} online from UGC-entitled, NAAC-accredited Indi
           <input name="name" placeholder="Full name" required autocomplete="name" />
           <input name="phone" type="tel" placeholder={`WhatsApp number (${m.dial})`} required autocomplete="tel" inputmode="tel" pattern="[+0-9 ()-]{8,20}" title="Your phone number with country code" />
           <input name="email" type="email" placeholder="Email (optional)" autocomplete="email" />
-          <select name="program" aria-label={`Which online ${d}?`}>
-            <option value="">Which {d}? Help me choose</option>
-            {unis.map(({ u, ps }) => <optgroup label={u.name}>{ps.map((p) => <option value={p.id}>{p.name}</option>)}</optgroup>)}
+          <select name="specialisation" aria-label="Specialisation">
+            <option value="">Specialisation? Help me choose</option>
+            {specList.map((x) => <option>{x}</option>)}
           </select>
           <select name="qualification" aria-label="Your qualification">
             <option value="">Your qualification (optional)</option>
@@ -107,23 +101,9 @@ const description = `${info.full} online from UGC-entitled, NAAC-accredited Indi
   </div>
 
   <section><div class="wrap">
-    <h2>Compare {list.length} online {d} programs</h2>
-    <div class="unis">
-      {unis.map(({ u, ps }) => (
-        <div class="card uni">
-          <h3>{u.name}</h3>
-          <div>{u.approvals.map((a) => <span class="tag">{a}</span>)}</div>
-          <dl>
-            <dt>Programs</dt><dd>{ps.length === 1 ? ps[0].name : `${ps.length} ${d} options`}</dd>
-            <dt>Specialisations</dt><dd>{specs(ps)}</dd>
-            <dt>Duration</dt><dd>{c.duration}</dd>
-            <dt>Exams</dt><dd>{u.exams}</dd>
-            <dt>Fee</dt><dd>{feeText(ps)}</dd>
-          </dl>
-        </div>
-      ))}
-    </div>
-    <p class="small muted">Eligibility: {c.eligibility} {m.region !== 'in' && 'If you studied outside India, we check your qualification’s equivalence with the university for you.'}</p>
+    <h2>The online {d} at a glance</h2>
+    <div class="grid">{overview.map((o) => <div class="card"><h3>{o.title}</h3><p class="small muted" style="margin:0">{o.body}</p></div>)}</div>
+    <p class="small muted">Your advisor recommends the university that fits your background, budget and goals, and shares its approvals, fees and next intake date.</p>
   </div></section>
 
   <section><div class="wrap">
@@ -135,7 +115,7 @@ const description = `${info.full} online from UGC-entitled, NAAC-accredited Indi
     <h2>How it works</h2>
     <ol class="steps">
       <li><strong>Tell us your goal</strong><br /><span class="small muted">Share your background, budget and the career move you want.</span></li>
-      <li><strong>Get a shortlist</strong><br /><span class="small muted">We compare fees, eligibility, specialisations and recognition for you.</span></li>
+      <li><strong>Get a shortlist</strong><br /><span class="small muted">We match you to the right university and compare fees, eligibility, specialisations and recognition for you.</span></li>
       <li><strong>Apply with help</strong><br /><span class="small muted">We guide your application and documents until your first semester starts.</span></li>
     </ol>
   </div></section>
