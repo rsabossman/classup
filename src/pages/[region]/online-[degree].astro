@@ -6,6 +6,8 @@ import LeadForm from '../../components/LeadForm.astro';
 import { regionList, regions, type RegionId } from '../../data/regions';
 import { degrees, degreeInfo, byDegree, uni, inr } from '../../data/catalog';
 import { site, url } from '../../data/site';
+import Faq from '../../components/Faq.astro';
+import { faqLd } from '../../lib';
 import Pic from '../../components/Pic.astro';
 import { imgForDegree } from '../../data/images';
 export const getStaticPaths = () => regionList.flatMap((r) => degrees.map((d) => ({ params: { region: r.id, degree: d.toLowerCase() }, props: { d } })));
@@ -14,12 +16,22 @@ const r = regions[Astro.params.region as RegionId];
 const list = byDegree(d);
 const info = degreeInfo[d];
 const fees = list.filter((p) => p.fee_inr).map((p) => p.fee_inr!);
+const unis = [...new Set(list.map((p) => uni(p).name))];
+const durs = [...new Set(list.map((p) => p.duration_years).filter(Boolean))];
+const answer = `${list.length} UGC-entitled online ${d} programs are listed here from ${unis.length} universities (${unis.join(', ')}). They take ${durs.join(' or ') || 'varying'} years${r.id === 'in' && fees.length ? `, and published fees start at ${inr(Math.min(...fees))}` : ''}. All are taught fully online with exams you can take from home.`;
+const faqs = [
+  { q: `Is an online ${d} valid?`, a: `Yes, when it comes from a university entitled by the UGC to run online programs. Under the UGC (Online Programs) Regulations, an online ${d} is treated as equivalent to the same degree earned on campus. Check the university on the UGC-DEB website before you enrol.` },
+  { q: `Which universities offer an online ${d}?`, a: `On this page: ${unis.join(', ')}. Each program page lists its duration, eligibility, approvals and fee.` },
+  { q: `How much does an online ${d} cost?`, a: r.id === 'in' && fees.length ? `Published fees for the programs here range from ${inr(Math.min(...fees))} to ${inr(Math.max(...fees))} in total. Some universities have not published fees; an advisor can confirm them.` : `International fees vary by university and are usually charged in USD per semester. An advisor can confirm the current fee for your country.` },
+  { q: `Can I do an online ${d} while working?`, a: `Yes. These programs use recorded lectures, weekend live sessions and online exams, so most students study while working full time.` },
+];
 ---
-<Base title={fitTitle(`Online ${d} for ${r.audience}: ${list.length} Programs Compared | ${site.name}`, `Online ${d} (${r.tag}): ${list.length} Programs, Fees & Eligibility`, `Online ${d} (${r.tag}): ${list.length} Programs Compared`)} description={clipDesc(`${info.blurb} Compare ${list.length} UGC-entitled online ${d} programs for ${r.audience} on fees, eligibility, approvals and exams.`)} region={r.id} regionPath={`/online-${d.toLowerCase()}/`} image={imgForDegree(d)}>
+<Base title={fitTitle(`Online ${d} for ${r.audience}: ${list.length} Programs Compared | ${site.name}`, `Online ${d} (${r.tag}): ${list.length} Programs, Fees & Eligibility`, `Online ${d} (${r.tag}): ${list.length} Programs Compared`)} description={clipDesc(`${info.blurb} Compare ${list.length} UGC-entitled online ${d} programs for ${r.audience} on fees, eligibility, approvals and exams.`)} region={r.id} regionPath={`/online-${d.toLowerCase()}/`} image={imgForDegree(d)} jsonld={[faqLd(faqs)]}>
   <section><div class="wrap layout-2">
     <div>
       <h1 style="margin-top:0">Online {d}: {info.full}</h1>
       <Pic img={imgForDegree(d)} class="art-img wide" sizes="(min-width: 900px) 700px, 100vw" priority />
+      <p class="answer"><strong>In short:</strong> {answer}</p>
       <p>{info.blurb}</p>
       <table class="facts">
         <tr><th>Programs listed</th><td>{list.length} from {new Set(list.map((p) => p.university)).size} universities</td></tr>
@@ -28,6 +40,8 @@ const fees = list.filter((p) => p.fee_inr).map((p) => p.fee_inr!);
       </table>
       <h2 style="margin-top:28px">Programs</h2>
       <div class="grid">{list.map((p) => <ProgramCard p={p} region={r} />)}</div>
+      <h2 style="margin-top:28px">FAQs</h2>
+      <Faq faqs={faqs} />
     </div>
     <aside><div class="card sticky"><h3>Not sure which {d} to pick?</h3><p class="small muted">An advisor will compare them for your budget, background and goals.</p><LeadForm region={r.id} /></div></aside>
   </div></section>

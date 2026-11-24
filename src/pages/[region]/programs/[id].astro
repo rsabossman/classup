@@ -19,6 +19,8 @@ const info = degreeInfo[p.degree];
 const faqs = [
   { q: `Is the ${p.name} from ${u.name} valid?`, a: `${u.name} states that it holds these approvals: ${u.approvals.join(', ')}. Degrees from UGC-entitled universities earned online are treated as equivalent to on-campus degrees. Check the university’s current entitlement on the UGC-DEB website before enrolling.` },
   { q: `Who can apply for the ${p.name}?`, a: `Applicants in India: ${p.eligibility_india}. International applicants: ${p.eligibility_foreign}.` },
+  { q: `How much does the ${p.name} from ${u.name} cost?`, a: f ? `${f.long} Fees can change, so confirm the current amount with an advisor before paying.` : `${u.name} has not published this fee for your region. An advisor can confirm the current fee and payment options.` },
+  ...(r.id !== 'in' ? [{ q: `Can I study the ${p.name} from ${r.name === 'International' ? 'outside India' : r.name}?`, a: `Yes. Classes, assignments and exams are online, so you do not need to travel to India. ${r.id === 'me' ? 'If you need the degree attested or evaluated in a Gulf country, check the rules for your country before you enrol.' : 'Check how your country or employer recognises Indian online degrees before you enrol.'}` }] : []),
   { q: 'How are exams held?', a: u.exams + '.' },
   { q: 'How long does it take?', a: `The program normally takes ${dur}.${p.credits ? ` It carries ${p.credits} credits.` : ''}` },
 ];
@@ -33,13 +35,26 @@ const course = {
   programPrerequisites: p.eligibility_india,
   ...(r.id === 'in' && p.fee_inr ? { offers: { '@type': 'Offer', price: p.fee_inr, priceCurrency: 'INR', category: 'Tuition' } } : p.tuition_per_term && r.id !== 'in' ? { offers: { '@type': 'Offer', price: (p.tuition_per_term as any)[{ me: 'me_usd', africa: 'africa_usd', intl: 'intl_usd' }[r.id as 'me']], priceCurrency: 'USD', category: 'Tuition per semester' } } : {}),
 };
+// A plain Course object alongside the program, so search and AI engines that only read Course still pick it up.
+const courseLd = {
+  '@context': 'https://schema.org', '@type': 'Course', name: `${p.name} (${u.name})`, url: self,
+  description: `${p.name} from ${u.name}: ${dur}, ${p.level}, taught 100% online. Eligibility: ${p.eligibility_india}.`,
+  provider: { '@type': 'CollegeOrUniversity', name: u.name, address: u.city },
+  educationalCredentialAwarded: info?.full || p.degree,
+  hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'online', ...(p.duration_years ? { courseWorkload: `P${p.duration_years}Y` } : {}) },
+  ...(course.offers ? { offers: course.offers } : {}),
+};
+// Answer-first summary: the sentence an AI answer or a featured snippet can quote as is.
+const levelWord = { UG: 'undergraduate', PG: 'postgraduate', 'PG Diploma': 'postgraduate diploma', Diploma: 'diploma' }[p.level] || p.level;
+const summary = `${p.name} from ${u.name} is a ${p.duration_years ? p.duration_years + '-year ' : ''}${levelWord} program taught fully online. Exams: ${u.exams.charAt(0).toLowerCase() + u.exams.slice(1)}. ${f ? 'Fee: ' + f.short + '.' : 'Ask an advisor for the current fee.'} Eligibility: ${r.id === 'in' ? p.eligibility_india : p.eligibility_foreign}.`;
 const related = programs.filter((x) => x.degree === p.degree && x.id !== p.id).slice(0, 6);
 ---
-<Base title={fitTitle(`${p.name}, ${u.short}: Fees & Eligibility (${r.tag}) | ${site.name}`, `${p.name}, ${u.short}: Fees & Eligibility (${r.tag})`, `${p.name}, ${u.short} (${r.tag})`)} description={clipDesc(`${p.name} from ${u.name} for ${r.audience}: ${dur}${f ? `, ${f.short}` : ''}. Eligibility, exams, approvals (${u.approvals.slice(0, 2).join(', ')}) and free counselling.`)} region={r.id} regionPath={`/programs/${p.id}/`} image={imgForDegree(p.degree)} jsonld={[course, faqLd(faqs), crumbLd([['Programs', new URL(url(`/${r.id}/programs/`), Astro.site).href], [p.name, self]])]}>
+<Base title={fitTitle(`${p.name}, ${u.short}: Fees & Eligibility (${r.tag}) | ${site.name}`, `${p.name}, ${u.short}: Fees & Eligibility (${r.tag})`, `${p.name}, ${u.short} (${r.tag})`)} description={clipDesc(`${p.name} from ${u.name} for ${r.audience}: ${dur}${f ? `, ${f.short}` : ''}. Eligibility, exams, approvals (${u.approvals.slice(0, 2).join(', ')}) and free counselling.`)} region={r.id} regionPath={`/programs/${p.id}/`} image={imgForDegree(p.degree)} jsonld={[course, courseLd, faqLd(faqs), crumbLd([['Programs', new URL(url(`/${r.id}/programs/`), Astro.site).href], [p.name, self]])]}>
   <div class="wrap crumbs"><a href={url(`/${r.id}/programs/`)}>Programs</a> › <a href={url(`/${r.id}/online-${p.degree.toLowerCase()}/`)}>Online {p.degree}</a> › {p.name}</div>
   <section><div class="wrap layout-2">
     <div>
       <h1 style="margin-top:0">{p.name}</h1>
+      <p class="answer"><strong>In short:</strong> {summary}</p>
       <p class="muted">Offered by <a href={url(`/${r.id}/universities/${u.id}/`)}>{u.name}</a>, {u.city}. {info?.blurb}</p>
       <table class="facts">
         <tr><th>Level</th><td>{p.level}</td></tr>
