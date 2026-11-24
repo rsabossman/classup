@@ -7,15 +7,20 @@ import { regionList, regions, type RegionId } from '../../data/regions';
 import { programs, degrees, degreeInfo, byDegree, universities } from '../../data/catalog';
 import { url, site } from '../../data/site';
 import { faqLd, fitTitle, clipDesc } from '../../lib';
+import Pic from '../../components/Pic.astro';
+import { regionImg, imgForDegree } from '../../data/images';
 export const getStaticPaths = () => regionList.map((r) => ({ params: { region: r.id } }));
 const r = regions[Astro.params.region as RegionId];
 const featured = ['MBA', 'MCA', 'BBA', 'BCA'].flatMap((d) => byDegree(d).filter((p, i, a) => a.findIndex((x) => x.university === p.university) === i).slice(0, 2));
 ---
-<Base title={fitTitle(`Online Degrees for ${r.label}: MBA, MCA, BBA, BCA | ${site.name}`, `Online Degrees for ${r.label}: MBA, MCA, BBA, BCA`)} description={clipDesc(r.sub)} region={r.id} regionPath="/" jsonld={[faqLd(r.faqs)]}>
-  <div class="hero"><div class="wrap">
-    <h1>{r.hero}</h1>
-    <p>{r.sub}</p>
-    <div class="row"><a class="btn" href={url(`/${r.id}/programs/`)}>Browse {programs.length} programs</a><a class="btn alt" href="#counselling">Talk to an advisor</a></div>
+<Base title={fitTitle(`Online Degrees for ${r.label}: MBA, MCA, BBA, BCA | ${site.name}`, `Online Degrees for ${r.label}: MBA, MCA, BBA, BCA`)} description={clipDesc(r.sub)} region={r.id} regionPath="/" image={regionImg[r.id]} jsonld={[faqLd(r.faqs)]}>
+  <div class="hero"><div class="wrap hero-split">
+    <div>
+      <h1>{r.hero}</h1>
+      <p>{r.sub}</p>
+      <div class="row"><a class="btn" href={url(`/${r.id}/programs/`)}>Browse {programs.length} programs</a><a class="btn alt" href="#counselling">Talk to an advisor</a></div>
+    </div>
+    <Pic img={regionImg[r.id]} class="hero-img" sizes="(min-width: 900px) 540px, 100vw" priority />
   </div></div>
   <section><div class="wrap">
     <div class="grid">{r.points.map((p) => <div class="card"><h3>{p.title}</h3><p class="small muted" style="margin:0">{p.body}</p></div>)}</div>
@@ -26,7 +31,7 @@ const featured = ['MBA', 'MCA', 'BBA', 'BCA'].flatMap((d) => byDegree(d).filter(
   </div></section>
   <section><div class="wrap">
     <h2>Browse by degree</h2>
-    <div class="grid">{degrees.map((d) => <a class="card stretch" style="text-decoration:none;color:inherit" href={url(`/${r.id}/online-${d.toLowerCase()}/`)}><h3>Online {d}</h3><p class="small muted" style="margin:0">{degreeInfo[d].full} · {byDegree(d).length} programs</p></a>)}</div>
+    <div class="grid">{degrees.map((d) => <a class="card media" style="text-decoration:none;color:inherit" href={url(`/${r.id}/online-${d.toLowerCase()}/`)}><Pic img={imgForDegree(d)} alt="" sizes="(min-width: 900px) 360px, 100vw" /><div class="body"><h3>Online {d}</h3><p class="small muted" style="margin:0">{degreeInfo[d].full} · {byDegree(d).length} programs</p></div></a>)}</div>
   </div></section>
   <section><div class="wrap">
     <h2>Universities</h2>

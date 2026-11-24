@@ -1,6 +1,10 @@
 # Cloudflare static assets headers.
 # Astro's build files have content hashes in their names, so they can be cached for a year.
-/_astro/*
+/_astro# Illustrations change rarely; cache for 30 days.
+/img/*
+  Cache-Control: public, max-age=2592000
+
+/*
   Cache-Control: public, max-age=31536000, immutable
 
 /*
