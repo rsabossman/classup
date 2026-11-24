@@ -10,6 +10,7 @@ const css = `
 *{box-sizing:border-box}
 .fab{position:fixed;right:16px;bottom:16px;z-index:2147483000;height:56px;padding:0 20px 0 16px;border:0;border-radius:28px;background:#0f5c4d;color:#fff;display:flex;align-items:center;gap:8px;font:600 15px system-ui,sans-serif;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.22)}
 .fab svg{width:24px;height:24px;fill:currentColor}
+@media(max-width:600px){.fab{width:56px;padding:0;justify-content:center}.fab span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
 .panel{position:fixed;right:16px;bottom:84px;z-index:2147483001;width:min(370px,calc(100vw - 32px));max-height:min(600px,calc(100vh - 110px));background:#fff;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.25);display:flex;flex-direction:column;overflow:hidden}
 .panel[hidden]{display:none}
 .hd{background:#0f5c4d;color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px}
