@@ -51,12 +51,14 @@ const source = () => { try { return JSON.parse(sessionStorage.getItem('cu_src') 
 const pageProgram = () => (document.querySelector('form[data-lead] select[name=program]') as HTMLSelectElement | null)?.value || '';
 
 export async function sendLead(data: Record<string, unknown>) {
-  const payload = { ...data, program: data.program || pageProgram(), region: cfg.region, page: location.pathname, ...source(), ts: new Date().toISOString(), via: 'widget' };
+  // Every lead needs an id: the lead store keys on it, and the ad conversions reuse it for de-duplication.
+  const lead_id = crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  const payload = { ...data, lead_id, program: data.program || pageProgram(), region: cfg.region, page: location.pathname, ...source(), ts: new Date().toISOString(), via: 'widget' };
   if (cfg.endpoint) {
     const r = await fetch(cfg.endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
     if (!r.ok) throw new Error(String(r.status));
   }
-  (window as any).dataLayer?.push({ event: 'lead', intent: data.intent, region: cfg.region });
+  (window as any).dataLayer?.push({ event: 'lead', intent: data.intent, region: cfg.region, lead_id });
 }
 const track = (action: string) => (window as any).dataLayer?.push({ event: 'contact_click', action, region: cfg.region });
 

@@ -2,8 +2,9 @@
 export const site = {
   name: 'ClassUp',
   tagline: 'Compare UGC-entitled online degrees from established Indian universities',
-  // Lead endpoint: an n8n webhook that writes to HubSpot (step 2). Empty = form shows a thank-you but stores nothing.
-  leadEndpoint: import.meta.env.PUBLIC_LEAD_ENDPOINT || '',
+  // Leads go to an n8n webhook that stores them (status "held") in the n8n data table classup_leads, keyed by lead_id.
+  // It does not touch HubSpot while the distribution hold is in place.
+  leadEndpoint: import.meta.env.PUBLIC_LEAD_ENDPOINT || 'https://university18.app.n8n.cloud/webhook/classup-lead',
   // AI chat widget script (ElevenLabs / other) added in step 3.
   // Cloudflare Web Analytics site token for classuponline.com (visitor counts; manual install, not auto-injected). Loaded after page load, see Base.astro.
   cfAnalyticsToken: 'eda6841b4eb347039f99a98fc0bdeece',
