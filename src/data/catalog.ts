@@ -3,13 +3,16 @@ import raw from './catalog.json';
 export interface University {
   id: string; name: string; short: string; city: string; est: number;
   approvals: string[]; exams: string; source: string; fee_note?: string;
-  scholarships?: Record<string, number>;
+  scholarships?: Record<string, number>; other_fees?: string;
 }
 export interface Program {
   id: string; university: string; degree: string; name: string; level: string;
   duration_years: number | null; credits: number | null; fee_inr: number | null;
   specializations: string[]; eligibility_india: string; eligibility_foreign: string;
   source_url: string | null; category: string;
+  fee_per_year_inr?: number | null; fee_source?: string | null;
+  tuition_per_term?: { in_inr: number; nri_usd: number; saarc_inr: number; me_usd: number; sea_usd: number; africa_usd: number; intl_usd: number } | null;
+  terms?: number | null;
 }
 
 export const universities: Record<string, University> = Object.fromEntries(
@@ -21,6 +24,22 @@ export const updated = raw.updated;
 export const uni = (p: Program) => universities[p.university];
 export const title = (p: Program) => `${p.name.replace(/^Online /, 'Online ')} – ${uni(p).name}`;
 export const inr = (n: number) => '₹' + n.toLocaleString('en-IN');
+export const usd = (n: number) => '$' + Math.round(n).toLocaleString('en-US');
+
+/** Fee to show for a region: `short` for cards, `long` for the program page. Null = ask an advisor. */
+export function feeFor(p: Program, region: string): { short: string; long: string } | null {
+  const t = p.tuition_per_term;
+  if (region === 'in') {
+    if (p.fee_inr) return { short: `${inr(p.fee_inr)} total`, long: `${inr(p.fee_inr)} total${p.fee_per_year_inr ? ` (${inr(p.fee_per_year_inr)} per year)` : ''}${t ? `. Tuition is ${inr(t.in_inr)} per semester` : ''}.` };
+    if (t) return { short: `${inr(t.in_inr)} / semester`, long: `${inr(t.in_inr)} tuition per semester (${inr(t.in_inr * (p.terms || 1))} over ${p.terms} semesters), plus exam and admin fees.` };
+    return null;
+  }
+  if (t) {
+    const v = (t as any)[{ me: 'me_usd', africa: 'africa_usd', intl: 'intl_usd' }[region] || 'intl_usd'] as number;
+    return { short: `${usd(v)} / semester`, long: `${usd(v)} tuition per semester (${usd(v * (p.terms || 1))} over ${p.terms} semesters), plus exam and admin fees. Indian nationals living abroad pay ${usd(t.nri_usd)} per semester.` };
+  }
+  return null;
+}
 
 export const degreeOrder = ['MBA', 'MCA', 'MCom', 'MA', 'BBA', 'BCA', 'BCom', 'BA', 'PGD', 'DCA', 'Diploma'];
 export const degrees = degreeOrder.filter((d) => programs.some((p) => p.degree === d));
