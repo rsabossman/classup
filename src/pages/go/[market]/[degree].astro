@@ -1,0 +1,135 @@
+---
+// Paid-ad landing page: one market × one degree, e.g. /go/ae/mba/. See src/data/landing.ts.
+import Landing from '../../../layouts/Landing.astro';
+import Faq from '../../../components/Faq.astro';
+import Pic from '../../../components/Pic.astro';
+import { regions } from '../../../data/regions';
+import { byDegree, degreeInfo } from '../../../data/catalog';
+import { site } from '../../../data/site';
+import { heroImg, HERO_WIDTHS } from '../../../data/images';
+import { markets, lpDegrees, degreeCopy, type Market, type LpDegree } from '../../../data/landing';
+
+export const getStaticPaths = () =>
+  markets.flatMap((m) => lpDegrees.map((d) => ({ params: { market: m.id, degree: d.toLowerCase() }, props: { m, d } })));
+const { m, d } = Astro.props as { m: Market; d: LpDegree };
+const r = regions[m.region];
+const c = degreeCopy[d];
+const info = degreeInfo[d];
+const list = byDegree(d);
+const lp = `${m.id}-${d.toLowerCase()}`;
+const isPG = d === 'MBA' || d === 'MCA';
+
+// No university is named on these pages: the advisor matches each student to a university.
+const unis = new Set(list.map((p) => p.university)).size;
+// Specialisations across all programs, merged so "Marketing" and "Marketing Management" (or "HR" and "Human Resources") show once.
+const specList = (() => {
+  const seen = new Map<string, string>();
+  for (const x of list.flatMap((p) => p.specializations)) {
+    const label = x.replace(/^HR\b/, 'Human Resources').replace(/^Human Resource\b(?!s)/, 'Human Resources');
+    const key = label.replace(/ Management$/, '').toLowerCase();
+    if (!seen.has(key)) seen.set(key, label);
+  }
+  return [...seen.values()];
+})();
+const overview = [
+  { title: 'Specialisations', body: specList.length ? specList.join(' · ') : `A general ${d} curriculum, with electives in the final year.` },
+  { title: 'Duration and format', body: `${c.duration}. Recorded lectures, live online sessions (usually at weekends) and assignments you submit online.` },
+  { title: 'Exams', body: 'Online proctored exams you take from home with a webcam. A typical split is 30% internal assessment and 70% end-term exam.' },
+  { title: 'Eligibility', body: c.eligibility + (m.region !== 'in' ? ' If you studied outside India, we check your qualification’s equivalence for you.' : '') },
+  { title: 'Fees', body: m.region === 'in' ? 'Fees differ by university and specialisation. Pay per semester or per year, and ask about EMI. Your advisor shares the exact fee for every option.' : 'Fees differ by university and are quoted in US dollars for international students. Your advisor shares the exact fee and payment options for your country.' },
+];
+const h1 =
+  m.region === 'in' ? (isPG ? `Earn a UGC-entitled online ${d} without leaving your job` : `Earn a UGC-entitled online ${d} from home, right after 12th`)
+  : m.region === 'me' ? `Earn an Indian university ${d} online while you work ${m.where}`
+  : m.region === 'africa' ? `Study an online ${d} from an established Indian university, from home ${m.where}`
+  : `An online ${d} from an established Indian university, ${m.where}`;
+const sub = `Choose from ${list.length} online ${d} programs at ${unis} NAAC-accredited universities entitled by the UGC to teach online. ${c.duration}, no entrance exam for most programs, and exams you take from home. Free counselling to help you ${c.goal}.`;
+const ticks = [
+  `${info.full}: ${c.duration}, fully online`,
+  'Proctored exams you take online from home',
+  m.region === 'in' ? 'Pay per semester or per year, with EMI options' : 'No travel to India and no student visa',
+  `Free one-to-one counselling, ${r.hours}`,
+];
+const trust = ['UGC-entitled universities', 'NAAC accredited, up to A++', ...(isPG ? ['AICTE approvals'] : []), 'No entrance exam for most', ...(m.region !== 'in' ? ['English-medium'] : [])];
+const why = [
+  { title: `Careers an online ${d} opens up`, body: c.careers.join(' · ') },
+  ...r.points.slice(0, 2),
+];
+const faqs = [...c.faqs, ...r.faqs.filter((f) => !/valid\?$/.test(f.q))];
+const qual = isPG
+  ? ['I have a bachelor’s degree', 'I’m in the final year of my degree', 'I have a diploma / other']
+  : ['I have passed 12th', 'I’m in 12th now', 'I have a diploma / other'];
+const where = m.region === 'in' ? 'in India' : m.where;
+const title = `Online ${d} ${m.region === 'in' ? 'in India' : m.region === 'intl' ? 'from an Indian University' : `for ${m.name.replace(/^the /, '')}`}: Fees & Eligibility | ${site.name}`;
+const description = `${info.full} online from UGC-entitled, NAAC-accredited Indian universities for students ${where}. Specialisations, fees and eligibility. Free counselling.`;
+---
+<Landing title={title} description={description} region={r.id} lp={lp} degree={d} country={m.country}>
+  <div class="hero hero-bg lp">
+    <Pic img={heroImg[m.hero]} widths={HERO_WIDTHS} ratio={2.2} sizes="(min-width: 900px) 58vw, 100vw" priority />
+    <div class="wrap lp-hero">
+      <div class="copy">
+        <span class="eyebrow">Online {d} · {m.region === 'intl' ? 'International' : m.name.replace(/^the /, '')}</span>
+        <h1>{h1}</h1>
+        <p>{sub}</p>
+        <ul class="ticks">{ticks.map((t) => <li>{t}</li>)}</ul>
+        <div class="trust">{trust.map((t) => <span class="tag">{t}</span>)}</div>
+      </div>
+      <div class="card form-card" id="apply">
+        <h2>Get fees, eligibility and the next intake date</h2>
+        <p class="small muted" style="margin:0 0 12px">An advisor will message you on WhatsApp or call you, usually within minutes during working hours.</p>
+        <form class="lead" data-lead data-endpoint={site.leadEndpoint} data-region={r.id} data-intent="landing">
+          <input type="hidden" name="lp" value={lp} />
+          <input type="hidden" name="degree" value={d} />
+          <input type="hidden" name="country" value={m.country} />
+          <input name="name" placeholder="Full name" required autocomplete="name" />
+          <input name="phone" type="tel" placeholder={`WhatsApp number (${m.dial})`} required autocomplete="tel" inputmode="tel" pattern="[+0-9 ()-]{8,20}" title="Your phone number with country code" />
+          <input name="email" type="email" placeholder="Email (optional)" autocomplete="email" />
+          <select name="specialisation" aria-label="Specialisation">
+            <option value="">Specialisation? Help me choose</option>
+            {specList.map((x) => <option>{x}</option>)}
+          </select>
+          <select name="qualification" aria-label="Your qualification">
+            <option value="">Your qualification (optional)</option>
+            {qual.map((q) => <option>{q}</option>)}
+          </select>
+          <label class="c small muted"><input type="checkbox" name="consent" required checked /> I agree to be contacted by call, WhatsApp, SMS or email about programs.</label>
+          <button class="btn" type="submit">Get my free shortlist</button>
+          <p class="small muted" data-status hidden></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <section><div class="wrap">
+    <h2>The online {d} at a glance</h2>
+    <div class="grid">{overview.map((o) => <div class="card"><h3>{o.title}</h3><p class="small muted" style="margin:0">{o.body}</p></div>)}</div>
+    <p class="small muted">Your advisor recommends the university that fits your background, budget and goals, and shares its approvals, fees and next intake date.</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <h2>Why an online {d} {m.region === 'in' ? 'works for you' : `works ${m.where}`}</h2>
+    <div class="grid">{why.map((p) => <div class="card"><h3>{p.title}</h3><p class="small muted" style="margin:0">{p.body}</p></div>)}</div>
+  </div></section>
+
+  <section><div class="wrap">
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><strong>Tell us your goal</strong><br /><span class="small muted">Share your background, budget and the career move you want.</span></li>
+      <li><strong>Get a shortlist</strong><br /><span class="small muted">We match you to the right university and compare fees, eligibility, specialisations and recognition for you.</span></li>
+      <li><strong>Apply with help</strong><br /><span class="small muted">We guide your application and documents until your first semester starts.</span></li>
+    </ol>
+  </div></section>
+
+  <section><div class="wrap">
+    <h2>Questions about the online {d}</h2>
+    <Faq faqs={faqs} />
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="cta-band">
+      <h2>Not sure which online {d} fits you?</h2>
+      <p>Counselling is free, and there is no obligation to apply.</p>
+      <div class="row"><a class="btn" href="#apply">Get my free shortlist</a><a class="btn alt" href="#apply" data-widget="callback">Request a call back</a></div>
+    </div>
+  </div></section>
+</Landing>

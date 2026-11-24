@@ -1,0 +1,22 @@
+---
+// First-touch attribution, inline in <head> so it runs before anything else (about 1 KB, no requests).
+// Stores the visitor's first touch for 90 days (localStorage cu_ft) and their latest ad/referral touch (cu_lt),
+// then exposes both as sessionStorage cu_src, which the lead form and the contact widget send with every lead.
+// Keys in cu_src: utm_*, gclid/gbraid/wbraid, fbclid, msclkid, ttclid, landing, referrer, ft_at (first touch),
+// plus the same keys prefixed lt_ for the latest touch when it differs from the first.
+---
+<script is:inline>
+(function(){try{
+var K=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','utm_id','gclid','gbraid','wbraid','fbclid','msclkid','ttclid'],
+q=new URLSearchParams(location.search),L=localStorage,now=Date.now(),t={landing:location.pathname,referrer:'',at:new Date(now).toISOString()},n=0,
+r=document.referrer,ext=r&&new URL(r).host!==location.host;
+K.forEach(function(k){var v=q.get(k);if(v){t[k]=v.slice(0,250);n++}});
+if(ext)t.referrer=r.slice(0,250);
+var ft=JSON.parse(L.getItem('cu_ft')||'null'),lt=JSON.parse(L.getItem('cu_lt')||'null');
+if(!ft||now-Date.parse(ft.at)>7776e6){ft=t;L.setItem('cu_ft',JSON.stringify(ft))}
+if(n||ext){lt=t;L.setItem('cu_lt',JSON.stringify(lt))}
+var s={};for(var k in ft)s[k==='at'?'ft_at':k]=ft[k];
+if(lt&&lt.at!==ft.at)for(k in lt)s['lt_'+k]=lt[k];
+sessionStorage.setItem('cu_src',JSON.stringify(s));
+}catch(e){}})();
+</script>

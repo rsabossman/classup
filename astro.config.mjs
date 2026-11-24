@@ -19,6 +19,8 @@ export default defineConfig({
   // The site CSS is ~2 KB, so inline it: no render-blocking stylesheet request on first paint.
   build: { inlineStylesheets: 'always' },
   integrations: [sitemap({
+    // Paid-ad landing pages (/go/) are noindex and stay out of the sitemap.
+    filter: (page) => !new URL(page).pathname.startsWith('/go/'),
     serialize(item) {
       const d = articleDates[new URL(item.url).pathname];
       return d ? { ...item, lastmod: new Date(d).toISOString() } : item;

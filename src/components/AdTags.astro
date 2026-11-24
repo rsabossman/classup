@@ -1,0 +1,41 @@
+---
+// Google Ads and Meta pixel for the paid-ad landing pages.
+// Nothing is downloaded until the page has loaded and the browser is idle. Calls made earlier are queued
+// by the standard stubs below. Every `lead` pushed to dataLayer (page form or advisor widget) fires
+// a Google Ads conversion and a Meta "Lead" event, both carrying the lead's id so the platforms can
+// de-duplicate it against offline/server-side conversions later.
+import { site } from '../data/site';
+interface Props { lp: string; degree: string; country: string }
+const { lp, degree, country } = Astro.props;
+const { googleAdsId: g, googleAdsLeadLabel: gl, metaPixelId: m } = site.ads;
+---
+{(g || m) && <script is:inline define:vars={{ g, gl, m, lp, degree, country }}>
+(function(w,d){
+  var q=[];function add(src){q.push(src)}
+  if(g){
+    // gtag uses its own queue name (gdl) so it never replaces our dataLayer hook below.
+    w.gdl=w.gdl||[];w.gtag=function(){w.gdl.push(arguments)};
+    gtag('js',new Date());gtag('config',g);
+    add('https://www.googletagmanager.com/gtag/js?id='+g+'&l=gdl');
+  }
+  if(m){
+    var f=w.fbq=function(){f.callMethod?f.callMethod.apply(f,arguments):f.queue.push(arguments)};
+    if(!w._fbq)w._fbq=f;f.push=f;f.loaded=!0;f.version='2.0';f.queue=[];
+    fbq('init',m);fbq('track','PageView');
+    add('https://connect.facebook.net/en_US/fbevents.js');
+  }
+  var dl=w.dataLayer=w.dataLayer||[],push=dl.push.bind(dl);
+  dl.push=function(){
+    for(var i=0;i<arguments.length;i++){var e=arguments[i];if(e&&e.event==='lead'){
+      var id=e.lead_id||String(Date.now());
+      if(g&&gl)gtag('event','conversion',{send_to:g+'/'+gl,transaction_id:id});
+      if(g)gtag('event','generate_lead',{lp:lp,degree:degree,country:country,intent:e.intent});
+      if(m)fbq('track','Lead',{content_name:degree,content_category:lp},{eventID:id});
+    }}
+    return push.apply(null,arguments);
+  };
+  addEventListener('load',function(){(w.requestIdleCallback||setTimeout)(function(){
+    q.forEach(function(s){var el=d.createElement('script');el.async=!0;el.src=s;d.head.appendChild(el)});
+  },{timeout:3000})});
+})(window,document);
+</script>}
