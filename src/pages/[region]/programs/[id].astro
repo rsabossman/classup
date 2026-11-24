@@ -25,24 +25,32 @@ const faqs = [
   { q: 'How long does it take?', a: `The program normally takes ${dur}.${p.credits ? ` It carries ${p.credits} credits.` : ''}` },
 ];
 const self = new URL(Astro.url.pathname, Astro.site).href;
+// Offers carry only published, confirmed fees: the India total from a university fee notification.
+// Universities whose fees are under revision (fee_note) and all international/regional tuition stay out until confirmed.
+const offers = r.id === 'in' && p.fee_inr && !u.fee_note
+  ? { '@type': 'Offer', category: 'Paid', price: p.fee_inr, priceCurrency: 'INR', url: self, description: `Total program fee for students in India${p.fee_per_year_inr ? ` (₹${p.fee_per_year_inr.toLocaleString('en-IN')} per year)` : ''}` }
+  : undefined;
+const provider = { '@type': 'CollegeOrUniversity', name: u.name, address: { '@type': 'PostalAddress', addressLocality: u.city, addressCountry: 'IN' } };
+const credential = { '@type': 'EducationalOccupationalCredential', name: info?.full || p.degree, credentialCategory: /Diploma|PGD|DCA/.test(p.level + p.degree) ? 'diploma' : 'degree', recognizedBy: { '@type': 'Organization', name: 'University Grants Commission (UGC)' } };
 const course = {
   '@context': 'https://schema.org', '@type': 'EducationalOccupationalProgram',
-  name: `${p.name} – ${u.name}`, url: self, educationalProgramMode: 'online',
-  provider: { '@type': 'CollegeOrUniversity', name: u.name, address: u.city },
+  name: `${p.name} – ${u.name}`, url: self, programType: 'online', educationalProgramMode: 'online',
+  identifier: p.id, provider,
   timeToComplete: p.duration_years ? `P${p.duration_years}Y` : undefined,
   numberOfCredits: p.credits ?? undefined,
-  educationalCredentialAwarded: info?.full || p.degree,
-  programPrerequisites: p.eligibility_india,
-  ...(r.id === 'in' && p.fee_inr ? { offers: { '@type': 'Offer', price: p.fee_inr, priceCurrency: 'INR', category: 'Tuition' } } : p.tuition_per_term && r.id !== 'in' ? { offers: { '@type': 'Offer', price: (p.tuition_per_term as any)[{ saarc: 'saarc_inr', me: 'me_usd', sea: 'sea_usd', africa: 'africa_usd', intl: 'intl_usd' }[r.id as 'me']], priceCurrency: r.id === 'saarc' ? 'INR' : 'USD', category: 'Tuition per semester' } } : {}),
+  educationalCredentialAwarded: credential, occupationalCredentialAwarded: credential,
+  programPrerequisites: r.id === 'in' ? p.eligibility_india : p.eligibility_foreign,
+  ...(p.terms ? { termsPerYear: Math.round(p.terms / (p.duration_years || 1)) } : {}),
+  ...(offers ? { offers } : {}),
 };
 // A plain Course object alongside the program, so search and AI engines that only read Course still pick it up.
 const courseLd = {
-  '@context': 'https://schema.org', '@type': 'Course', name: `${p.name} (${u.name})`, url: self,
-  description: `${p.name} from ${u.name}: ${dur}, ${p.level}, taught 100% online. Eligibility: ${p.eligibility_india}.`,
-  provider: { '@type': 'CollegeOrUniversity', name: u.name, address: u.city },
-  educationalCredentialAwarded: info?.full || p.degree,
+  '@context': 'https://schema.org', '@type': 'Course', name: `${p.name} (${u.name})`, url: self, courseCode: p.id.toUpperCase(),
+  description: `${p.name} from ${u.name}: ${dur}, ${p.level}, taught 100% online. Eligibility: ${r.id === 'in' ? p.eligibility_india : p.eligibility_foreign}.`,
+  provider, educationalCredentialAwarded: credential.name, inLanguage: 'en',
+  ...(p.duration_years ? { timeRequired: `P${p.duration_years}Y` } : {}),
   hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'online', ...(p.duration_years ? { courseWorkload: `P${p.duration_years}Y` } : {}) },
-  ...(course.offers ? { offers: course.offers } : {}),
+  ...(offers ? { offers } : {}),
 };
 // Answer-first summary: the sentence an AI answer or a featured snippet can quote as is.
 const levelWord = { UG: 'undergraduate', PG: 'postgraduate', 'PG Diploma': 'postgraduate diploma', Diploma: 'diploma' }[p.level] || p.level;
