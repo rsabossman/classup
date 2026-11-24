@@ -2,18 +2,20 @@
 // Google Ads and Meta pixel for the paid-ad landing pages.
 // Nothing is downloaded until the page has loaded and the browser is idle. Calls made earlier are queued
 // by the standard stubs below. Every `lead` pushed to dataLayer (page form or advisor widget) fires
-// a Google Ads conversion and a Meta "Lead" event, both carrying the lead's id so the platforms can
+// a Meta "Lead" event (and a direct Google Ads conversion when GTM is not used), both carrying the lead's id so the platforms can
 // de-duplicate it against offline/server-side conversions later.
 import { site } from '../data/site';
 interface Props { lp: string; degree: string; country: string }
 const { lp, degree, country } = Astro.props;
-const { googleAdsId: g, googleAdsLeadLabel: gl, metaPixelId: m } = site.ads;
+const { googleAdsLeadLabel: gl, metaPixelId: m, gtmId } = site.ads;
+// With GTM in place, Google Ads conversions are set up inside GTM instead, so the direct tag stays off.
+const g = gtmId ? '' : site.ads.googleAdsId;
 ---
 {(g || m) && <script is:inline define:vars={{ g, gl, m, lp, degree, country }}>
 (function(w,d){
   var q=[];function add(src){q.push(src)}
   if(g){
-    // gtag uses its own queue name (gdl) so it never replaces our dataLayer hook below.
+    // gtag uses its own queue name (gdl) so it never mixes with the GTM dataLayer.
     w.gdl=w.gdl||[];w.gtag=function(){w.gdl.push(arguments)};
     gtag('js',new Date());gtag('config',g);
     add('https://www.googletagmanager.com/gtag/js?id='+g+'&l=gdl');
@@ -24,16 +26,13 @@ const { googleAdsId: g, googleAdsLeadLabel: gl, metaPixelId: m } = site.ads;
     fbq('init',m);fbq('track','PageView');
     add('https://connect.facebook.net/en_US/fbevents.js');
   }
-  var dl=w.dataLayer=w.dataLayer||[],push=dl.push.bind(dl);
-  dl.push=function(){
-    for(var i=0;i<arguments.length;i++){var e=arguments[i];if(e&&e.event==='lead'){
-      var id=e.lead_id||String(Date.now());
-      if(g&&gl)gtag('event','conversion',{send_to:g+'/'+gl,transaction_id:id});
-      if(g)gtag('event','generate_lead',{lp:lp,degree:degree,country:country,intent:e.intent});
-      if(m)fbq('track','Lead',{content_name:degree,content_category:lp},{eventID:id});
-    }}
-    return push.apply(null,arguments);
-  };
+  // Leads are announced as a cu:lead DOM event (as well as on dataLayer, which GTM takes over).
+  addEventListener('cu:lead',function(ev){
+    var e=ev.detail||{},id=e.lead_id||String(Date.now());
+    if(g&&gl)gtag('event','conversion',{send_to:g+'/'+gl,transaction_id:id});
+    if(g)gtag('event','generate_lead',{lp:lp,degree:degree,country:country,intent:e.intent});
+    if(m)fbq('track','Lead',{content_name:degree,content_category:lp},{eventID:id});
+  });
   addEventListener('load',function(){(w.requestIdleCallback||setTimeout)(function(){
     q.forEach(function(s){var el=d.createElement('script');el.async=!0;el.src=s;d.head.appendChild(el)});
   },{timeout:3000})});

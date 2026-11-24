@@ -60,7 +60,9 @@ export async function sendLead(data: Record<string, unknown>): Promise<string> {
     const r = await fetch(cfg.endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
     if (!r.ok) throw new Error(String(r.status));
   }
-  (window as any).dataLayer?.push({ event: 'lead', intent: data.intent, region: cfg.region, lead_id });
+  const ev = { event: 'lead', intent: data.intent, region: cfg.region, lead_id };
+  ((window as any).dataLayer ||= []).push(ev);
+  dispatchEvent(new CustomEvent('cu:lead', { detail: ev }));
   return lead_id;
 }
 const track = (action: string) => (window as any).dataLayer?.push({ event: 'contact_click', action, region: cfg.region });

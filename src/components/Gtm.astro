@@ -1,0 +1,22 @@
+---
+// Google Tag Manager (container from the Google Ads setup), site-wide.
+// The dataLayer exists from the first byte so lead events are never lost, but gtm.js itself is only
+// downloaded after the page has finished loading and the browser is idle, keeping first paint under 1 s.
+// Every lead pushes {event: 'lead', lead_id, intent, region, program} to dataLayer; in GTM, a
+// Custom Event trigger on "lead" fires the Google Ads conversion (transaction ID = lead_id).
+import { site } from '../data/site';
+const id = site.ads.gtmId;
+---
+{id && <script is:inline define:vars={{ id }}>
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function () { dataLayer.push(arguments); };
+  dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+  addEventListener('load', function () {
+    (window.requestIdleCallback || setTimeout)(function () {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtm.js?id=' + id;
+      document.head.appendChild(s);
+    }, { timeout: 3000 });
+  });
+</script>}
