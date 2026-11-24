@@ -11,7 +11,13 @@ const ogW = image.ogWidth ?? 1280;
 const ogImage = new URL(url(`/img/${image.name}-${ogW}.webp`), Astro.site).href;
 const r = regions[region];
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const org = { '@context': 'https://schema.org', '@type': 'Organization', name: site.name, url: new URL(url('/'), Astro.site).href, description: site.tagline };
+const home = new URL(url('/'), Astro.site).href;
+const org = [
+  { '@context': 'https://schema.org', '@type': 'Organization', '@id': home + '#org', name: site.name, url: home, description: site.tagline,
+    areaServed: ['IN', 'AE', 'SA', 'QA', 'KW', 'OM', 'BH', 'NG', 'KE', 'GH', 'ZA', 'TZ', 'UG', 'ET', 'ZM'],
+    knowsAbout: ['Online degrees in India', 'UGC-entitled online programs', 'Online MBA', 'Online MCA', 'Online BBA', 'Online BCA', 'Online BCom', 'Online MCom', 'Online MA'] },
+  { '@context': 'https://schema.org', '@type': 'WebSite', '@id': home + '#site', name: site.name, url: home, publisher: { '@id': home + '#org' }, inLanguage: 'en' },
+];
 // Each regional copy of a page names every country it serves; the international copy is the fallback (x-default).
 const alternates = regionPath ? [
   ...regionList.flatMap((x) => x.hreflang.map((h) => ({ hreflang: h, href: new URL(url(`/${x.id}${regionPath}`), Astro.site).href }))),
@@ -48,7 +54,7 @@ const alternates = regionPath ? [
   <link rel="alternate" type="text/plain" title="LLM summary" href={url('/llms.txt')} />
   <!-- Instant page changes: the browser fetches a page when the visitor hovers or starts tapping its link. -->
   <script type="speculationrules" set:html={JSON.stringify({ prefetch: [{ where: { href_matches: '/*' }, eagerness: 'moderate' }] })} />
-  <script type="application/ld+json" set:html={JSON.stringify([org, ...jsonld])} />
+  <script type="application/ld+json" set:html={JSON.stringify([...org, ...jsonld])} />
 </head>
 <body>
   <header class="site">
