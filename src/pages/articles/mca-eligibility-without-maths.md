@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/Article.astro
 title: Can you do an online MCA without maths in 12th or graduation?
+seoTitle: "Online MCA without maths: are you eligible?"
 description: How MCA eligibility works at different universities, and how bridge courses and IT experience can open the door.
 date: 2026-11-24
 ---

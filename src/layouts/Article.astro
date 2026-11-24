@@ -9,7 +9,7 @@ const hero = articleImg[slug];
 const { frontmatter } = Astro.props;
 const ld = { '@context': 'https://schema.org', '@type': 'Article', headline: frontmatter.title, description: frontmatter.description, datePublished: frontmatter.date, dateModified: frontmatter.updated || frontmatter.date, author: { '@type': 'Organization', name: `${site.name} Advisors` }, publisher: { '@type': 'Organization', name: site.name }, ...(hero ? { image: new URL(url(`/img/${hero.name}-1280.webp`), Astro.site).href } : {}) };
 ---
-<Base title={`${frontmatter.title} | ${site.name}`} description={frontmatter.description} jsonld={[ld]} image={hero}>
+<Base title={`${frontmatter.seoTitle ?? frontmatter.title} | ${site.name}`} description={frontmatter.description} jsonld={[ld]} image={hero}>
   <div class="wrap crumbs"><a href={url('/articles/')}>Guides</a> › {frontmatter.title}</div>
   <section><div class="wrap layout-2">
     <article class="prose">

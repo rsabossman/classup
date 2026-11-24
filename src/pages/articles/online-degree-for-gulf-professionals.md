@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/Article.astro
 title: Studying an Indian online degree while working in the Gulf
+seoTitle: "Indian online degrees for Gulf professionals"
 description: What professionals in the UAE, Saudi Arabia, Qatar, Oman, Kuwait and Bahrain should check before enrolling in an online degree from India.
 date: 2026-11-24
 ---

@@ -1,12 +1,15 @@
 ---
 import '../styles/global.css';
 import { site, url } from '../data/site';
+import { fitTitle } from '../lib';
 import { regions, regionList, type RegionId } from '../data/regions';
 import { heroImg, type Img } from '../data/images';
 import Attribution from '../components/Attribution.astro';
 import Gtm from '../components/Gtm.astro';
 interface Props { title: string; description: string; region?: RegionId; jsonld?: object[]; regionPath?: string; image?: Img }
-const { title, description, region = 'in', jsonld = [], regionPath = '', image = heroImg.home } = Astro.props;
+const { title: rawTitle, description, region = 'in', jsonld = [], regionPath = '', image = heroImg.home } = Astro.props;
+// Every page title is held to 60 characters here, whichever template built it.
+const title = fitTitle(rawTitle, rawTitle.replace(/ \| ClassUp$/, ''));
 const ogW = image.ogWidth ?? 1280;
 const ogImage = new URL(url(`/img/${image.name}-${ogW}.webp`), Astro.site).href;
 const r = regions[region];
