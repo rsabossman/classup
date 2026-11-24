@@ -16,6 +16,8 @@ export default defineConfig({
   site: process.env.SITE_URL || 'https://rsabossman.github.io',
   base: process.env.BASE_PATH || '/',
   trailingSlash: 'always',
+  // The site CSS is ~2 KB, so inline it: no render-blocking stylesheet request on first paint.
+  build: { inlineStylesheets: 'always' },
   integrations: [sitemap({
     serialize(item) {
       const d = articleDates[new URL(item.url).pathname];
