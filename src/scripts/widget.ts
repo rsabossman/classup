@@ -193,6 +193,7 @@ function chat() {
         leadId = await sendLead({ ...data, intent: 'chat', interest, degree: /^(MBA|MCA|BBA|BCA)$/.test(interest) ? interest : pageDegree, transcript: log.join('\n') });
         name = data.name || '';
         f.remove();
+        if (cfg.chat) import('./ria').then(({ listen }) => listen(cfg.chat!, leadId, (t) => say('bot', `Advisor: ${t}`)));
         if (!cfg.chat) return void say('bot', 'Thank you! An advisor will message you on WhatsApp shortly.');
         const intro = [interest && interest !== 'Not sure yet' ? `I’m interested in an online ${interest}.` : 'I’m not sure which degree to choose yet.', work && `Work status: ${work}.`, ...pending].filter(Boolean).join(' ');
         pending.length = 0;
