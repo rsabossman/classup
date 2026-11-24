@@ -69,7 +69,9 @@ const wa = `https://wa.me/${r.whatsapp}?text=${encodeURIComponent(`Hi, I would l
     <div class="wrap">
       <span class="logo">{site.name}</span>
       <span class="tag-line">Free online degree counselling</span>
-      <a class="btn wa" href={wa} target="_blank" rel="noopener" data-track="whatsapp">WhatsApp us</a>
+      {r.whatsapp
+        ? <a class="btn wa" href={wa} target="_blank" rel="noopener" data-track="whatsapp">WhatsApp us</a>
+        : <a class="btn wa" href={`tel:${r.phone.replace(/[^+\d]/g, '')}`} data-track="call">Call {r.phone}</a>}
     </div>
   </header>
   <main><slot /></main>

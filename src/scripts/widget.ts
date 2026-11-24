@@ -118,10 +118,10 @@ function show(v: string) {
     title.textContent = 'Hi! How can we help?';
     bd.innerHTML =
       opt('chat', '#0f5c4d', icon.chat.replace('<svg', '<svg width="18" height="18" fill="#fff"'), 'Chat with us', 'Ask about programs, fees or eligibility') +
-      opt('wa-now', '#1f9d55', icon.wa, 'WhatsApp us', 'Opens WhatsApp with our advisors', waLink) +
-      opt('wa-msg', '#1f9d55', icon.wa, 'Get details on WhatsApp', 'We’ll message you with fees and intakes') +
+      (cfg.whatsapp ? opt('wa-now', '#1f9d55', icon.wa, 'WhatsApp us', 'Opens WhatsApp with our advisors', waLink) +
+        opt('wa-msg', '#1f9d55', icon.wa, 'Get details on WhatsApp', 'We’ll message you with fees and intakes') : '') +
       opt('callback', '#d9822b', icon.phone, 'Request a call back', 'An advisor calls you, usually within minutes') +
-      opt('call', '#d9822b', icon.phone, 'Call us now', esc(cfg.phone || ''), `tel:${(cfg.phone || '').replace(/[^+\d]/g, '')}`) +
+      (cfg.phone ? opt('call', '#d9822b', icon.phone, 'Call us now', esc(cfg.phone), `tel:${cfg.phone.replace(/[^+\d]/g, '')}`) : '') +
       opt('details', '#5b6275', '✉', 'Leave your details', 'Get a personalised program shortlist');
     bd.querySelectorAll<HTMLElement>('[data-v]').forEach((el) => el.addEventListener('click', () => {
       const t = el.dataset.v!;
