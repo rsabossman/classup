@@ -65,5 +65,15 @@ const alternates = regionPath ? [
   <script>
     import '../scripts/client';
   </script>
+  {site.cfAnalyticsToken && <script is:inline define:vars={{ token: site.cfAnalyticsToken }}>
+    // Visitor analytics, loaded once the page has finished loading so it never delays what the visitor sees.
+    addEventListener('load', () => (window.requestIdleCallback || setTimeout)(() => {
+      const s = document.createElement('script');
+      s.defer = true;
+      s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+      s.dataset.cfBeacon = JSON.stringify({ token, spa: true });
+      document.body.appendChild(s);
+    }, { timeout: 3000 }));
+  </script>}
 </body>
 </html>
