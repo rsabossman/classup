@@ -6,6 +6,9 @@ import LeadForm from '../../../components/LeadForm.astro';
 import { regionList, regions, type RegionId } from '../../../data/regions';
 import { universities, programs, type University } from '../../../data/catalog';
 import { site } from '../../../data/site';
+import Pic from '../../../components/Pic.astro';
+import { uniImg } from '../../../data/images';
+const photo = uniImg[(Astro.props as any).u.id];
 export const getStaticPaths = () => regionList.flatMap((r) => Object.values(universities).map((u) => ({ params: { region: r.id, uni: u.id }, props: { u } })));
 const { u } = Astro.props as { u: University };
 const r = regions[Astro.params.region as RegionId];
@@ -17,6 +20,7 @@ const ld = { '@context': 'https://schema.org', '@type': 'CollegeOrUniversity', n
     <div>
       <h1 style="margin-top:0">{u.name} online programs</h1>
       <p class="muted">{u.city} · Established {u.est}</p>
+      {photo && <figure style="margin:0 0 20px"><Pic img={photo.img} widths={photo.widths} class="art-img" sizes="(min-width: 900px) 700px, 100vw" priority /><figcaption class="small muted" style="margin-top:-12px">Campus photo: {photo.credit}</figcaption></figure>}
       <table class="facts">
         <tr><th>Approvals (as stated by the university)</th><td>{u.approvals.join(', ')}</td></tr>
         <tr><th>Exams</th><td>{u.exams}</td></tr>

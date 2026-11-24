@@ -46,3 +46,10 @@ export const heroImg: Record<string, Img> = {
   africa: { name: 'hero-africa', alt: 'Professional with a headset joining an online class on his laptop', ogWidth: 1600 },
   intl: { name: 'hero-intl', alt: 'Professional studying on her laptop in a modern workspace', ogWidth: 1600 },
 };
+
+// Campus photos from each university's own website (added at the site owner's request), in public/img as uni-<id>-<w>.webp.
+export const uniImg: Record<string, { img: Img; widths: readonly number[]; credit: string }> = {
+  vtu: { img: img('uni-vtu', 'Visvesvaraya Technological University campus at Jnana Sangama, Belagavi'), widths: [480, 800], credit: 'vtu.ac.in' },
+  gndu: { img: img('uni-gndu', 'Tree-lined main avenue of the Guru Nanak Dev University campus, Amritsar'), widths: [480, 800], credit: 'gndu.ac.in' },
+  adbu: { img: img('uni-adbu', 'Assam Don Bosco University buildings beside the Brahmaputra, Guwahati'), widths: [400], credit: 'dbuniversity.ac.in' },
+};
