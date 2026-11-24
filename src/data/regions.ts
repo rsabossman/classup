@@ -43,7 +43,7 @@ export const regions: Record<RegionId, Region> = {
     ],
   },
   saarc: {
-    id: 'saarc', name: 'SAARC', label: 'South Asia (SAARC)', tag: 'SAARC', hreflang: ['en-NP', 'en-BD', 'en-LK', 'en-BT', 'en-MV', 'en-AF'], audience: 'students in Nepal, Bangladesh, Sri Lanka, Bhutan, the Maldives and Afghanistan',
+    id: 'saarc', name: 'SAARC', label: 'South Asia (SAARC)', tag: 'SAARC', hreflang: ['en-NP', 'en-BD', 'en-LK', 'en-BT', 'en-MV', 'en-AF', 'en-PK'], audience: 'students in Nepal, Bangladesh, Sri Lanka, Bhutan, the Maldives, Afghanistan and Pakistan',
     hero: 'Indian university degrees online, close to home in South Asia',
     sub: 'Compare UGC-entitled online MBA, MCA, BBA, BCA and more from Indian universities, with counselling in a time zone close to yours.',
     currency: 'INR', showInrFees: false,

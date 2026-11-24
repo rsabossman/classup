@@ -2,8 +2,7 @@
 // Shared by the Worker (worker/index.ts) and the homepage. Plain data, no imports, so the Worker can bundle it.
 export type GeoRegion = 'in' | 'saarc' | 'me' | 'sea' | 'africa' | 'intl';
 
-// Pakistan is a SAARC member but is left out: Indian universities generally cannot admit its nationals.
-const SAARC = 'NP BD LK BT MV AF'.split(' ');
+const SAARC = 'NP BD LK BT MV AF PK'.split(' ');
 const SEA = 'SG MY TH ID PH VN MM KH LA BN TL'.split(' ');
 const ME = 'AE SA QA KW OM BH IQ JO LB IR YE SY PS IL EG'.split(' ');
 const AFRICA = ('DZ AO BJ BW BF BI CM CV CF TD KM CG CD CI DJ GQ ER SZ ET GA GM GH GN GW KE LS LR LY MG MW ML MR MU MA MZ NA NE NG RW '
@@ -23,7 +22,7 @@ export function regionForCountry(cc: string | undefined | null): GeoRegion | nul
 /** Fallback when the country isn't known (local runs, previews without a country): guess from the time zone. */
 export function regionForTz(tz: string): GeoRegion {
   if (tz === 'Asia/Calcutta' || tz === 'Asia/Kolkata') return 'in';
-  if (/^(Asia\/(Kathmandu|Katmandu|Dhaka|Dacca|Colombo|Thimphu|Thimbu|Kabul)|Indian\/Maldives)$/.test(tz)) return 'saarc';
+  if (/^(Asia\/(Kathmandu|Katmandu|Dhaka|Dacca|Colombo|Thimphu|Thimbu|Kabul|Karachi)|Indian\/Maldives)$/.test(tz)) return 'saarc';
   if (/^Asia\/(Singapore|Kuala_Lumpur|Kuching|Bangkok|Jakarta|Makassar|Jayapura|Pontianak|Manila|Ho_Chi_Minh|Saigon|Yangon|Rangoon|Phnom_Penh|Vientiane|Brunei|Dili)$/.test(tz)) return 'sea';
   if (/^Asia\/(Dubai|Riyadh|Qatar|Kuwait|Bahrain|Muscat|Baghdad|Amman|Beirut|Tehran)/.test(tz)) return 'me';
   if (tz.startsWith('Africa/')) return 'africa';
