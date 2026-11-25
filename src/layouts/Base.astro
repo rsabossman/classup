@@ -5,6 +5,7 @@ import { fitTitle } from '../lib';
 import { regions, regionList, type RegionId } from '../data/regions';
 import { heroImg, type Img } from '../data/images';
 import Attribution from '../components/Attribution.astro';
+import SkPixel from '../components/SkPixel.astro';
 import Gtm from '../components/Gtm.astro';
 interface Props { title: string; description: string; region?: RegionId; jsonld?: object[]; regionPath?: string; image?: Img }
 const { title: rawTitle, description, region = 'in', jsonld = [], regionPath = '', image = heroImg.home } = Astro.props;
@@ -45,6 +46,7 @@ const icon: Record<string, string> = {
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <Attribution />
+  <SkPixel />
   <Gtm />
   <title>{title}</title>
   <meta name="description" content={description} />
