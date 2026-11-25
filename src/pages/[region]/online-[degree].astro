@@ -33,6 +33,7 @@ const faqs = [
       <Pic img={imgForDegree(d)} class="art-img wide" sizes="(min-width: 900px) 700px, 100vw" priority />
       <p class="answer"><strong>In short:</strong> {answer}</p>
       <p>{info.blurb}</p>
+      {r.id === 'in' && d === 'MBA' && <p><a href={url('/in/online-mba-fees/')}>Online MBA fees in India compared →</a></p>}
       <table class="facts">
         <tr><th>Programs listed</th><td>{list.length} from {new Set(list.map((p) => p.university)).size} universities</td></tr>
         <tr><th>Duration</th><td>{[...new Set(list.map((p) => p.duration_years).filter(Boolean))].join(' or ') || '—'} years</td></tr>
