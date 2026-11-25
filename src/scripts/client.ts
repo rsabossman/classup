@@ -1,3 +1,4 @@
+import { metaCookies } from './meta-cookies';
 // Where the visitor came from (UTMs, ad click IDs, referrer, landing page), written by the inline
 // first-touch script in Attribution.astro. Read at submit time so it is always current.
 const src = () => { try { return JSON.parse(sessionStorage.getItem('cu_src') || '{}'); } catch { return {}; } };
@@ -8,7 +9,7 @@ document.querySelectorAll<HTMLFormElement>('form[data-lead]').forEach((f) =>
     const status = f.querySelector<HTMLElement>('[data-status]')!;
     const data = Object.fromEntries(new FormData(f).entries());
     const lead_id = crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    const payload = { ...data, lead_id, region: f.dataset.region, intent: f.dataset.intent, page: location.pathname, ...src(), ts: new Date().toISOString() };
+    const payload = { ...data, lead_id, region: f.dataset.region, intent: f.dataset.intent, page: location.pathname, ...src(), ...metaCookies(), ts: new Date().toISOString() };
     const btn = f.querySelector('button[type=submit]') as HTMLButtonElement;
     btn.disabled = true;
     try {
