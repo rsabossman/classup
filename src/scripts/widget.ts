@@ -1,3 +1,4 @@
+import { metaCookies } from './meta-cookies';
 // One contact widget: chat, WhatsApp, call back, call now and "leave your details".
 // It is loaded after the page has finished loading (see client.ts), renders in a shadow root,
 // and carries its own styles inline, so it never slows down or restyles the page.
@@ -55,7 +56,7 @@ const pageProgram = () => (document.querySelector('form[data-lead] select[name=p
 export async function sendLead(data: Record<string, unknown>): Promise<string> {
   // Every lead needs an id: the lead store keys on it, and the ad conversions reuse it for de-duplication.
   const lead_id = crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-  const payload = { ...data, lead_id, program: data.program || pageProgram(), region: cfg.region, page: location.pathname, ...source(), ts: new Date().toISOString(), via: 'widget' };
+  const payload = { ...data, lead_id, program: data.program || pageProgram(), region: cfg.region, page: location.pathname, ...source(), ...metaCookies(), ts: new Date().toISOString(), via: 'widget' };
   if (cfg.endpoint) {
     const r = await fetch(cfg.endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
     if (!r.ok) throw new Error(String(r.status));
