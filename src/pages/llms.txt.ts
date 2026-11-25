@@ -29,6 +29,7 @@ export const GET: APIRoute = ({ site: s }) => {
     ]),
     '## Guides',
     `- [All guides](${abs('/articles/')})`,
+    `- [Online MBA fees in India compared](${abs('/in/online-mba-fees/')}): every UGC-entitled online MBA, India fees side by side.`,
     '',
     '## Contact',
     `- Free counselling: ${abs('/in/#counselling')}`,

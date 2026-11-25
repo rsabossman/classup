@@ -1,0 +1,85 @@
+---
+// Fees page (content calendar, 25 Nov 2026): every UGC-entitled online MBA in the catalog, India fees side by side.
+// Figures come only from src/data/catalog.json; programs without a published fee say "Ask an advisor".
+import Base from '../../layouts/Base.astro';
+import Faq from '../../components/Faq.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import { byDegree, uni, inr } from '../../data/catalog';
+import { url } from '../../data/site';
+import { faqLd, crumbLd } from '../../lib';
+import { imgForDegree } from '../../data/images';
+const asOf = '25 November 2026';
+const asOfIso = '2026-11-25';
+const self = new URL(Astro.url.pathname, Astro.site).href;
+const list = byDegree('MBA');
+type P = (typeof list)[number];
+const priced = list.filter((p) => p.fee_inr).sort((a, b) => a.fee_inr! - b.fee_inr!);
+const unpriced = list.filter((p) => !p.fee_inr);
+const cheapest = priced[0];
+const runnerUp = priced.find((p) => p.university !== cheapest?.university);
+const unpricedUnis = [...new Set(unpriced.filter((p) => !priced.some((q) => q.university === p.university)).map((p) => uni(p).name))];
+const allUnis = [...new Set(list.map((p) => uni(p).name))];
+const revising = (p: P) => Boolean(uni(p).fee_note);
+// One row per university and fee, so many same-priced specialisations don't swamp the table.
+type Row = { uni: string; uniId: string; programs: P[]; fee?: number; perYear?: number; note?: string };
+const rows: Row[] = [];
+for (const p of [...priced, ...unpriced]) {
+  let row = rows.find((x) => x.uniId === p.university && (x.fee ?? 0) === (p.fee_inr ?? 0));
+  if (!row) { row = { uni: uni(p).name, uniId: p.university, programs: [], fee: p.fee_inr ?? undefined, perYear: p.fee_per_year_inr ?? undefined, note: p.fee_inr && revising(p) ? 'The university says these fees are being revised; confirm before paying' : undefined }; rows.push(row); }
+  row.programs.push(p);
+}
+const vtu = priced.find((p) => p.university === 'vtu');
+const answer = cheapest
+  ? `The lowest published total fee for a UGC-entitled online MBA in our list is ${inr(cheapest.fee_inr!)} (${cheapest.name}, ${uni(cheapest).name}${revising(cheapest) ? '; the university says its fees are under revision' : ''}). ${runnerUp ? `Next is ${uni(runnerUp).name} at ${inr(runnerUp.fee_inr!)} for the full program${runnerUp.fee_per_year_inr ? ` (${inr(runnerUp.fee_per_year_inr)} a year)` : ''}. ` : ''}${unpricedUnis.length ? `${unpricedUnis.join(' and ')} ${unpricedUnis.length > 1 ? 'have' : 'has'} not published online MBA fees, so ask an advisor for the current amount.` : ''}`
+  : 'No university in our list has published an online MBA fee yet. Ask an advisor for current fees.';
+const faqs = [
+  { q: 'How much does an online MBA cost in India?', a: priced.length ? `Published total fees for the UGC-entitled online MBAs listed here range from ${inr(priced[0].fee_inr!)} to ${inr(priced[priced.length - 1].fee_inr!)} for the full two years, as of ${asOf}. Some universities have not published fees; an advisor can confirm them.` : 'Fees are not yet published; ask an advisor.' },
+  ...(cheapest ? [{ q: 'Which is the cheapest UGC-entitled online MBA?', a: `Among the programs listed here, ${cheapest.name} from ${uni(cheapest).name} has the lowest published fee at ${inr(cheapest.fee_inr!)} in total.${revising(cheapest) ? ' The university says its fees are under revision, so confirm before paying.' : ''}` }] : []),
+  ...(vtu ? [{ q: 'What does the VTU online MBA fee include?', a: `${inr(vtu.fee_inr!)} in total (${inr(vtu.fee_per_year_inr!)} per year) for Indian students. The source states it covers admission, tuition and exam fees: ${vtu.fee_source}.` }] : []),
+  { q: 'Is a cheaper online MBA less valid?', a: 'No. Validity depends on the university being entitled by the UGC to run online programs, not on the fee. An online MBA from a UGC-entitled university is treated as equivalent to its on-campus MBA. Check the university on the UGC-DEB website before you enrol.' },
+  { q: 'Do these fees apply to students outside India?', a: 'No. These are fees for Indian students. International, Gulf, SAARC and South East Asia fees are set separately; ask an advisor for the fee in your country.' },
+];
+const articleLd = { '@context': 'https://schema.org', '@type': 'Article', headline: 'Online MBA fees in India compared: every UGC-entitled program', datePublished: asOfIso, dateModified: asOfIso, url: self, author: { '@type': 'Organization', name: 'ClassUp Advisors' }, publisher: { '@type': 'Organization', name: 'ClassUp' } };
+const sources = [...new Set(priced.map((p) => p.fee_source).filter(Boolean))];
+---
+<Base title="Online MBA Fees in India Compared (2026)" description={`Online MBA fees in India compared for ${list.length} UGC-entitled programs from ${allUnis.length} universities: the lowest fee, cost per year, what's included and which fees are unpublished.`} region="in" image={imgForDegree('MBA')} jsonld={[articleLd, faqLd(faqs), crumbLd([['Online MBA', new URL(url('/in/online-mba/'), Astro.site).href], ['Fees compared', self]])]}>
+  <div class="wrap crumbs"><a href={url('/in/online-mba/')}>Online MBA</a> › Fees compared</div>
+  <section><div class="wrap layout-2">
+    <div class="prose">
+      <h1 style="margin-top:0">Online MBA fees in India compared: every UGC-entitled program</h1>
+      <p class="answer"><strong>In short:</strong> {answer}</p>
+      <p class="small muted">Fees for Indian students, as of {asOf}. ClassUp is an independent counselling service, not a university; fees are paid to the university.</p>
+
+      <h2>How much does an online MBA cost in India?</h2>
+      <table class="facts">
+        <tr><th>University</th><th>Programs</th><th>Total fee (₹, full program)</th><th>Per year (₹)</th></tr>
+        {rows.map((x) => <tr>
+          <td><a href={url(`/in/universities/${x.uniId}/`)}>{x.uni}</a></td>
+          <td>{x.programs.length === 1 ? <a href={url(`/in/programs/${x.programs[0].id}/`)}>{x.programs[0].name}</a> : <>{x.programs.length} programs</>}</td>
+          <td>{x.fee ? inr(x.fee) : 'Ask an advisor'}{x.note && <><br /><span class="small muted">{x.note}.</span></>}</td>
+          <td>{x.perYear ? inr(x.perYear) : '—'}</td>
+        </tr>)}
+      </table>
+      {sources.length > 0 && <p class="small muted">Sources: {sources.join('; ')}. Universities can change fees; confirm the current amount before paying.</p>}
+
+      {cheapest && <>
+        <h2>Which is the cheapest UGC-entitled online MBA?</h2>
+        <p>{cheapest.name} from {uni(cheapest).name}, at {inr(cheapest.fee_inr!)} in total.{revising(cheapest) && ' The university notes that its fees are being revised, so treat this as indicative.'} {vtu && <>VTU's online MBAs cost {inr(vtu.fee_inr!)} in total, or {inr(vtu.fee_per_year_inr!)} a year, and the published fee includes admission, tuition and exams.</>}</p>
+        <p>Specialisations at the same university usually cost the same, so pick the specialisation you need first, then compare fees.</p>
+      </>}
+
+      <h2>Which online MBA fees are not published yet?</h2>
+      <p>{unpricedUnis.length > 0 && <>{unpricedUnis.join(' and ')} {unpricedUnis.length > 1 ? 'have' : 'has'} not published online MBA fees that we can verify. </>}{unpriced.some((p) => p.university === 'uom') && <>Most University of Mysore specialisations have no current published total either. </>}An advisor can confirm the latest fee and payment schedule for any of them.</p>
+
+      <h2>Does a lower fee mean a weaker degree?</h2>
+      <p>No. What makes an online MBA valid is the university's UGC entitlement for online programs, not the price. Check the university on the <a href="https://deb.ugc.ac.in/" rel="noopener" target="_blank">UGC-DEB website</a> before you enrol, and see <a href={url('/articles/check-if-online-degree-is-ugc-valid/')}>how to check whether an online degree is UGC-valid</a>.</p>
+
+      <h2>Compare the programs</h2>
+      <p>See all {list.length} programs with eligibility and approvals on the <a href={url('/in/online-mba/')}>online MBA page</a>{vtu && <>, or go straight to <a href={url(`/in/programs/${vtu.id}/`)}>{vtu.name} (VTU)</a></>}{cheapest && cheapest !== vtu && <> and <a href={url(`/in/programs/${cheapest.id}/`)}>{cheapest.name} ({uni(cheapest).short})</a></>}. Weighing formats? Read <a href={url('/articles/online-mba-vs-regular-mba/')}>online MBA vs regular MBA</a>.</p>
+
+      <h2>FAQs</h2>
+      <Faq faqs={faqs} />
+    </div>
+    <aside><div class="card sticky"><h3>Want the exact fee for your MBA?</h3><p class="small muted">An advisor will confirm current fees, payment options and eligibility.</p><LeadForm region="in" /></div></aside>
+  </div></section>
+</Base>
