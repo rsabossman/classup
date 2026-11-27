@@ -15,6 +15,8 @@ export const site = {
   // Ria, the AI advisor behind the widget's chat (SalesKarma; history is stored server side by lead_id). Empty = guided chat only.
   // Advisor replies from the desk arrive live over a WebSocket on the same API.
   chatEndpoint: import.meta.env.PUBLIC_CHAT_ENDPOINT ?? 'https://api.saleskarma.app/v1/chat?k=sk_a5ced9aff85a95d1a2915456',
+  // SalesKarma traffic pixel (SkPixel.astro): one beacon per page view, for visits by source, city and device in the desk. Empty = off.
+  visitEndpoint: import.meta.env.PUBLIC_VISIT_ENDPOINT ?? 'https://api.saleskarma.app/v1/visit?k=sk_a5ced9aff85a95d1a2915456',
   // Paid-ad conversion tags. They load only on the /go/ landing pages, after the page has finished loading,
   // and fire on every lead from the page form or the advisor widget. Empty = that tag is not loaded.
   ads: {

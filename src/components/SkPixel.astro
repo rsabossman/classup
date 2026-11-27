@@ -1,0 +1,29 @@
+---
+// SalesKarma traffic pixel: one tiny beacon per page view to SalesKarma, sent after the page has loaded (or when
+// the visitor leaves first), so it never competes with the page. No cookies and no third-party script: a random
+// visitor id (localStorage sk_vid) and a session id (sk_ses, new after 30 minutes idle or a new ad click,
+// campaign or outside referral). The session's first page carries its UTMs, ad click id and referrer;
+// SalesKarma adds city, region, country and device from the request and never stores the IP.
+// When the visitor becomes a lead (the cu:lead event from the form or the widget), one more beacon links their
+// visits to that lead_id. Empty endpoint = off.
+import { site } from '../data/site';
+const endpoint = site.visitEndpoint;
+---
+{endpoint && <script is:inline define:vars={{ endpoint }}>
+(function(){try{
+if(navigator.webdriver||!navigator.sendBeacon)return;
+var L=localStorage,now=Date.now(),q=new URLSearchParams(location.search),r=document.referrer,
+id=function(){return crypto.randomUUID?crypto.randomUUID():now.toString(36)+Math.random().toString(36).slice(2,12)},
+K=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','gbraid','wbraid','fbclid','msclkid','ttclid'],
+ext=r&&new URL(r).host!==location.host,camp=K.some(function(k){return q.get(k)}),
+vid=L.getItem('sk_vid'),nv=0,s=JSON.parse(L.getItem('sk_ses')||'null');
+if(!vid){vid=id();L.setItem('sk_vid',vid);nv=1}
+if(!s||now-s.t>18e5||camp||ext){var a={p:location.pathname};if(ext)a.ref=r.slice(0,300);K.forEach(function(k){var v=q.get(k);if(v)a[k]=v.slice(0,200)});s={id:id(),n:0,a:a}}
+s.n++;s.t=now;L.setItem('sk_ses',JSON.stringify(s));
+var b={vid:vid,sid:s.id,n:s.n,nv:s.n===1?nv:0,p:location.pathname,lang:navigator.language,a:s.a,lid:L.getItem('sk_lid')||''},sent=0,
+go=function(){if(!sent&&s.n<=60){sent=1;navigator.sendBeacon(endpoint,JSON.stringify(b))}};
+addEventListener('load',function(){setTimeout(go,800)},{once:true});
+addEventListener('pagehide',go,{once:true});
+addEventListener('cu:lead',function(e){var l=e.detail&&e.detail.lead_id;if(!l)return;L.setItem('sk_lid',l);b.lid=l;b.ev='lead';navigator.sendBeacon(endpoint,JSON.stringify(b));b.ev=''});
+}catch(e){}})();
+</script>}

@@ -6,6 +6,7 @@ import '../styles/global.css';
 import { site, url } from '../data/site';
 import { regions, type RegionId } from '../data/regions';
 import Attribution from '../components/Attribution.astro';
+import SkPixel from '../components/SkPixel.astro';
 import Gtm from '../components/Gtm.astro';
 import AdTags from '../components/AdTags.astro';
 interface Props { title: string; description: string; region: RegionId; lp: string; degree: string; country: string }
@@ -21,6 +22,7 @@ const wa = `https://wa.me/${r.whatsapp}?text=${encodeURIComponent(`Hi, I would l
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <Attribution />
+  <SkPixel />
   <Gtm />
   <title>{title}</title>
   <meta name="description" content={description} />
