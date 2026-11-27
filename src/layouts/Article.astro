@@ -3,13 +3,15 @@ import Base from './Base.astro';
 import LeadForm from '../components/LeadForm.astro';
 import { site, url } from '../data/site';
 import Pic from '../components/Pic.astro';
+import Faq from '../components/Faq.astro';
+import { faqLd } from '../lib';
 import { articleImg } from '../data/images';
 const slug = Astro.url.pathname.replace(/\/$/, '').split('/').pop() || '';
 const hero = articleImg[slug];
 const { frontmatter } = Astro.props;
 const ld = { '@context': 'https://schema.org', '@type': 'Article', headline: frontmatter.title, description: frontmatter.description, datePublished: frontmatter.date, dateModified: frontmatter.updated || frontmatter.date, author: { '@type': 'Organization', name: `${site.name} Advisors` }, publisher: { '@type': 'Organization', name: site.name }, ...(hero ? { image: new URL(url(`/img/${hero.name}-1280.webp`), Astro.site).href } : {}) };
 ---
-<Base title={`${frontmatter.seoTitle ?? frontmatter.title} | ${site.name}`} description={frontmatter.description} jsonld={[ld]} image={hero}>
+<Base title={`${frontmatter.seoTitle ?? frontmatter.title} | ${site.name}`} description={frontmatter.description} jsonld={frontmatter.faqs?.length ? [ld, faqLd(frontmatter.faqs)] : [ld]} image={hero}>
   <div class="wrap crumbs"><a href={url('/articles/')}>Guides</a> › {frontmatter.title}</div>
   <section><div class="wrap layout-2">
     <article class="prose">
@@ -17,6 +19,7 @@ const ld = { '@context': 'https://schema.org', '@type': 'Article', headline: fro
       <p class="small muted">Updated {frontmatter.updated || frontmatter.date} · {site.name} Advisors</p>
       {hero && <Pic img={hero} class="art-img" sizes="(min-width: 900px) 700px, 100vw" priority />}
       <slot />
+      {frontmatter.faqs?.length > 0 && <><h2>FAQs</h2><Faq faqs={frontmatter.faqs} /></>}
     </article>
     <aside><div class="card sticky"><h3>Have a question?</h3><p class="small muted">Ask an advisor. It’s free.</p><LeadForm region="in" /></div></aside>
   </div></section>
