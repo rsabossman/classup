@@ -1,29 +1,79 @@
 ---
 import Base from '../layouts/Base.astro';
 import { regionList } from '../data/regions';
-import { programs, universities } from '../data/catalog';
+import { programs, universities, degrees, degreeInfo, byDegree } from '../data/catalog';
 import { site, url } from '../data/site';
 import Pic from '../components/Pic.astro';
 import SearchBar from '../components/SearchBar.astro';
-import { regionImg, heroImg, HERO_WIDTHS } from '../data/images';
+import { heroImg, HERO_WIDTHS } from '../data/images';
+
+// Program panels lead the page. Links point at India by default; the Worker (worker/index.ts) and the
+// fallback script below point them at the visitor's own region, so they land on the right fees.
+const groups = [
+  { title: 'Master’s degrees', sub: 'Two years, for graduates', ids: ['MBA', 'MCA', 'MCom', 'MA'] },
+  { title: 'Bachelor’s degrees', sub: 'Three years, after 10+2', ids: ['BBA', 'BCA', 'BCom', 'BA'] },
+  { title: 'Diplomas and certificates', sub: 'Six months to a year', ids: ['PGD', 'DCA', 'Diploma'] },
+].map((g) => ({ ...g, ids: g.ids.filter((d) => degrees.includes(d)) })).filter((g) => g.ids.length);
+
+const fallbackLine: Record<string, string> = { MA: 'English, Economics, Political Science and more', BA: 'Languages and social sciences', DCA: 'Computer basics and office tools' };
+const topSpecs = (d: string) => {
+  const n = new Map<string, number>();
+  byDegree(d).forEach((p) => p.specializations.forEach((s) => n.set(s, (n.get(s) || 0) + 1)));
+  const list = [...n.entries()].sort((a, b) => b[1] - a[1]).map(([s]) => s);
+  let line = '';
+  for (const s of list) { const next = line ? `${line}, ${s}` : s; if (next.length > 64 && line) break; line = next; }
+  return line || fallbackLine[d] || degreeInfo[d].full;
+};
+const years = (d: string) => {
+  const y = byDegree(d).map((p) => p.duration_years).filter(Boolean) as number[];
+  return y.length ? `${Math.min(...y)}${Math.max(...y) > Math.min(...y) ? `–${Math.max(...y)}` : ''} year${Math.max(...y) > 1 ? 's' : ''}` : 'Duration on request';
+};
+// Small line icons, inline so the panels need no image requests.
+const icon: Record<string, string> = {
+  business: 'M4 8h16v11H4zM9 8V6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M4 13h16',
+  tech: 'M3 5h18v11H3zM8 20h8M12 16v4M9 9l-2 2 2 2M15 9l2 2-2 2',
+  commerce: 'M5 3h14v18H5zM8 7h8M8 11h2M12 11h2M16 11v6M8 14h2M12 14h2M8 17h2M12 17h2',
+  arts: 'M4 5c3-1 5-1 8 1 3-2 5-2 8-1v14c-3-1-5-1-8 1-3-2-5-2-8-1zM12 6v14',
+  diploma: 'M4 4h16v12H4zM8 8h8M8 11h5M15 16l-1 5 2-1 2 1-1-5',
+};
+const kind: Record<string, string> = { MBA: 'business', BBA: 'business', PGD: 'business', MCA: 'tech', BCA: 'tech', DCA: 'tech', MCom: 'commerce', BCom: 'commerce', MA: 'arts', BA: 'arts', Diploma: 'diploma' };
+const label = (d: string) => (d === 'Diploma' ? 'Online diplomas' : d === 'PGD' ? 'Online PG diplomas' : `Online ${d}`);
 ---
 <Base title={`${site.name}: Compare UGC-entitled online degrees from Indian universities`} description={`${site.tagline}. ${programs.length} online programs from ${Object.keys(universities).length} universities, with free counselling.`} region="in">
-  <div class="hero hero-bg">
+  <div class="hero hero-bg hero-home">
     <Pic img={heroImg.home} widths={HERO_WIDTHS} ratio={2.2} sizes="(min-width: 900px) 58vw, 100vw" priority />
     <div class="wrap"><div class="copy">
     <h1>{site.tagline}</h1>
     <SearchBar />
     <!-- The Worker (worker/index.ts) fills in the visitor's region from their country; the script below covers previews and local runs. -->
-    <p class="geo small muted">Fees and counselling for <b data-geo-label>your region</b> · <a href="#regions">Change</a></p>
+    <p class="geo small muted">Showing fees and counselling for <b data-geo-label>your region</b> · <a href="#regions" data-open-region>Change</a></p>
     </div></div>
   </div>
-  <section id="regions"><div class="wrap">
-    <h2>Where are you studying from?</h2>
-    <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">{regionList.map((r) => <a class="card media" style="text-decoration:none;color:inherit" href={url(`/${r.id}/`)}><Pic img={regionImg[r.id]} sizes="(min-width: 900px) 360px, 100vw" /><div class="body"><h3>{r.label}</h3><p class="small muted" style="margin:0">{r.hero}</p></div></a>)}</div>
+  <section id="programs"><div class="wrap">
+    <h2>What do you want to study?</h2>
+    {groups.map((g) => (
+      <div class="deg-group">
+        <h3 class="deg-h">{g.title} <span class="muted small">{g.sub}</span></h3>
+        <div class="deg-grid">{g.ids.map((d) => (
+          <a class="card deg" href={url(`/in/online-${d.toLowerCase()}/`)} data-rpath={`/online-${d.toLowerCase()}/`}>
+            <svg class="deg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d={icon[kind[d]]} /></svg>
+            <span class="deg-t"><b>{label(d)}</b><span class="small muted">{d === 'Diploma' || d === 'PGD' ? 'Job-ready skills' : degreeInfo[d].full}</span></span>
+            <span class="deg-s small">{topSpecs(d)}</span>
+            <span class="deg-m small muted">{years(d)} · {byDegree(d).length} program{byDegree(d).length > 1 ? 's' : ''}</span>
+          </a>
+        ))}</div>
+      </div>
+    ))}
+    <p class="small"><a href={url('/in/programs/')} data-rpath="/programs/">See all {programs.length} programs →</a></p>
+  </div></section>
+  <section id="regions" class="rgn-foot"><div class="wrap">
+    <p class="small muted">Studying from outside India? Fees, eligibility and counselling hours differ by region:
+      {regionList.map((r, i) => <>{i ? ' · ' : ' '}<a href={url(`/${r.id}/`)}>{r.label}</a></>)}
+    </p>
   </div></section>
   <script>
-    // Fallback when the Worker didn't set the region (local runs): guess from the browser time zone. No redirect, so crawlers see the same page.
     import { regionLabels, regionNames, regionForTz } from '../data/geo';
+    // Fallback when the Worker didn't set the region (local runs, previews): guess from the browser time zone. No redirect, so crawlers see the same page.
     const box = document.querySelector<HTMLElement>('[data-search]');
     const label = document.querySelector<HTMLElement>('[data-geo-label]');
     if (box && label && box.dataset.region === 'auto') {
@@ -32,6 +82,13 @@ import { regionImg, heroImg, HERO_WIDTHS } from '../data/images';
       label.textContent = regionLabels[id];
       const n = document.querySelector('[data-geo-name]'); if (n) n.textContent = regionNames[id];
       document.querySelectorAll('.region-switch a').forEach((a) => a.getAttribute('href')?.endsWith(`/${id}/`) ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current'));
+      document.querySelectorAll<HTMLAnchorElement>('a[data-rpath]').forEach((a) => { a.href = `/${id}${a.dataset.rpath}`; });
     }
+    // "Change" opens the region picker in the header instead of scrolling down the page.
+    document.querySelector('[data-open-region]')?.addEventListener('click', (e) => {
+      const d = document.querySelector<HTMLDetailsElement>('details.rgn');
+      if (!d || !d.offsetParent) return;
+      e.preventDefault(); e.stopPropagation(); d.open = true; d.querySelector('summary')?.focus();
+    });
   </script>
 </Base>
