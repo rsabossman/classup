@@ -1,6 +1,6 @@
 // Runs only for the homepage ("/", see run_worker_first in wrangler.jsonc); every other path is served
 // straight from static assets. It reads the visitor's country from Cloudflare and fills in their region,
-// so the search box shows the right fees and the advisor widget the right phone and hours, with no
+// so the search box and program panels show the right fees and the advisor widget the right phone and hours, with no
 // redirect and no extra request. Crawlers get the same page, only the region label differs.
 import { regionForCountry, regionLabels, regionNames } from '../src/data/geo';
 
@@ -23,6 +23,8 @@ export default {
       .on('[data-geo-name]', { element(e) { e.setInnerContent(regionNames[region]); } })
       .on('[data-geo-label]', { element(e) { e.setInnerContent(regionLabels[region]); } })
       .on('.region-switch a', { element(e) { if ((e.getAttribute('href') || '') === `/${region}/`) e.setAttribute('aria-current', 'true'); else e.removeAttribute('aria-current'); } })
+      // Program panels and "all programs" link: point at the visitor's region so they land on the right fees.
+      .on('a[data-rpath]', { element(e) { e.setAttribute('href', `/${region}${e.getAttribute('data-rpath')}`); } })
       .on('#cu-widget-cfg', { element(e) { if (cfg) e.setInnerContent(JSON.stringify(cfg).replace(/</g, '\\u003c'), { html: true }); } })
       .transform(res);
     const h = new Headers(out.headers);
