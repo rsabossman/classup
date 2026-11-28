@@ -25,10 +25,11 @@ const faqs = [
   { q: 'How long does it take?', a: `The program normally takes ${dur}.${p.credits ? ` It carries ${p.credits} credits.` : ''}` },
 ];
 const self = new URL(Astro.url.pathname, Astro.site).href;
-// Offers carry only published, confirmed fees: the India total from a university fee notification.
-// Universities whose fees are under revision (fee_note) and all international/regional tuition stay out until confirmed.
-const offers = r.id === 'in' && p.fee_inr && !u.fee_note
-  ? { '@type': 'Offer', category: 'Paid', price: p.fee_inr, priceCurrency: 'INR', url: self, description: `Total program fee for students in India${p.fee_per_year_inr ? ` (₹${p.fee_per_year_inr.toLocaleString('en-IN')} per year)` : ''}` }
+// Offers carry the university's published full-payment total for this page's region.
+// Universities whose fees are under revision (fee_note) stay out of the schema until confirmed.
+const regionFee = p.fees?.[r.id];
+const offers = regionFee && !u.fee_note
+  ? { '@type': 'Offer', category: 'Paid', price: regionFee.amount, priceCurrency: regionFee.currency, url: self, description: `Total program fee (full payment) for ${r.audience}${regionFee.per_year ? ` (${regionFee.currency === 'INR' ? '₹' + regionFee.per_year.toLocaleString('en-IN') : '$' + regionFee.per_year} per year)` : ''}` }
   : undefined;
 const provider = { '@type': 'CollegeOrUniversity', name: u.name, address: { '@type': 'PostalAddress', addressLocality: u.city, addressCountry: 'IN' } };
 const credential = { '@type': 'EducationalOccupationalCredential', name: info?.full || p.degree, credentialCategory: /Diploma|PGD|DCA/.test(p.level + p.degree) ? 'diploma' : 'degree', recognizedBy: { '@type': 'Organization', name: 'University Grants Commission (UGC)' } };
@@ -75,6 +76,7 @@ const related = programs.filter((x) => x.degree === p.degree && x.id !== p.id).s
         <tr><th>Mode</th><td>100% online</td></tr>
         <tr><th>Exams</th><td>{u.exams}</td></tr>
         <tr><th>Approvals (as stated by the university)</th><td>{u.approvals.join(', ')}</td></tr>
+        {u.intakes && <tr><th>Intakes</th><td>{u.intakes}</td></tr>}
         {u.scholarships && <tr><th>Scholarships</th><td>{Object.entries(u.scholarships).map(([k, v]) => `${k}: ${v}%`).join(' · ')} (confirm eligibility with an advisor)</td></tr>}
       </table>
       <h2 style="margin-top:28px">How admission works</h2>

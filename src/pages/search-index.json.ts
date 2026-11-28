@@ -13,7 +13,6 @@ export const GET: APIRoute = () => {
     const u = uni(x);
     const fees: Record<string, string> = {};
     for (const r of ['in', 'saarc', 'me', 'sea', 'africa', 'intl']) { const f = feeFor(x, r); if (f) fees[r] = f.short; }
-    const t = x.tuition_per_term;
     return {
       id: x.id,
       n: x.name,
@@ -23,7 +22,7 @@ export const GET: APIRoute = () => {
       un: u.name,
       y: x.duration_years,
       // Total India fee in rupees, for "under 1 lakh" style budget filters. Null = not published.
-      f: x.fee_inr ?? (t && x.terms ? t.in_inr * x.terms : null),
+      f: x.fee_inr ?? null,
       fs: fees,
       e: x.eligibility_india,
       s: x.specializations.join(', '),
