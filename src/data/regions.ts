@@ -49,13 +49,13 @@ export const regions: Record<RegionId, Region> = {
     currency: 'INR', showInrFees: false,
     whatsapp: '', phone: '+91 80642 64489', hours: 'Mon–Sat, 9 AM–8 PM IST',
     points: [
-      { title: 'A separate SAARC fee category', body: 'Some universities charge students from SAARC countries a different fee from Indian or other international students. Our counsellor confirms the current fee for your country before you apply.' },
+      { title: 'A separate SAARC fee category', body: 'Universities charge students from SAARC countries a separate fee, in rupees or US dollars depending on the university. Each program page shows the SAARC fee; our counsellor confirms it before you apply.' },
       { title: 'Your school and degree certificates count', body: 'Universities accept qualifications such as the +2 (NEB), HSC or A-Levels for bachelor’s programs, and a recognised bachelor’s degree for master’s programs. We help you check equivalence.' },
       { title: 'Study from home', body: 'Classes, assignments and proctored exams are online, so there is no need to travel to India.' },
     ],
     faqs: [
       ...commonFaqs,
-      { q: 'What are the fees for students from SAARC countries?', a: 'Fees for SAARC students differ by university and are revised from time to time. Ask our counsellor and we will share the current fee for your country and program.' },
+      { q: 'What are the fees for students from SAARC countries?', a: 'Each university sets a separate SAARC fee. Some charge it in Indian rupees and some in US dollars, and every program page on this site shows the full-program total for SAARC students. Fees are revised from time to time, so our counsellor confirms the current amount before you pay.' },
       { q: 'Will I need an equivalence certificate?', a: 'Some universities ask for an equivalence certificate from the Association of Indian Universities (AIU) for qualifications earned outside India. Our counsellor will tell you whether your program needs one and how to apply.' },
     ],
   },
@@ -73,7 +73,7 @@ export const regions: Record<RegionId, Region> = {
     faqs: [
       ...commonFaqs,
       { q: 'Will my degree be recognised in the GCC?', a: 'Recognition rules differ by country and employer, and some ministries treat online degrees differently from regular ones. Tell our counsellor your country and purpose (job, promotion, licensing or further study). We will share what the rules currently say so you can decide before you pay.' },
-      { q: 'Can I pay in my local currency?', a: 'International fees and payment methods vary by university. Our counsellor will confirm the fee in your currency and the accepted payment options.' },
+      { q: 'Can I pay in my local currency?', a: 'Fees for students in the Gulf are set in US dollars, and each program page shows the full-program total. Indian nationals living in the Gulf usually pay a lower NRI fee. Payment is online by card, net banking or UPI; our counsellor confirms the accepted options for your university.' },
     ],
   },
   sea: {
@@ -89,7 +89,7 @@ export const regions: Record<RegionId, Region> = {
     ],
     faqs: [
       ...commonFaqs,
-      { q: 'What are the fees for students in South East Asia?', a: 'International fees differ by university and country. Ask our counsellor and we will share the current fee for your program and the accepted payment options.' },
+      { q: 'What are the fees for students in South East Asia?', a: 'Fees for South East Asia are set in US dollars and differ by university and program. Each program page shows the full-program total for your region; our counsellor confirms the current amount and payment options before you pay.' },
       { q: 'Will my degree be recognised where I live?', a: 'It depends on the country, the employer and your purpose. Tell our counsellor where you live and why you need the degree, and we will share what we know before you pay.' },
     ],
   },

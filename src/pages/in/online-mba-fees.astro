@@ -33,16 +33,16 @@ const answer = cheapest
   ? `The lowest published total fee for a UGC-entitled online MBA in our list is ${inr(cheapest.fee_inr!)} (${cheapest.name}, ${uni(cheapest).name}${revising(cheapest) ? '; the university says its fees are under revision' : ''}). ${runnerUp ? `Next is ${uni(runnerUp).name} at ${inr(runnerUp.fee_inr!)} for the full program${runnerUp.fee_per_year_inr ? ` (${inr(runnerUp.fee_per_year_inr)} a year)` : ''}. ` : ''}${unpricedUnis.length ? `${unpricedUnis.join(' and ')} ${unpricedUnis.length > 1 ? 'have' : 'has'} not published online MBA fees, so ask an advisor for the current amount.` : ''}`
   : 'No university in our list has published an online MBA fee yet. Ask an advisor for current fees.';
 const faqs = [
-  { q: 'How much does an online MBA cost in India?', a: priced.length ? `Published total fees for the UGC-entitled online MBAs listed here range from ${inr(priced[0].fee_inr!)} to ${inr(priced[priced.length - 1].fee_inr!)} for the full two years, as of ${asOf}. Some universities have not published fees; an advisor can confirm them.` : 'Fees are not yet published; ask an advisor.' },
+  { q: 'How much does an online MBA cost in India?', a: priced.length ? `Published total fees for the UGC-entitled online MBAs listed here range from ${inr(priced[0].fee_inr!)} to ${inr(priced[priced.length - 1].fee_inr!)} for the full two years, as of ${asOf}.${unpriced.length ? ' Some programs have no published fee yet; an advisor can confirm them.' : ''}` : 'Fees are not yet published; ask an advisor.' },
   ...(cheapest ? [{ q: 'Which is the cheapest UGC-entitled online MBA?', a: `Among the programs listed here, ${cheapest.name} from ${uni(cheapest).name} has the lowest published fee at ${inr(cheapest.fee_inr!)} in total.${revising(cheapest) ? ' The university says its fees are under revision, so confirm before paying.' : ''}` }] : []),
   ...(vtu ? [{ q: 'What does the VTU online MBA fee include?', a: `${inr(vtu.fee_inr!)} in total (${inr(vtu.fee_per_year_inr!)} per year) for Indian students. The source states it covers admission, tuition and exam fees: ${vtu.fee_source}.` }] : []),
   { q: 'Is a cheaper online MBA less valid?', a: 'No. Validity depends on the university being entitled by the UGC to run online programs, not on the fee. An online MBA from a UGC-entitled university is treated as equivalent to its on-campus MBA. Check the university on the UGC-DEB website before you enrol.' },
-  { q: 'Do these fees apply to students outside India?', a: 'No. These are fees for Indian students. International, Gulf, SAARC and South East Asia fees are set separately; ask an advisor for the fee in your country.' },
+  { q: 'Do these fees apply to students outside India?', a: 'No. These are fees for Indian students. Universities set separate fees, mostly in US dollars, for SAARC, Gulf, South East Asian, African and other international students, and for Indian nationals living abroad. Each program page shows the fee for your region.' },
 ];
 const articleLd = { '@context': 'https://schema.org', '@type': 'Article', headline: 'Online MBA fees in India compared: every UGC-entitled program', datePublished: asOfIso, dateModified: asOfIso, url: self, author: { '@type': 'Organization', name: 'ClassUp Advisors' }, publisher: { '@type': 'Organization', name: 'ClassUp' } };
 const sources = [...new Set(priced.map((p) => p.fee_source).filter(Boolean))];
 ---
-<Base title="Online MBA Fees in India Compared (2026)" description={`Online MBA fees in India compared for ${list.length} UGC-entitled programs from ${allUnis.length} universities: the lowest fee, cost per year, what's included and which fees are unpublished.`} region="in" image={imgForDegree('MBA')} jsonld={[articleLd, faqLd(faqs), crumbLd([['Online MBA', new URL(url('/in/online-mba/'), Astro.site).href], ['Fees compared', self]])]}>
+<Base title="Online MBA Fees in India Compared (2026)" description={`Online MBA fees in India compared for ${list.length} UGC-entitled programs from ${allUnis.length} universities: the lowest fee, cost per year, and what's included.`} region="in" image={imgForDegree('MBA')} jsonld={[articleLd, faqLd(faqs), crumbLd([['Online MBA', new URL(url('/in/online-mba/'), Astro.site).href], ['Fees compared', self]])]}>
   <div class="wrap crumbs"><a href={url('/in/online-mba/')}>Online MBA</a> › Fees compared</div>
   <section><div class="wrap layout-2">
     <div class="prose">
@@ -68,8 +68,10 @@ const sources = [...new Set(priced.map((p) => p.fee_source).filter(Boolean))];
         <p>Specialisations at the same university usually cost the same, so pick the specialisation you need first, then compare fees.</p>
       </>}
 
-      <h2>Which online MBA fees are not published yet?</h2>
-      <p>{unpricedUnis.length > 0 && <>{unpricedUnis.join(' and ')} {unpricedUnis.length > 1 ? 'have' : 'has'} not published online MBA fees that we can verify. </>}{unpriced.some((p) => p.university === 'uom') && <>Most University of Mysore specialisations have no current published total either. </>}An advisor can confirm the latest fee and payment schedule for any of them.</p>
+      {unpriced.length > 0 && <>
+        <h2>Which online MBA fees are not published yet?</h2>
+        <p>{unpricedUnis.length > 0 && <>{unpricedUnis.join(' and ')} {unpricedUnis.length > 1 ? 'have' : 'has'} not published online MBA fees that we can verify. </>}{unpriced.some((p) => p.university === 'uom') && <>Most University of Mysore specialisations have no current published total either. </>}An advisor can confirm the latest fee and payment schedule for any of them.</p>
+      </>}
 
       <h2>Does a lower fee mean a weaker degree?</h2>
       <p>No. What makes an online MBA valid is the university's UGC entitlement for online programs, not the price. Check the university on the <a href="https://deb.ugc.ac.in/" rel="noopener" target="_blank">UGC-DEB website</a> before you enrol, and see <a href={url('/articles/check-if-online-degree-is-ugc-valid/')}>how to check whether an online degree is UGC-valid</a>.</p>

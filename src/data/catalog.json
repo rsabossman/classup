@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24",
+ "updated": "2026-11-28",
  "universities": {
   "uom": {
    "name": "University of Mysore",
@@ -7,15 +7,15 @@
    "city": "Mysuru, Karnataka",
    "est": 1916,
    "approvals": [
-    "UGC-entitled",
+    "UGC-DEB entitled",
     "AICTE",
-    "AIU member",
-    "NAAC accredited",
-    "NIRF ranked"
+    "NAAC A (3.47)",
+    "NIRF 2022 #33 (University)",
+    "AIU member"
    ],
-   "exams": "Remotely proctored online exams; assignments mandatory",
+   "exams": "Remotely proctored online exams you can take at your convenience within the programme period; assignments mandatory",
    "source": "https://www.uni-mysore.in",
-   "fee_note": "Fees under revision at source; confirm before quoting"
+   "fee_note": "The university says a fee revision is in process; confirm before paying"
   },
   "vtu": {
    "name": "Visvesvaraya Technological University",
@@ -69,7 +69,8 @@
     "Merit (85%+)": 25,
     "Sports": 25,
     "Alumni": 25
-   }
+   },
+   "intakes": "January and July"
   }
  },
  "programs": [
@@ -83,14 +84,44 @@
    "credits": 120,
    "fee_inr": 52875,
    "specializations": [],
-   "eligibility_india": "10+2 (any stream) from a recognised board",
-   "eligibility_foreign": "12 years of formal schooling",
+   "eligibility_india": "10+2, NIOS or an equivalent diploma, having studied Mathematics, Computer Science, IT, Business Mathematics, Statistics, Quantitative Techniques or Economics",
+   "eligibility_foreign": "12 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-bca-degree-program",
    "category": "Computer Applications",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore website, Nov 2026 (fee revision in progress)",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 52875,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 83250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 3337.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 3337.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 3337.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 7102.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 7102.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-bcom",
@@ -106,14 +137,44 @@
     "Advertising & Salesmanship",
     "Retail Marketing"
    ],
-   "eligibility_india": "10+2 (any stream) from a recognised board",
-   "eligibility_foreign": "12 years of formal schooling",
+   "eligibility_india": "10+2, NIOS or a diploma equivalent to 10+2, from a recognised board",
+   "eligibility_foreign": "12 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-bcom-degree-program",
    "category": "Commerce",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore website, Nov 2026 (fee revision in progress)",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 34875,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 83250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 3337.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 3337.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 3337.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 7102.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 7102.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-bba",
@@ -125,14 +186,44 @@
    "credits": 120,
    "fee_inr": 52875,
    "specializations": [],
-   "eligibility_india": "10+2 (any stream) from a recognised board",
-   "eligibility_foreign": "12 years of formal schooling",
+   "eligibility_india": "10+2, NIOS or a diploma equivalent to 10+2, from a recognised board",
+   "eligibility_foreign": "12 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-bba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore website, Nov 2026 (fee revision in progress)",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 52875,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 105750,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 3337.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 3337.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 3337.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 7102.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 7102.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-mca",
@@ -142,16 +233,46 @@
    "level": "PG",
    "duration_years": 2,
    "credits": 84,
-   "fee_inr": 66625,
+   "fee_inr": 72625,
    "specializations": [],
-   "eligibility_india": "BCA/B.Sc CS/B.E., or any graduate with Maths/Statistics/IT (bridge course may apply)",
+   "eligibility_india": "BCA or a bachelor's in Computer Science or Engineering; or any bachelor's with Mathematics, Statistics, CS, IT, Business Maths or Statistics, Quantitative Techniques or Economics; or a bachelor's plus IT experience, an IT diploma or certification",
    "eligibility_foreign": "15 years of formal education",
    "source_url": "https://www.uni-mysore.in/online-mca-degree-program",
    "category": "Computer Applications",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore website, Nov 2026 (fee revision in progress)",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 72625,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 107250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 5339.18,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 5072.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 5072.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 8207.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 8207.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-mcom",
@@ -166,14 +287,44 @@
     "Retail Banking",
     "Personal Financial Planning"
    ],
-   "eligibility_india": "BCom/BBM/BBA",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "BCom, BBM or BBA, or an equivalent degree recognised by the university",
+   "eligibility_foreign": "15 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-mcom-degree-program",
    "category": "Commerce",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore website, Nov 2026 (fee revision in progress)",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 38625,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 71250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 2872.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 2872.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 2872.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 4207.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 4207.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-mba-dual-specialisation",
@@ -183,7 +334,7 @@
    "level": "PG",
    "duration_years": 2,
    "credits": 85,
-   "fee_inr": 62625,
+   "fee_inr": 68625,
    "specializations": [
     "Supply Chain",
     "Operations",
@@ -192,35 +343,44 @@
     "Marketing",
     "Project Management"
    ],
-   "eligibility_india": "Any graduate",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Bachelor's or postgraduate degree in any discipline (Arts, Science, Commerce, Management, Engineering, Medical Sciences or equivalent)",
+   "eligibility_foreign": "15 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore website, Nov 2026 (fee revision in progress)",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
-  },
-  {
-   "id": "uom-online-mba-in-general-management",
-   "university": "uom",
-   "degree": "MBA",
-   "name": "Online MBA in General Management",
-   "level": "PG",
-   "duration_years": 2,
-   "credits": null,
-   "fee_inr": null,
-   "specializations": [
-    "General Management"
-   ],
-   "eligibility_india": "Any graduate",
-   "eligibility_foreign": "15 years of formal education",
-   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
-   "category": "Management",
-   "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 68625,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 101250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 3472.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 3472.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 3472.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 5407.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 5407.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-mba-in-human-resource-management",
@@ -230,18 +390,48 @@
    "level": "PG",
    "duration_years": 2,
    "credits": null,
-   "fee_inr": null,
+   "fee_inr": 98625,
    "specializations": [
     "Human Resource Management"
    ],
-   "eligibility_india": "Any graduate",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Bachelor's or postgraduate degree in any discipline (Arts, Science, Commerce, Management, Engineering, Medical Sciences or equivalent)",
+   "eligibility_foreign": "15 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 98625,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 146250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 6307.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 6307.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-mba-in-marketing-management",
@@ -251,18 +441,48 @@
    "level": "PG",
    "duration_years": 2,
    "credits": null,
-   "fee_inr": null,
+   "fee_inr": 98625,
    "specializations": [
     "Marketing Management"
    ],
-   "eligibility_india": "Any graduate",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Bachelor's or postgraduate degree in any discipline (Arts, Science, Commerce, Management, Engineering, Medical Sciences or equivalent)",
+   "eligibility_foreign": "15 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 98625,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 146250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 6307.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 6307.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-mba-in-finance-management",
@@ -272,18 +492,48 @@
    "level": "PG",
    "duration_years": 2,
    "credits": null,
-   "fee_inr": null,
+   "fee_inr": 98625,
    "specializations": [
     "Finance Management"
    ],
-   "eligibility_india": "Any graduate",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Bachelor's or postgraduate degree in any discipline (Arts, Science, Commerce, Management, Engineering, Medical Sciences or equivalent)",
+   "eligibility_foreign": "15 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 98625,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 146250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 6307.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 6307.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-mba-in-supply-chain-management",
@@ -293,18 +543,48 @@
    "level": "PG",
    "duration_years": 2,
    "credits": null,
-   "fee_inr": null,
+   "fee_inr": 98625,
    "specializations": [
     "Supply Chain Management"
    ],
-   "eligibility_india": "Any graduate",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Bachelor's or postgraduate degree in any discipline (Arts, Science, Commerce, Management, Engineering, Medical Sciences or equivalent)",
+   "eligibility_foreign": "15 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 98625,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 146250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 6307.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 6307.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-mba-in-operations-management",
@@ -314,18 +594,48 @@
    "level": "PG",
    "duration_years": 2,
    "credits": null,
-   "fee_inr": null,
+   "fee_inr": 98625,
    "specializations": [
     "Operations Management"
    ],
-   "eligibility_india": "Any graduate",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Bachelor's or postgraduate degree in any discipline (Arts, Science, Commerce, Management, Engineering, Medical Sciences or equivalent)",
+   "eligibility_foreign": "15 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 98625,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 146250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 6307.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 6307.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-mba-in-data-science-business-analytics",
@@ -335,18 +645,48 @@
    "level": "PG",
    "duration_years": 2,
    "credits": null,
-   "fee_inr": null,
+   "fee_inr": 98625,
    "specializations": [
     "Data Science & Business Analytics"
    ],
-   "eligibility_india": "Any graduate",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Bachelor's or postgraduate degree in any discipline (Arts, Science, Commerce, Management, Engineering, Medical Sciences or equivalent)",
+   "eligibility_foreign": "15 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 98625,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 146250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 6307.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 6307.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-mba-in-it-business-management",
@@ -356,18 +696,48 @@
    "level": "PG",
    "duration_years": 2,
    "credits": null,
-   "fee_inr": null,
+   "fee_inr": 98625,
    "specializations": [
     "IT Business Management"
    ],
-   "eligibility_india": "Any graduate",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Bachelor's or postgraduate degree in any discipline (Arts, Science, Commerce, Management, Engineering, Medical Sciences or equivalent)",
+   "eligibility_foreign": "15 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 98625,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 146250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 6307.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 6307.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-mba-in-entrepreneurship",
@@ -377,39 +747,48 @@
    "level": "PG",
    "duration_years": 2,
    "credits": null,
-   "fee_inr": null,
+   "fee_inr": 98625,
    "specializations": [
     "Entrepreneurship"
    ],
-   "eligibility_india": "Any graduate",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Bachelor's or postgraduate degree in any discipline (Arts, Science, Commerce, Management, Engineering, Medical Sciences or equivalent)",
+   "eligibility_foreign": "15 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
-  },
-  {
-   "id": "uom-online-mba-in-executive-leadership",
-   "university": "uom",
-   "degree": "MBA",
-   "name": "Online MBA in Executive Leadership",
-   "level": "PG",
-   "duration_years": 2,
-   "credits": null,
-   "fee_inr": null,
-   "specializations": [
-    "Executive Leadership"
-   ],
-   "eligibility_india": "Any graduate",
-   "eligibility_foreign": "15 years of formal education",
-   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
-   "category": "Management",
-   "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
-   "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 98625,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 146250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 6307.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 6307.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-mba-in-digital-marketing",
@@ -419,18 +798,48 @@
    "level": "PG",
    "duration_years": 2,
    "credits": null,
-   "fee_inr": null,
+   "fee_inr": 98625,
    "specializations": [
     "Digital Marketing"
    ],
-   "eligibility_india": "Any graduate",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Bachelor's or postgraduate degree in any discipline (Arts, Science, Commerce, Management, Engineering, Medical Sciences or equivalent)",
+   "eligibility_foreign": "15 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 98625,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 146250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 6307.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 6307.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-mba-in-small-medium-business-management",
@@ -440,18 +849,48 @@
    "level": "PG",
    "duration_years": 2,
    "credits": null,
-   "fee_inr": null,
+   "fee_inr": 98625,
    "specializations": [
     "Small & Medium Business Management"
    ],
-   "eligibility_india": "Any graduate",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Bachelor's or postgraduate degree in any discipline (Arts, Science, Commerce, Management, Engineering, Medical Sciences or equivalent)",
+   "eligibility_foreign": "15 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 98625,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 146250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 6307.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 6307.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-mba-in-hospital-administration",
@@ -461,18 +900,48 @@
    "level": "PG",
    "duration_years": 2,
    "credits": null,
-   "fee_inr": null,
+   "fee_inr": 98625,
    "specializations": [
     "Hospital Administration"
    ],
-   "eligibility_india": "Any graduate",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Bachelor's or postgraduate degree in any discipline (Arts, Science, Commerce, Management, Engineering, Medical Sciences or equivalent)",
+   "eligibility_foreign": "15 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 98625,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 146250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 6307.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 6307.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "uom-online-mba-in-strategy-leadership",
@@ -482,18 +951,48 @@
    "level": "PG",
    "duration_years": 2,
    "credits": null,
-   "fee_inr": null,
+   "fee_inr": 98625,
    "specializations": [
     "Strategy & Leadership"
    ],
-   "eligibility_india": "Any graduate",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Bachelor's or postgraduate degree in any discipline (Arts, Science, Commerce, Management, Engineering, Medical Sciences or equivalent)",
+   "eligibility_foreign": "15 years of formal education or equivalent",
    "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": "University of Mysore online fee schedule (Syndicate 22 Aug 2022); India total as published on the university website",
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 98625,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 146250,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 4072.5,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 6307.5,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 6307.5,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "vtu-online-bba-in-digital-marketing",
@@ -507,14 +1006,45 @@
    "specializations": [
     "Digital Marketing"
    ],
-   "eligibility_india": "10+2 (any stream) from a recognised board",
-   "eligibility_foreign": "12 years of formal schooling",
+   "eligibility_india": "10+2, PUC, diploma or an equivalent qualification from a recognised board",
+   "eligibility_foreign": "12 years of formal education",
    "source_url": "https://vtu-online.net/online-bba-in-digital-marketing",
    "category": "Management",
    "fee_per_year_inr": 16000,
-   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026 (Indian students; includes admission, tuition and exam fees)",
+   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026, and the university fee sheet for international students (India fee includes admission, tuition and exam fees)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 48000,
+     "currency": "INR",
+     "per_year": 16000
+    },
+    "saarc": {
+     "amount": 3082,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 5771,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 5771,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 7082,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 7082,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 9341,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "vtu-online-bca-in-data-analytics",
@@ -528,14 +1058,45 @@
    "specializations": [
     "Data Analytics"
    ],
-   "eligibility_india": "10+2 (any stream) from a recognised board",
-   "eligibility_foreign": "12 years of formal schooling",
+   "eligibility_india": "10+2, PUC, diploma or an equivalent qualification from a recognised board",
+   "eligibility_foreign": "12 years of formal education",
    "source_url": "https://vtu-online.net/online-bca-in-data-analytics",
    "category": "Computer Applications",
    "fee_per_year_inr": 16000,
-   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026 (Indian students; includes admission, tuition and exam fees)",
+   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026, and the university fee sheet for international students (India fee includes admission, tuition and exam fees)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 48000,
+     "currency": "INR",
+     "per_year": 16000
+    },
+    "saarc": {
+     "amount": 3082,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 5771,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 5771,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 7082,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 7082,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 9341,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "vtu-online-bca-in-data-science",
@@ -549,14 +1110,45 @@
    "specializations": [
     "Data Science"
    ],
-   "eligibility_india": "10+2 (any stream) from a recognised board",
-   "eligibility_foreign": "12 years of formal schooling",
+   "eligibility_india": "10+2, PUC, diploma or an equivalent qualification from a recognised board",
+   "eligibility_foreign": "12 years of formal education",
    "source_url": "https://vtu-online.net/online-bca-in-data-sciences",
    "category": "Computer Applications",
    "fee_per_year_inr": 16000,
-   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026 (Indian students; includes admission, tuition and exam fees)",
+   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026, and the university fee sheet for international students (India fee includes admission, tuition and exam fees)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 48000,
+     "currency": "INR",
+     "per_year": 16000
+    },
+    "saarc": {
+     "amount": 3082,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 5771,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 5771,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 7082,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 7082,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 9341,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "vtu-online-mca",
@@ -575,14 +1167,45 @@
     "Blockchain",
     "Machine Learning"
    ],
-   "eligibility_india": "BCA/B.Sc CS, or B.Sc/B.Com/BA with Maths/Statistics/Computer Applications",
+   "eligibility_india": "BCA or a bachelor's in Computer Science Engineering, or a B.Sc, B.Com or BA with Mathematics, Statistics or Computer Applications at 10+2 or degree level",
    "eligibility_foreign": "15 years of formal education",
    "source_url": "https://vtu-online.net/online-mca",
    "category": "Computer Applications",
    "fee_per_year_inr": 31000,
-   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026 (Indian students; includes admission, tuition and exam fees)",
+   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026, and the university fee sheet for international students (India fee includes admission, tuition and exam fees)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 62000,
+     "currency": "INR",
+     "per_year": 31000
+    },
+    "saarc": {
+     "amount": 3294,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 6304,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 6304,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 7777,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 7777,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 12209,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "vtu-online-mca-in-ai-data-science",
@@ -596,14 +1219,45 @@
    "specializations": [
     "AI & Data Science"
    ],
-   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_india": "BCA or a bachelor's in Computer Science Engineering, or a B.Sc, B.Com or BA with Mathematics, Statistics or Computer Applications at 10+2 or degree level",
    "eligibility_foreign": "15 years of formal education",
    "source_url": "https://vtu-online.net/online-mca-artificial-intelligence-data-science",
    "category": "Computer Applications",
    "fee_per_year_inr": 31000,
-   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026 (Indian students; includes admission, tuition and exam fees)",
+   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026, and the university fee sheet for international students (India fee includes admission, tuition and exam fees)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 62000,
+     "currency": "INR",
+     "per_year": 31000
+    },
+    "saarc": {
+     "amount": 3294,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 6304,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 6304,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 7777,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 7777,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 12209,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "vtu-online-mca-in-cyber-security-cloud-computing",
@@ -618,14 +1272,45 @@
     "Cyber Security",
     "Cloud Computing"
    ],
-   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_india": "BCA or a bachelor's in Computer Science Engineering, or a B.Sc, B.Com or BA with Mathematics, Statistics or Computer Applications at 10+2 or degree level",
    "eligibility_foreign": "15 years of formal education",
    "source_url": "https://vtu-online.net/online-mca-cyber-security-cloud-computing",
    "category": "Computer Applications",
    "fee_per_year_inr": 31000,
-   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026 (Indian students; includes admission, tuition and exam fees)",
+   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026, and the university fee sheet for international students (India fee includes admission, tuition and exam fees)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 62000,
+     "currency": "INR",
+     "per_year": 31000
+    },
+    "saarc": {
+     "amount": 3294,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 6304,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 6304,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 7777,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 7777,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 12209,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "vtu-online-mba-in-business-analytics",
@@ -639,14 +1324,45 @@
    "specializations": [
     "Business Analytics"
    ],
-   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_india": "Bachelor's degree or equivalent from a recognised university",
    "eligibility_foreign": "15 years of formal education",
    "source_url": "https://vtu-online.net/online-mba-business-analytics",
    "category": "Management",
    "fee_per_year_inr": 35000,
-   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026 (Indian students; includes admission, tuition and exam fees)",
+   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026, and the university fee sheet for international students (India fee includes admission, tuition and exam fees)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 70000,
+     "currency": "INR",
+     "per_year": 35000
+    },
+    "saarc": {
+     "amount": 3294,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 6304,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 6304,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 7777,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 7777,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 12209,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "vtu-online-mba-in-digital-marketing",
@@ -660,14 +1376,45 @@
    "specializations": [
     "Digital Marketing"
    ],
-   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_india": "Bachelor's degree or equivalent from a recognised university",
    "eligibility_foreign": "15 years of formal education",
    "source_url": "https://vtu-online.net/online-mba-in-digital-marketing",
    "category": "Management",
    "fee_per_year_inr": 35000,
-   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026 (Indian students; includes admission, tuition and exam fees)",
+   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026, and the university fee sheet for international students (India fee includes admission, tuition and exam fees)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 70000,
+     "currency": "INR",
+     "per_year": 35000
+    },
+    "saarc": {
+     "amount": 3294,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 6304,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 6304,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 7777,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 7777,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 12209,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "vtu-online-mba-dual-hr-marketing-finance",
@@ -683,14 +1430,45 @@
     "Marketing",
     "Finance"
    ],
-   "eligibility_india": "Bachelor's degree from a recognised university",
+   "eligibility_india": "Bachelor's degree or equivalent from a recognised university",
    "eligibility_foreign": "15 years of formal education",
    "source_url": "https://vtu-online.net/online-mba-hr-mm-fm",
    "category": "Management",
    "fee_per_year_inr": 35000,
-   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026 (Indian students; includes admission, tuition and exam fees)",
+   "fee_source": "VTU fee notification VTU/MYS/CDOE/2026-27/311, 30 Oct 2026, and the university fee sheet for international students (India fee includes admission, tuition and exam fees)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 70000,
+     "currency": "INR",
+     "per_year": 35000
+    },
+    "saarc": {
+     "amount": 3294,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 6304,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 6304,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 7777,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 7777,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 12209,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "vtu-online-pg-diploma-in-big-data-analytics",
@@ -711,7 +1489,8 @@
    "fee_per_year_inr": null,
    "fee_source": null,
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": null
   },
   {
    "id": "vtu-online-pg-diploma-in-software-testing",
@@ -732,7 +1511,8 @@
    "fee_per_year_inr": null,
    "fee_source": null,
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": null
   },
   {
    "id": "vtu-online-pg-diploma-in-financial-marketing-hr-analytics",
@@ -753,7 +1533,8 @@
    "fee_per_year_inr": null,
    "fee_source": null,
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": null
   },
   {
    "id": "vtu-online-pg-diploma-in-investment-risk-financial-retail-management",
@@ -774,7 +1555,8 @@
    "fee_per_year_inr": null,
    "fee_source": null,
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": null
   },
   {
    "id": "gndu-online-bca",
@@ -784,16 +1566,46 @@
    "level": "UG",
    "duration_years": 3,
    "credits": 132,
-   "fee_inr": null,
+   "fee_inr": 97600,
    "specializations": [],
-   "eligibility_india": "10+2 with minimum 40%",
+   "eligibility_india": "10+2 with at least 40%, a 3-year diploma (any stream) or PUC equivalent",
    "eligibility_foreign": "12 years of formal schooling",
    "source_url": "https://gndu-online.in/online-bca-degree-program",
    "category": "Computer Applications",
    "fee_per_year_inr": null,
-   "fee_source": null,
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 97600,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 2235,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 9500,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 6835,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 6835,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 8935,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 13635,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "gndu-online-ba",
@@ -803,22 +1615,52 @@
    "level": "UG",
    "duration_years": 3,
    "credits": 128,
-   "fee_inr": [
+   "fee_inr": 52600,
+   "specializations": [
     "English/Punjabi",
     "Economics/Sociology",
     "History",
     "Political Science",
     "Public Administration"
    ],
-   "specializations": [],
-   "eligibility_india": "10+2 (any stream) from a recognised board",
+   "eligibility_india": "10+2, a 3-year diploma (any stream) or PUC equivalent",
    "eligibility_foreign": "12 years of formal schooling",
    "source_url": "https://gndu-online.in/online-ba-degree-program",
    "category": "Arts",
    "fee_per_year_inr": null,
-   "fee_source": null,
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 52600,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 1735,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 3500,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 2335,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 2335,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 2935,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 4135,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "gndu-online-bcom",
@@ -828,16 +1670,46 @@
    "level": "UG",
    "duration_years": 3,
    "credits": 132,
-   "fee_inr": null,
+   "fee_inr": 52600,
    "specializations": [],
-   "eligibility_india": "10+2 with minimum 40%",
+   "eligibility_india": "10+2 with at least 40%, a 3-year diploma (any stream) or PUC equivalent",
    "eligibility_foreign": "12 years of formal schooling",
    "source_url": "https://gndu-online.in/online-bcom-degree-program",
    "category": "Commerce",
    "fee_per_year_inr": null,
-   "fee_source": null,
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 52600,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 1735,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 3500,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 2335,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 2335,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 2935,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 4135,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "gndu-online-mba",
@@ -847,7 +1719,7 @@
    "level": "PG",
    "duration_years": 2,
    "credits": 100,
-   "fee_inr": null,
+   "fee_inr": 80600,
    "specializations": [
     "Finance",
     "Marketing",
@@ -858,9 +1730,39 @@
    "source_url": "https://gndu-online.in/online-mba-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": null,
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 80600,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 2035,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 8700,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 6435,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 6435,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 8335,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 12635,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "gndu-online-mba-in-marketing-management",
@@ -870,7 +1772,7 @@
    "level": "PG",
    "duration_years": 2,
    "credits": 100,
-   "fee_inr": null,
+   "fee_inr": 80600,
    "specializations": [
     "Marketing Management"
    ],
@@ -879,9 +1781,39 @@
    "source_url": "https://gndu-online.in/online-mba-in-mm-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": null,
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 80600,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 2035,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 8700,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 6435,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 6435,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 8335,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 12635,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "gndu-online-mba-in-hr-management",
@@ -891,7 +1823,7 @@
    "level": "PG",
    "duration_years": 2,
    "credits": 100,
-   "fee_inr": null,
+   "fee_inr": 80600,
    "specializations": [
     "HR Management"
    ],
@@ -900,9 +1832,39 @@
    "source_url": "https://gndu-online.in/online-mba-in-hrm-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": null,
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 80600,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 2035,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 8700,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 6435,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 6435,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 8335,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 12635,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "gndu-online-mba-in-finance-management",
@@ -912,7 +1874,7 @@
    "level": "PG",
    "duration_years": 2,
    "credits": 100,
-   "fee_inr": null,
+   "fee_inr": 80600,
    "specializations": [
     "Finance Management"
    ],
@@ -921,9 +1883,39 @@
    "source_url": "https://gndu-online.in/online-mba-in-fm-degree-program",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": null,
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 80600,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 2035,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 8700,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 6435,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 6435,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 8335,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 12635,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "gndu-online-mca",
@@ -933,16 +1925,46 @@
    "level": "PG",
    "duration_years": 2,
    "credits": 96,
-   "fee_inr": null,
+   "fee_inr": 90600,
    "specializations": [],
-   "eligibility_india": "BCA/B.Sc IT/CS, or bachelor's with Mathematics, 50% (45% SC/ST)",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "BBA, BCom, B.Sc Economics or any graduate with Maths, Statistics, Computer Science/Applications, IT or Quantitative Techniques as an elective, with 50% (45% SC/ST); or any bachelor's with 50% and Mathematics at 10+2",
+   "eligibility_foreign": "15 years of formal schooling",
    "source_url": "https://gndu-online.in/online-mca-degree-program",
    "category": "Computer Applications",
    "fee_per_year_inr": null,
-   "fee_source": null,
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 90600,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 2035,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 12020,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 6935,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 6935,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 9335,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 14135,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "gndu-online-mcom",
@@ -952,16 +1974,46 @@
    "level": "PG",
    "duration_years": 2,
    "credits": 96,
-   "fee_inr": null,
+   "fee_inr": 55600,
    "specializations": [],
    "eligibility_india": "BCom/BBA with 50% (45% SC/ST)",
    "eligibility_foreign": "15 years of formal education",
    "source_url": "https://gndu-online.in/online-mcom-degree-program",
    "category": "Commerce",
    "fee_per_year_inr": null,
-   "fee_source": null,
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 55600,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 1335,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 7033,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 4135,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 4135,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 5602,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 8535,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "gndu-online-ma-in-english",
@@ -971,16 +2023,46 @@
    "level": "PG",
    "duration_years": 2,
    "credits": 80,
-   "fee_inr": null,
+   "fee_inr": 45600,
    "specializations": [],
-   "eligibility_india": "Bachelor's degree from a recognised university",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Bachelor's in any faculty with 50% aggregate (or 45% in the subject), or any master's degree",
+   "eligibility_foreign": "15 years of formal schooling",
    "source_url": "https://gndu-online.in/online-ma-in-english-degree-program",
    "category": "Arts",
    "fee_per_year_inr": null,
-   "fee_source": null,
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 45600,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 1535,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 2700,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 1935,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 1935,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 2335,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 3135,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "gndu-online-ma-in-punjabi",
@@ -990,16 +2072,46 @@
    "level": "PG",
    "duration_years": 2,
    "credits": 80,
-   "fee_inr": null,
+   "fee_inr": 35600,
    "specializations": [],
-   "eligibility_india": "Bachelor's degree from a recognised university",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Bachelor's in any faculty with 50% aggregate (or 45% in the subject), or any master's degree",
+   "eligibility_foreign": "15 years of formal schooling",
    "source_url": "https://gndu-online.in/online-ma-in-punjabi-degree-program",
    "category": "Arts",
    "fee_per_year_inr": null,
-   "fee_source": null,
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 35600,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 1535,
+     "currency": "USD"
+    },
+    "nri": {
+     "amount": 2700,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 1935,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 1935,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 2335,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 3135,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "gndu-online-diploma-in-computer-applications",
@@ -1018,7 +2130,8 @@
    "fee_per_year_inr": null,
    "fee_source": null,
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": null
   },
   {
    "id": "gndu-online-diploma-certificate-in-data-analytics",
@@ -1039,7 +2152,8 @@
    "fee_per_year_inr": null,
    "fee_source": null,
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": null
   },
   {
    "id": "gndu-online-diploma-certificate-in-artificial-intelligence-machine-learning",
@@ -1060,7 +2174,8 @@
    "fee_per_year_inr": null,
    "fee_source": null,
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": null
   },
   {
    "id": "gndu-online-diploma-certificate-in-digital-marketing",
@@ -1081,7 +2196,8 @@
    "fee_per_year_inr": null,
    "fee_source": null,
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": null
   },
   {
    "id": "gndu-online-diploma-certificate-in-cybersecurity",
@@ -1102,7 +2218,8 @@
    "fee_per_year_inr": null,
    "fee_source": null,
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": null
   },
   {
    "id": "gndu-online-diploma-certificate-in-fashion-merchandising-retail-marketing",
@@ -1123,7 +2240,8 @@
    "fee_per_year_inr": null,
    "fee_source": null,
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": null
   },
   {
    "id": "gndu-online-diploma-certificate-in-apparel-management",
@@ -1144,7 +2262,8 @@
    "fee_per_year_inr": null,
    "fee_source": null,
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": null
   },
   {
    "id": "gndu-online-diploma-certificate-in-radio-jockeying",
@@ -1165,7 +2284,8 @@
    "fee_per_year_inr": null,
    "fee_source": null,
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": null
   },
   {
    "id": "gndu-online-diploma-certificate-in-personal-finance-investment-management",
@@ -1186,7 +2306,8 @@
    "fee_per_year_inr": null,
    "fee_source": null,
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": null
   },
   {
    "id": "gndu-online-diploma-certificate-in-internet-of-things",
@@ -1207,7 +2328,8 @@
    "fee_per_year_inr": null,
    "fee_source": null,
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": null
   },
   {
    "id": "gndu-online-diploma-certificate-in-start-up-family-enterprise-management",
@@ -1228,7 +2350,8 @@
    "fee_per_year_inr": null,
    "fee_source": null,
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": null
   },
   {
    "id": "adbu-online-mba",
@@ -1237,8 +2360,8 @@
    "name": "Online MBA",
    "level": "PG",
    "duration_years": 2,
-   "credits": null,
-   "fee_inr": null,
+   "credits": 85,
+   "fee_inr": 96000,
    "specializations": [
     "Marketing",
     "Finance",
@@ -1247,14 +2370,44 @@
     "Supply Chain",
     "Operations"
    ],
-   "eligibility_india": "Any graduate",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Graduate in any stream from a recognised university",
+   "eligibility_foreign": "Bachelor's in any stream or 15 years of education",
    "source_url": "https://dbuniversity.ac.in/dbucdoe/online-mba",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": null,
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 96000,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 119575,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 2420,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 2420,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 2420,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 2520,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 3580,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "adbu-online-mca",
@@ -1263,20 +2416,50 @@
    "name": "Online MCA",
    "level": "PG",
    "duration_years": 2,
-   "credits": null,
-   "fee_inr": null,
+   "credits": 100,
+   "fee_inr": 104000,
    "specializations": [
-    "AI & Machine Learning",
+    "Artificial Intelligence",
     "Data Science"
    ],
-   "eligibility_india": "CS/IT graduate, or any graduate with CS/IT subject, IT experience or bridge course",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "BCA, BIT, BE/BTech, AMIE or B.Sc CS/IT; or any bachelor's with CS/IT at 10+2 or degree level, IT industry experience, or the university's bridge course",
+   "eligibility_foreign": "15 years of education (equivalent qualifications accepted)",
    "source_url": "https://dbuniversity.ac.in/dbucdoe/online-mca",
    "category": "Computer Applications",
    "fee_per_year_inr": null,
-   "fee_source": null,
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 104000,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 129575,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 3560,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 3560,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 3560,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 3760,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 4640,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "adbu-online-bba",
@@ -1285,8 +2468,8 @@
    "name": "Online BBA",
    "level": "UG",
    "duration_years": 3,
-   "credits": null,
-   "fee_inr": null,
+   "credits": 120,
+   "fee_inr": 84800,
    "specializations": [
     "Marketing",
     "Finance",
@@ -1294,14 +2477,44 @@
     "Entrepreneurship",
     "Artificial Intelligence"
    ],
-   "eligibility_india": "10+2 (any stream) from a recognised board",
-   "eligibility_foreign": "12 years of formal schooling",
+   "eligibility_india": "10+2 or equivalent (any stream) from a recognised board",
+   "eligibility_foreign": "12 years of schooling or equivalent",
    "source_url": "https://dbuniversity.ac.in/dbucdoe/online-bba",
    "category": "Management",
    "fee_per_year_inr": null,
-   "fee_source": null,
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 84800,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 111200,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 2720,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 2720,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 2720,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 2720,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 3680,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "adbu-online-bca",
@@ -1310,17 +2523,47 @@
    "name": "Online BCA",
    "level": "UG",
    "duration_years": 3,
-   "credits": null,
-   "fee_inr": null,
+   "credits": 120,
+   "fee_inr": 84800,
    "specializations": [],
-   "eligibility_india": "10+2 (any stream) from a recognised board",
-   "eligibility_foreign": "12 years of formal schooling",
+   "eligibility_india": "10+2 or equivalent (any stream) from a recognised board",
+   "eligibility_foreign": "12 years of schooling or equivalent",
    "source_url": "https://dbuniversity.ac.in/dbucdoe/online-bca",
    "category": "Computer Applications",
    "fee_per_year_inr": null,
-   "fee_source": null,
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 84800,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 111200,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 2720,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 2720,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 2720,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 2720,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 3680,
+     "currency": "USD"
+    }
+   }
   },
   {
    "id": "adbu-online-ma-in-public-administration",
@@ -1329,17 +2572,47 @@
    "name": "Online MA in Public Administration",
    "level": "PG",
    "duration_years": 2,
-   "credits": null,
-   "fee_inr": null,
+   "credits": 80,
+   "fee_inr": 44900,
    "specializations": [],
-   "eligibility_india": "Bachelor's degree from a recognised university",
-   "eligibility_foreign": "15 years of formal education",
+   "eligibility_india": "Bachelor's degree or equivalent from a recognised university",
+   "eligibility_foreign": "Bachelor's in any stream or 15 years of education",
    "source_url": "https://dbuniversity.ac.in/dbucdoe/online-ma-in-pa",
    "category": "Arts",
    "fee_per_year_inr": null,
-   "fee_source": null,
+   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
    "tuition_per_term": null,
-   "terms": null
+   "terms": null,
+   "fees": {
+    "in": {
+     "amount": 44900,
+     "currency": "INR"
+    },
+    "saarc": {
+     "amount": 66500,
+     "currency": "INR"
+    },
+    "nri": {
+     "amount": 2420,
+     "currency": "USD"
+    },
+    "africa": {
+     "amount": 2420,
+     "currency": "USD"
+    },
+    "sea": {
+     "amount": 2420,
+     "currency": "USD"
+    },
+    "me": {
+     "amount": 2520,
+     "currency": "USD"
+    },
+    "intl": {
+     "amount": 3120,
+     "currency": "USD"
+    }
+   }
   }
  ]
 }

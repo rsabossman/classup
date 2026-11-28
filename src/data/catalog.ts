@@ -2,17 +2,20 @@ import raw from './catalog.json';
 
 export interface University {
   id: string; name: string; short: string; city: string; est: number;
-  approvals: string[]; exams: string; source: string; fee_note?: string;
+  approvals: string[]; exams: string; source: string; fee_note?: string; intakes?: string;
   scholarships?: Record<string, number>; other_fees?: string;
 }
+export type FeeRegion = 'in' | 'saarc' | 'nri' | 'me' | 'sea' | 'africa' | 'intl';
 export interface Program {
   id: string; university: string; degree: string; name: string; level: string;
   duration_years: number | null; credits: number | null; fee_inr: number | null;
   specializations: string[]; eligibility_india: string; eligibility_foreign: string;
   source_url: string | null; category: string;
   fee_per_year_inr?: number | null; fee_source?: string | null;
-  tuition_per_term?: { in_inr: number; nri_usd: number; saarc_inr: number; me_usd: number; sea_usd: number; africa_usd: number; intl_usd: number } | null;
-  terms?: number | null;
+  /** Total program fee by fee region (full-payment plan). nri = Indian nationals living abroad. */
+  fees?: Partial<Record<FeeRegion, { amount: number; currency: 'INR' | 'USD'; per_year?: number }>> | null;
+  /** Legacy per-semester fields, no longer used. */
+  tuition_per_term?: unknown; terms?: number | null;
 }
 
 export const universities: Record<string, University> = Object.fromEntries(
@@ -24,22 +27,20 @@ export const updated = raw.updated;
 export const uni = (p: Program) => universities[p.university];
 export const title = (p: Program) => `${p.name.replace(/^Online /, 'Online ')} – ${uni(p).name}`;
 export const inr = (n: number) => '₹' + n.toLocaleString('en-IN');
-export const usd = (n: number) => '$' + Math.round(n).toLocaleString('en-US');
+export const usd = (n: number) => '$' + n.toLocaleString('en-US', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 });
+const money = (f: { amount: number; currency: string }) => (f.currency === 'INR' ? inr(f.amount) : usd(f.amount));
 
-/** Fee to show for a region: `short` for cards, `long` for the program page. Null = ask an advisor. */
+/** Fee to show for a region: `short` for cards, `long` for the program page. Null = ask an advisor.
+ *  All amounts are the university's full-payment total for the whole program. */
 export function feeFor(p: Program, region: string): { short: string; long: string } | null {
-  const t = p.tuition_per_term;
-  if (region === 'in') {
-    if (p.fee_inr) return { short: `${inr(p.fee_inr)} total`, long: `${inr(p.fee_inr)} total${p.fee_per_year_inr ? ` (${inr(p.fee_per_year_inr)} per year)` : ''}${t ? `. Tuition is ${inr(t.in_inr)} per semester` : ''}.` };
-    if (t) return { short: `${inr(t.in_inr)} / semester`, long: `${inr(t.in_inr)} tuition per semester (${inr(t.in_inr * (p.terms || 1))} over ${p.terms} semesters), plus exam and admin fees.` };
-    return null;
-  }
-  if (t && region === 'saarc') return { short: `${inr(t.saarc_inr)} / semester`, long: `${inr(t.saarc_inr)} tuition per semester for students from SAARC countries (${inr(t.saarc_inr * (p.terms || 1))} over ${p.terms} semesters), plus exam and admin fees.` };
-  if (t) {
-    const v = (t as any)[{ me: 'me_usd', sea: 'sea_usd', africa: 'africa_usd', intl: 'intl_usd' }[region] || 'intl_usd'] as number;
-    return { short: `${usd(v)} / semester`, long: `${usd(v)} tuition per semester (${usd(v * (p.terms || 1))} over ${p.terms} semesters), plus exam and admin fees. Indian nationals living abroad pay ${usd(t.nri_usd)} per semester.` };
-  }
-  return null;
+  const f = p.fees?.[region as FeeRegion];
+  if (!f) return null;
+  const total = money(f);
+  if (region === 'in') return { short: `${total} total`, long: `${total} total for the full program${f.per_year ? ` (or ${inr(f.per_year)} per year)` : ''}, for students in India.` };
+  const who = region === 'saarc' ? 'students from SAARC countries' : region === 'intl' ? 'international students' : `students in ${({ me: 'the Gulf and West Asia', sea: 'South East Asia', africa: 'Africa' } as Record<string, string>)[region] || 'your region'}`;
+  const nri = p.fees?.nri;
+  const nriNote = nri && region !== 'saarc' ? ` Indian nationals living abroad pay ${money(nri)} in total.` : '';
+  return { short: `${total} total`, long: `${total} total for the full program, for ${who}.${nriNote}` };
 }
 
 export const degreeOrder = ['MBA', 'MCA', 'MCom', 'MA', 'BBA', 'BCA', 'BCom', 'BA', 'PGD', 'DCA', 'Diploma'];
