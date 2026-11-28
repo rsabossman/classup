@@ -383,57 +383,6 @@
    }
   },
   {
-   "id": "uom-online-mba-in-general-management",
-   "university": "uom",
-   "degree": "MBA",
-   "name": "Online MBA in General Management",
-   "level": "PG",
-   "duration_years": 2,
-   "credits": null,
-   "fee_inr": 208625,
-   "specializations": [
-    "General Management"
-   ],
-   "eligibility_india": "Bachelor's or postgraduate degree in any discipline (Arts, Science, Commerce, Management, Engineering, Medical Sciences or equivalent)",
-   "eligibility_foreign": "15 years of formal education or equivalent",
-   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
-   "category": "Management",
-   "fee_per_year_inr": null,
-   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
-   "tuition_per_term": null,
-   "terms": null,
-   "fees": {
-    "in": {
-     "amount": 208625,
-     "currency": "INR"
-    },
-    "saarc": {
-     "amount": 311250,
-     "currency": "INR"
-    },
-    "nri": {
-     "amount": 7072.5,
-     "currency": "USD"
-    },
-    "africa": {
-     "amount": 7072.5,
-     "currency": "USD"
-    },
-    "sea": {
-     "amount": 7072.5,
-     "currency": "USD"
-    },
-    "me": {
-     "amount": 11807.5,
-     "currency": "USD"
-    },
-    "intl": {
-     "amount": 11807.5,
-     "currency": "USD"
-    }
-   }
-  },
-  {
    "id": "uom-online-mba-in-human-resource-management",
    "university": "uom",
    "degree": "MBA",
@@ -837,57 +786,6 @@
     },
     "intl": {
      "amount": 6307.5,
-     "currency": "USD"
-    }
-   }
-  },
-  {
-   "id": "uom-online-mba-in-executive-leadership",
-   "university": "uom",
-   "degree": "MBA",
-   "name": "Online MBA in Executive Leadership",
-   "level": "PG",
-   "duration_years": 2,
-   "credits": null,
-   "fee_inr": 288625,
-   "specializations": [
-    "Executive Leadership"
-   ],
-   "eligibility_india": "Bachelor's or postgraduate degree in any discipline (Arts, Science, Commerce, Management, Engineering, Medical Sciences or equivalent)",
-   "eligibility_foreign": "15 years of formal education or equivalent",
-   "source_url": "https://www.uni-mysore.in/online-mba-degree-program",
-   "category": "Management",
-   "fee_per_year_inr": null,
-   "fee_source": "University fee sheet, full-payment plan (knowledge base shared with ClassUp, Nov 2026)",
-   "tuition_per_term": null,
-   "terms": null,
-   "fees": {
-    "in": {
-     "amount": 288625,
-     "currency": "INR"
-    },
-    "saarc": {
-     "amount": 411250,
-     "currency": "INR"
-    },
-    "nri": {
-     "amount": 11072.5,
-     "currency": "USD"
-    },
-    "africa": {
-     "amount": 11072.5,
-     "currency": "USD"
-    },
-    "sea": {
-     "amount": 11072.5,
-     "currency": "USD"
-    },
-    "me": {
-     "amount": 17807.5,
-     "currency": "USD"
-    },
-    "intl": {
-     "amount": 17807.5,
      "currency": "USD"
     }
    }
